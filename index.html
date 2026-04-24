@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CS퀴즈">
+<meta name="theme-color" content="#0f172a">
+<title>CS 면접 퀴즈</title>
+<link rel="manifest" href="manifest.json">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --surface2: #334155;
+    --border: #475569;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --blue: #3b82f6;
+    --blue-dim: #1d4ed8;
+    --green: #22c55e;
+    --red: #ef4444;
+    --yellow: #eab308;
+    --purple: #a855f7;
+    --orange: #f97316;
+  }
+
+  html, body {
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  body { padding-bottom: env(safe-area-inset-bottom); }
+
+  #app { min-height: 100vh; display: flex; flex-direction: column; }
+
+  /* ── 공통 ── */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: .65rem 1.2rem; border-radius: .5rem; border: none;
+    font-size: .95rem; font-weight: 600; cursor: pointer;
+    transition: opacity .15s, transform .1s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn:active { transform: scale(.96); }
+  .btn-primary { background: var(--blue); color: #fff; }
+  .btn-primary:disabled { background: var(--surface2); color: var(--muted); cursor: default; transform: none; }
+  .btn-ghost { background: var(--surface2); color: var(--text); }
+  .btn-sm { padding: .4rem .8rem; font-size: .82rem; }
+
+  .chip {
+    display: inline-flex; align-items: center; gap: .3rem;
+    padding: .3rem .65rem; border-radius: 999px; font-size: .75rem;
+    font-weight: 600; border: 2px solid transparent; cursor: pointer;
+    transition: border-color .15s, background .15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .chip.active { border-color: var(--blue); }
+
+  /* ── SCREENS ── */
+  .screen { display: none; flex-direction: column; flex: 1; animation: fadeIn .2s; }
+  .screen.active { display: flex; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+  /* ────────────────────────────────── HOME ── */
+  #homeScreen { padding: 1.5rem 1rem; gap: 1.5rem; max-width: 480px; margin: 0 auto; width: 100%; }
+
+  .home-header { text-align: center; }
+  .home-header h1 { font-size: 1.6rem; font-weight: 800; }
+  .home-header p { color: var(--muted); font-size: .85rem; margin-top: .3rem; }
+
+  .card { background: var(--surface); border-radius: .75rem; padding: 1rem; }
+  .card-title { font-size: .8rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; margin-bottom: .75rem; }
+
+  /* 주제 선택 */
+  .topic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+  .topic-btn {
+    padding: .6rem; border-radius: .5rem; border: 2px solid transparent;
+    background: var(--surface2); cursor: pointer; text-align: center;
+    font-size: .82rem; font-weight: 600; color: var(--text);
+    transition: border-color .15s, background .15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .topic-btn.active { border-color: var(--blue); background: #1e3a5f; }
+  .topic-btn .count { font-size: .7rem; color: var(--muted); font-weight: 400; }
+
+  /* 필터 행 */
+  .filter-row { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .chip-diff.basic    { background: #052e16; color: #4ade80; }
+  .chip-diff.intermediate { background: #1c1917; color: #fb923c; }
+  .chip-diff.advanced { background: #2d1b1b; color: #f87171; }
+  .chip-type.concept  { background: #172554; color: #93c5fd; }
+  .chip-type.tradeoff { background: #431407; color: #fdba74; }
+  .chip-type.scenario { background: #2e1065; color: #d8b4fe; }
+  .chip-type.debug    { background: #2d1b1b; color: #fca5a5; }
+  .chip-type.ordering { background: #1c1917; color: #fde047; }
+
+  /* 문제 수 */
+  .count-row { display: flex; align-items: center; gap: .75rem; }
+  .count-row input[type=range] { flex: 1; accent-color: var(--blue); }
+  .count-badge { font-weight: 700; color: var(--blue); min-width: 2.5rem; text-align: right; }
+
+  /* 통계 */
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .5rem; text-align: center; }
+  .stat-item .num { font-size: 1.4rem; font-weight: 800; color: var(--blue); }
+  .stat-item .label { font-size: .72rem; color: var(--muted); }
+
+  /* ────────────────────────────────── QUIZ ── */
+  #quizScreen { padding: 1rem; max-width: 480px; margin: 0 auto; width: 100%; }
+
+  .progress-bar {
+    height: 4px; background: var(--surface2); border-radius: 2px; margin-bottom: 1rem;
+  }
+  .progress-fill { height: 100%; background: var(--blue); border-radius: 2px; transition: width .3s; }
+
+  .quiz-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: .75rem; }
+  .quiz-counter { font-size: .8rem; color: var(--muted); }
+
+  .question-card {
+    background: var(--surface); border-radius: .75rem; padding: 1.1rem;
+    margin-bottom: 1rem; line-height: 1.6; font-size: .95rem;
+  }
+
+  .options { display: flex; flex-direction: column; gap: .55rem; }
+  .option {
+    padding: .8rem 1rem; border-radius: .6rem; border: 2px solid var(--surface2);
+    background: var(--surface); cursor: pointer; font-size: .9rem; line-height: 1.5;
+    transition: border-color .15s, background .15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .option:not(.disabled):hover { border-color: var(--blue); }
+  .option.selected  { border-color: var(--blue); background: #1e3a5f; }
+  .option.correct   { border-color: var(--green); background: #052e16; }
+  .option.wrong     { border-color: var(--red); background: #2d1b1b; }
+  .option.reveal    { border-color: var(--green); background: #052e16; }
+  .option.disabled  { cursor: default; }
+
+  .explanation {
+    background: var(--surface); border-left: 3px solid var(--blue);
+    border-radius: .5rem; padding: .85rem 1rem; font-size: .85rem;
+    line-height: 1.6; color: var(--muted); margin-bottom: 1rem;
+    animation: fadeIn .2s;
+  }
+
+  .quiz-actions { display: flex; gap: .6rem; }
+  .quiz-actions .btn { flex: 1; }
+
+  /* ────────────────────────────────── RESULT ── */
+  #resultScreen { padding: 1.5rem 1rem; gap: 1.25rem; max-width: 480px; margin: 0 auto; width: 100%; }
+
+  .score-circle {
+    width: 120px; height: 120px; border-radius: 50%;
+    border: 6px solid var(--blue); display: flex; flex-direction: column;
+    align-items: center; justify-content: center; margin: 0 auto;
+  }
+  .score-circle .pct { font-size: 1.8rem; font-weight: 800; }
+  .score-circle .sub { font-size: .75rem; color: var(--muted); }
+
+  .type-row { display: flex; justify-content: space-between; align-items: center; padding: .3rem 0; border-bottom: 1px solid var(--surface2); }
+  .type-row:last-child { border-bottom: none; }
+  .type-row .bar-bg { flex: 1; margin: 0 .75rem; height: 6px; background: var(--surface2); border-radius: 3px; }
+  .type-row .bar-fill { height: 100%; background: var(--blue); border-radius: 3px; transition: width .4s; }
+  .type-row .pct { font-size: .8rem; color: var(--muted); min-width: 2.5rem; text-align: right; }
+
+  .wrong-item { background: var(--surface); border-radius: .6rem; padding: .85rem; margin-bottom: .5rem; font-size: .85rem; }
+  .wrong-q { margin-bottom: .5rem; line-height: 1.5; }
+  .wrong-ans { font-size: .8rem; }
+  .wrong-ans .correct-text { color: var(--green); }
+  .wrong-ans .your-text    { color: var(--red); }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- ═══════════════════ HOME ═══════════════════ -->
+  <div id="homeScreen" class="screen active">
+    <div class="home-header">
+      <h1>💻 CS 면접 퀴즈</h1>
+      <p>기술 면접을 대비하는 퀴즈 앱</p>
+    </div>
+
+    <!-- 통계 -->
+    <div class="card">
+      <div class="card-title">📊 내 통계</div>
+      <div class="stat-grid">
+        <div class="stat-item"><div class="num" id="statTotal">0</div><div class="label">총 시도</div></div>
+        <div class="stat-item"><div class="num" id="statCorrect">0</div><div class="label">정답</div></div>
+        <div class="stat-item"><div class="num" id="statPct">0%</div><div class="label">정답률</div></div>
+      </div>
+    </div>
+
+    <!-- 주제 선택 -->
+    <div class="card">
+      <div class="card-title">📚 주제 선택 <span style="color:var(--blue);font-weight:400;font-size:.75rem;">(복수 선택 가능)</span></div>
+      <div class="topic-grid" id="topicGrid"></div>
+    </div>
+
+    <!-- 난이도 -->
+    <div class="card">
+      <div class="card-title">🎯 난이도</div>
+      <div class="filter-row" id="diffFilter">
+        <div class="chip chip-diff basic active" data-diff="basic">🟢 기초</div>
+        <div class="chip chip-diff intermediate active" data-diff="intermediate">🟠 중급</div>
+        <div class="chip chip-diff advanced active" data-diff="advanced">🔴 고급</div>
+      </div>
+    </div>
+
+    <!-- 문제 유형 -->
+    <div class="card">
+      <div class="card-title">🏷️ 문제 유형</div>
+      <div class="filter-row" id="typeFilter">
+        <div class="chip chip-type concept active" data-type="concept">🔵 개념</div>
+        <div class="chip chip-type tradeoff active" data-type="tradeoff">🟠 트레이드오프</div>
+        <div class="chip chip-type scenario active" data-type="scenario">🟣 시나리오</div>
+        <div class="chip chip-type debug active" data-type="debug">🔴 디버그</div>
+        <div class="chip chip-type ordering active" data-type="ordering">🟡 순서</div>
+      </div>
+    </div>
+
+    <!-- 문제 수 -->
+    <div class="card">
+      <div class="card-title">🔢 문제 수</div>
+      <div class="count-row">
+        <input type="range" id="countSlider" min="5" max="50" step="5" value="10">
+        <span class="count-badge" id="countLabel">10문제</span>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" id="startBtn" style="font-size:1.05rem;padding:.85rem;">퀴즈 시작</button>
+  </div>
+
+  <!-- ═══════════════════ QUIZ ═══════════════════ -->
+  <div id="quizScreen" class="screen">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="quiz-meta">
+      <span class="quiz-counter" id="quizCounter">1 / 10</span>
+      <div id="typeBadge" class="chip chip-type concept">🔵 개념</div>
+    </div>
+    <div class="question-card" id="questionText"></div>
+    <div class="options" id="optionList"></div>
+    <div class="explanation" id="explanationBox" style="display:none;"></div>
+    <div class="quiz-actions">
+      <button class="btn btn-ghost" id="quitBtn">그만두기</button>
+      <button class="btn btn-primary" id="nextBtn" style="display:none;" >다음 문제 →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ RESULT ═══════════════════ -->
+  <div id="resultScreen" class="screen">
+    <div class="home-header">
+      <h1 id="resultEmoji">🎉</h1>
+      <p id="resultMessage"></p>
+    </div>
+    <div class="score-circle">
+      <span class="pct" id="resultPct">0%</span>
+      <span class="sub" id="resultScore">0/0</span>
+    </div>
+    <!-- 유형별 정답률 -->
+    <div class="card" id="typeStatsCard">
+      <div class="card-title">유형별 정답률</div>
+      <div id="typeStatsList"></div>
+    </div>
+    <!-- 틀린 문제 -->
+    <div id="wrongCard" class="card" style="display:none;">
+      <div class="card-title">❌ 틀린 문제 복습</div>
+      <div id="wrongList"></div>
+    </div>
+    <button class="btn btn-primary" id="retryBtn" style="padding:.85rem;">다시 풀기</button>
+    <button class="btn btn-ghost" id="homeBtn">홈으로</button>
+  </div>
+
+</div>
+
+<script>
+// ─── 설정 ───────────────────────────────────────────────────────────────────
+const BASE_URL = 'https://GITHUB_USERNAME.github.io/cs-quiz/data';
+const TOPICS = [
+  { key: 'os',      label: '운영체제' },
+  { key: 'network', label: '네트워크' },
+  { key: 'ds',      label: '자료구조' },
+  { key: 'db',      label: '데이터베이스' },
+  { key: 'java',    label: 'Java' },
+  { key: 'spring',  label: 'Spring' },
+  { key: 'design',  label: '디자인패턴' },
+  { key: 'general', label: '개발자 필수' },
+];
+const TYPE_META = {
+  concept:  { icon: '🔵', label: '개념' },
+  tradeoff: { icon: '🟠', label: '트레이드오프' },
+  scenario: { icon: '🟣', label: '시나리오' },
+  debug:    { icon: '🔴', label: '디버그' },
+  ordering: { icon: '🟡', label: '순서' },
+};
+
+// ─── 상태 ───────────────────────────────────────────────────────────────────
+let allQuestions = [];        // 캐시된 전체 문제
+let topicCounts  = {};        // { os: 30, ... }
+let selectedTopics = new Set(TOPICS.map(t => t.key));
+let selectedDiffs  = new Set(['basic','intermediate','advanced']);
+let selectedTypes  = new Set(['concept','tradeoff','scenario','debug','ordering']);
+let countTarget = 10;
+
+let quiz = { questions: [], idx: 0, correct: 0, wrongs: [], answered: false };
+
+// ─── 데이터 로드 ─────────────────────────────────────────────────────────────
+async function loadAll() {
+  try {
+    const res = await Promise.all(
+      TOPICS.map(t =>
+        fetch(`${BASE_URL}/${t.key}.json`)
+          .then(r => r.json())
+          .catch(() => ({ topic: t.key, questions: [] }))
+      )
+    );
+    allQuestions = res.flatMap(r => {
+      topicCounts[r.topic] = (r.questions || []).length;
+      return r.questions || [];
+    });
+    localStorage.setItem('cached-questions', JSON.stringify(allQuestions));
+    localStorage.setItem('cached-counts',    JSON.stringify(topicCounts));
+  } catch {
+    const cached = localStorage.getItem('cached-questions');
+    const counts = localStorage.getItem('cached-counts');
+    if (cached) allQuestions = JSON.parse(cached);
+    if (counts)  topicCounts  = JSON.parse(counts);
+  }
+  renderTopicGrid();
+  updateStartBtn();
+}
+
+// ─── 홈 렌더 ─────────────────────────────────────────────────────────────────
+function renderTopicGrid() {
+  const grid = document.getElementById('topicGrid');
+  grid.innerHTML = TOPICS.map(t => {
+    const n = topicCounts[t.key] || 0;
+    const active = selectedTopics.has(t.key) ? 'active' : '';
+    return `<button class="topic-btn ${active}" data-key="${t.key}">
+      ${t.label}<br><span class="count">${n}문제</span>
+    </button>`;
+  }).join('');
+  grid.querySelectorAll('.topic-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const k = btn.dataset.key;
+      if (selectedTopics.has(k)) { selectedTopics.delete(k); btn.classList.remove('active'); }
+      else                       { selectedTopics.add(k);    btn.classList.add('active');    }
+      updateStartBtn();
+    });
+  });
+}
+
+function updateStartBtn() {
+  const available = getFiltered();
+  const btn = document.getElementById('startBtn');
+  btn.textContent = available.length > 0
+    ? `퀴즈 시작 (${Math.min(countTarget, available.length)}문제)`
+    : '문제가 없습니다';
+  btn.disabled = available.length === 0;
+}
+
+function getFiltered() {
+  return allQuestions.filter(q =>
+    selectedTopics.has(q.id.split('-')[0]) &&
+    selectedDiffs.has(q.difficulty) &&
+    selectedTypes.has(q.type)
+  );
+}
+
+function renderStats() {
+  const s = JSON.parse(localStorage.getItem('quiz-stats') || '{"total":0,"correct":0}');
+  document.getElementById('statTotal').textContent = s.total;
+  document.getElementById('statCorrect').textContent = s.correct;
+  document.getElementById('statPct').textContent = s.total ? Math.round(s.correct/s.total*100)+'%' : '0%';
+}
+
+// ─── 필터 토글 ────────────────────────────────────────────────────────────────
+document.getElementById('diffFilter').addEventListener('click', e => {
+  const chip = e.target.closest('[data-diff]'); if (!chip) return;
+  const d = chip.dataset.diff;
+  if (selectedDiffs.has(d)) { selectedDiffs.delete(d); chip.classList.remove('active'); }
+  else                       { selectedDiffs.add(d);   chip.classList.add('active');    }
+  updateStartBtn();
+});
+document.getElementById('typeFilter').addEventListener('click', e => {
+  const chip = e.target.closest('[data-type]'); if (!chip) return;
+  const t = chip.dataset.type;
+  if (selectedTypes.has(t)) { selectedTypes.delete(t); chip.classList.remove('active'); }
+  else                       { selectedTypes.add(t);   chip.classList.add('active');    }
+  updateStartBtn();
+});
+
+const slider = document.getElementById('countSlider');
+slider.addEventListener('input', () => {
+  countTarget = +slider.value;
+  document.getElementById('countLabel').textContent = countTarget + '문제';
+  updateStartBtn();
+});
+
+// ─── 퀴즈 시작 ───────────────────────────────────────────────────────────────
+document.getElementById('startBtn').addEventListener('click', startQuiz);
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function startQuiz() {
+  const pool = shuffle([...getFiltered()]);
+  const chosen = pool.slice(0, countTarget);
+  if (!chosen.length) return;
+  quiz = { questions: chosen, idx: 0, correct: 0, wrongs: [], answered: false };
+  showScreen('quizScreen');
+  renderQuestion();
+}
+
+// ─── 문제 렌더 ───────────────────────────────────────────────────────────────
+function renderQuestion() {
+  const q = quiz.questions[quiz.idx];
+  quiz.answered = false;
+
+  // 진행 바
+  const pct = (quiz.idx / quiz.questions.length) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('quizCounter').textContent = `${quiz.idx + 1} / ${quiz.questions.length}`;
+
+  // 유형 배지
+  const meta = TYPE_META[q.type] || { icon: '⚪', label: q.type };
+  const badge = document.getElementById('typeBadge');
+  badge.textContent = `${meta.icon} ${meta.label}`;
+  badge.className = `chip chip-type ${q.type}`;
+
+  document.getElementById('questionText').textContent = q.question;
+  document.getElementById('explanationBox').style.display = 'none';
+  document.getElementById('nextBtn').style.display = 'none';
+
+  const list = document.getElementById('optionList');
+  list.innerHTML = q.options.map((opt, i) =>
+    `<div class="option" data-idx="${i}">${opt}</div>`
+  ).join('');
+
+  list.querySelectorAll('.option').forEach(el => {
+    el.addEventListener('click', () => selectOption(el, q));
+  });
+}
+
+function selectOption(el, q) {
+  if (quiz.answered) return;
+  quiz.answered = true;
+
+  const chosen = +el.dataset.idx;
+  const correct = q.answer;
+
+  document.querySelectorAll('.option').forEach(o => {
+    o.classList.add('disabled');
+    const i = +o.dataset.idx;
+    if (i === correct) o.classList.add(chosen === correct ? 'correct' : 'reveal');
+    else if (i === chosen) o.classList.add('wrong');
+  });
+
+  if (chosen === correct) quiz.correct++;
+  else quiz.wrongs.push({ q, chosen });
+
+  const box = document.getElementById('explanationBox');
+  box.textContent = q.explanation;
+  box.style.display = 'block';
+
+  const nextBtn = document.getElementById('nextBtn');
+  nextBtn.style.display = '';
+  nextBtn.textContent = quiz.idx + 1 < quiz.questions.length ? '다음 문제 →' : '결과 보기';
+}
+
+document.getElementById('nextBtn').addEventListener('click', () => {
+  quiz.idx++;
+  if (quiz.idx < quiz.questions.length) renderQuestion();
+  else showResult();
+});
+
+document.getElementById('quitBtn').addEventListener('click', () => {
+  if (quiz.idx > 0) showResult();
+  else showScreen('homeScreen');
+});
+
+// ─── 결과 ────────────────────────────────────────────────────────────────────
+function showResult() {
+  const total = quiz.idx; // answered count
+  const pct = total ? Math.round(quiz.correct / total * 100) : 0;
+
+  document.getElementById('progressFill').style.width = '100%';
+
+  const emoji = pct >= 80 ? '🎉' : pct >= 50 ? '💪' : '📚';
+  const msg   = pct >= 80 ? '훌륭해요! 면접 준비 완료!' : pct >= 50 ? '좋아요! 조금만 더 연습하세요.' : '더 공부가 필요해요. 파이팅!';
+  document.getElementById('resultEmoji').textContent = emoji;
+  document.getElementById('resultMessage').textContent = msg;
+  document.getElementById('resultPct').textContent = pct + '%';
+  document.getElementById('resultScore').textContent = `${quiz.correct}/${total}`;
+
+  // 유형별 통계
+  const typeMap = {};
+  quiz.questions.slice(0, total).forEach((q, i) => {
+    if (!typeMap[q.type]) typeMap[q.type] = { total: 0, correct: 0 };
+    typeMap[q.type].total++;
+    const wrongIds = quiz.wrongs.map(w => w.q.id);
+    if (!wrongIds.includes(q.id)) typeMap[q.type].correct++;
+  });
+  const typeList = document.getElementById('typeStatsList');
+  typeList.innerHTML = Object.entries(typeMap).map(([type, s]) => {
+    const p = Math.round(s.correct / s.total * 100);
+    const meta = TYPE_META[type] || { icon: '⚪', label: type };
+    return `<div class="type-row">
+      <span style="font-size:.82rem;">${meta.icon} ${meta.label}</span>
+      <div class="bar-bg"><div class="bar-fill" style="width:${p}%"></div></div>
+      <span class="pct">${p}%</span>
+    </div>`;
+  }).join('');
+
+  // 틀린 문제
+  const wrongCard = document.getElementById('wrongCard');
+  if (quiz.wrongs.length) {
+    wrongCard.style.display = '';
+    document.getElementById('wrongList').innerHTML = quiz.wrongs.map(({ q, chosen }) =>
+      `<div class="wrong-item">
+        <div class="wrong-q">${q.question}</div>
+        <div class="wrong-ans">
+          <span class="correct-text">✓ ${q.options[q.answer]}</span><br>
+          <span class="your-text">✗ ${q.options[chosen]}</span>
+        </div>
+      </div>`
+    ).join('');
+  } else {
+    wrongCard.style.display = 'none';
+  }
+
+  // 통계 저장
+  const s = JSON.parse(localStorage.getItem('quiz-stats') || '{"total":0,"correct":0}');
+  s.total   += total;
+  s.correct += quiz.correct;
+  localStorage.setItem('quiz-stats', JSON.stringify(s));
+
+  showScreen('resultScreen');
+  renderStats();
+}
+
+document.getElementById('retryBtn').addEventListener('click', startQuiz);
+document.getElementById('homeBtn').addEventListener('click', () => showScreen('homeScreen'));
+
+// ─── 화면 전환 ────────────────────────────────────────────────────────────────
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ─── Service Worker ───────────────────────────────────────────────────────────
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/cs-quiz/sw.js').catch(() => {});
+}
+
+// ─── 초기화 ───────────────────────────────────────────────────────────────────
+renderStats();
+loadAll();
+</script>
+</body>
+</html>
