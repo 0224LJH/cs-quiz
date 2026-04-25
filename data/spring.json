@@ -1,4 +1,7 @@
-[
+{
+  "topic": "spring",
+  "label": "Spring",
+  "questions": [
   {
     "id": "spring-c001",
     "difficulty": "basic",
@@ -911,3 +914,4 @@
     "explanation": "REQUIRES_NEW 전파 순서: ①기존(외부) 트랜잭션 일시 중단 → ②완전히 독립된 새 트랜잭션 시작 → ③새 트랜잭션 내 로직 실행 후 커밋 또는 롤백 → ④외부 트랜잭션 재개. 새 트랜잭션의 커밋/롤백은 외부 트랜잭션에 영향을 주지 않습니다."
   }
 ]
+}

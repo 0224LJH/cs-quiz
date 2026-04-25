@@ -1,4 +1,7 @@
-[
+{
+  "topic": "design",
+  "label": "디자인패턴",
+  "questions": [
   {
     "id": "design-c001",
     "difficulty": "basic",
@@ -700,3 +703,4 @@
     "explanation": "SOLID 리팩토링 순서(실무 접근): ①SRP로 클래스 책임 분리(God Class 제거) → ②LSP로 상속 계층 올바른지 검증 → ③OCP를 위해 인터페이스/추상화 추가 → ④DIP로 고수준 모듈이 추상화에 의존하도록 DI 적용. ISP는 인터페이스 분리로 필요 시 적용."
   }
 ]
+}
