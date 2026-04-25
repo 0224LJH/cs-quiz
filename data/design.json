@@ -1,5 +1,702 @@
-{
-  "topic": "design",
-  "label": "디자인패턴",
-  "questions": []
-}
+[
+  {
+    "id": "design-c001",
+    "difficulty": "basic",
+    "type": "concept",
+    "question": "디자인 패턴을 생성(Creational), 구조(Structural), 행동(Behavioral) 패턴으로 분류할 때, Singleton 패턴은 어느 분류에 속하나요?",
+    "options": [
+      "구조(Structural) 패턴",
+      "생성(Creational) 패턴",
+      "행동(Behavioral) 패턴",
+      "동시성(Concurrency) 패턴"
+    ],
+    "answer": 1,
+    "explanation": "Singleton은 클래스의 인스턴스를 하나만 생성하고 전역 접근점을 제공하는 생성(Creational) 패턴입니다. 생성 패턴에는 Singleton, Factory Method, Abstract Factory, Builder, Prototype이 있습니다."
+  },
+  {
+    "id": "design-c002",
+    "difficulty": "basic",
+    "type": "concept",
+    "question": "Factory Method 패턴의 핵심 목적은?",
+    "options": [
+      "객체를 복사하여 새 인스턴스를 생성",
+      "객체 생성 인터페이스를 정의하되, 어떤 클래스를 생성할지는 서브클래스가 결정",
+      "복잡한 객체를 단계별로 조립",
+      "관련 객체군을 하나의 팩토리로 묶어 생성"
+    ],
+    "answer": 1,
+    "explanation": "Factory Method는 객체 생성의 인터페이스(Creator)를 정의하지만 어떤 구체 클래스를 인스턴스화할지는 서브클래스(ConcreteCreator)에 위임합니다. 이를 통해 코드의 유연성과 확장성을 높입니다."
+  },
+  {
+    "id": "design-c003",
+    "difficulty": "basic",
+    "type": "concept",
+    "question": "Observer 패턴에서 Subject(발행자)와 Observer(구독자)의 관계는?",
+    "options": [
+      "Subject가 Observer를 상속하여 알림을 전달",
+      "Subject의 상태 변화 시 등록된 모든 Observer에게 자동으로 알림을 전송하는 일대다 의존 관계",
+      "Observer가 주기적으로 Subject를 폴링하여 변경을 감지",
+      "Subject와 Observer가 동일한 스레드에서만 동작"
+    ],
+    "answer": 1,
+    "explanation": "Observer 패턴은 일대다 의존 관계를 정의합니다. Subject의 상태가 바뀌면 의존하는 모든 Observer에게 자동으로 알림을 보내 갱신됩니다. 이벤트 시스템, MVC 패턴, 리액티브 프로그래밍의 기반입니다."
+  },
+  {
+    "id": "design-c004",
+    "difficulty": "basic",
+    "type": "concept",
+    "question": "Strategy 패턴의 목적은?",
+    "options": [
+      "알고리즘을 캡슐화하여 런타임에 교체 가능하게 함",
+      "객체 구조를 변경하지 않고 새 기능을 추가",
+      "객체 생성 로직을 서브클래스에 위임",
+      "복잡한 서브시스템을 단순한 인터페이스로 감춤"
+    ],
+    "answer": 0,
+    "explanation": "Strategy 패턴은 알고리즘군을 정의하고 각각을 캡슐화하여 런타임에 교체할 수 있게 합니다. 조건문(if-else, switch) 없이 동작을 변경하는 데 유용합니다. 예: 정렬 알고리즘 선택, 결제 방식 선택."
+  },
+  {
+    "id": "design-c005",
+    "difficulty": "basic",
+    "type": "concept",
+    "question": "Decorator 패턴과 상속(Inheritance)의 차이는?",
+    "options": [
+      "Decorator는 컴파일 타임에 기능을 추가하고, 상속은 런타임에 추가",
+      "Decorator는 런타임에 객체를 래핑하여 동적으로 책임을 추가, 상속은 컴파일 타임에 정적으로 기능 확장",
+      "Decorator는 구조 패턴, 상속은 행동 패턴",
+      "Decorator와 상속은 동일한 목적으로 사용"
+    ],
+    "answer": 1,
+    "explanation": "상속은 클래스 계층을 컴파일 타임에 고정합니다. Decorator는 객체를 래퍼 객체로 감싸서 런타임에 동적으로 기능을 추가합니다. 기능 조합의 폭발적 증가 없이 다양한 조합을 구성할 수 있어 '상속보다 합성(Composition over Inheritance)'의 대표적인 예입니다."
+  },
+  {
+    "id": "design-c006",
+    "difficulty": "basic",
+    "type": "concept",
+    "question": "Adapter 패턴의 역할은?",
+    "options": [
+      "객체에 동적으로 기능을 추가하는 래퍼",
+      "호환되지 않는 인터페이스를 가진 클래스를 함께 동작할 수 있도록 변환",
+      "복잡한 객체 생성 과정을 단순화",
+      "객체 간의 느슨한 결합을 위한 중재자"
+    ],
+    "answer": 1,
+    "explanation": "Adapter는 클라이언트가 기대하는 인터페이스와 기존 클래스(Adaptee)의 인터페이스 사이를 변환해주는 '번역기' 역할입니다. 레거시 코드 통합, 서드파티 라이브러리 래핑 등에 활용됩니다."
+  },
+  {
+    "id": "design-c007",
+    "difficulty": "basic",
+    "type": "concept",
+    "question": "Builder 패턴이 생성자(Constructor)보다 유리한 경우는?",
+    "options": [
+      "객체 생성 속도가 중요할 때",
+      "매개변수가 많거나 선택적 매개변수가 많아 가독성이 낮은 생성자를 대체할 때",
+      "스레드 안전한 객체 생성이 필요할 때",
+      "단 하나의 인스턴스만 필요할 때"
+    ],
+    "answer": 1,
+    "explanation": "Builder 패턴은 점층적 생성자(Telescoping Constructor) 문제를 해결합니다. 매개변수가 많거나 선택적일 때 `new Pizza().setSize(\"L\").setCheese(true).build()` 처럼 명확하고 유연하게 객체를 생성할 수 있습니다."
+  },
+  {
+    "id": "design-c008",
+    "difficulty": "basic",
+    "type": "concept",
+    "question": "Facade 패턴의 목적은?",
+    "options": [
+      "객체 간의 통신을 중앙 집중화",
+      "복잡한 서브시스템에 단순화된 인터페이스를 제공",
+      "객체의 복사본을 효율적으로 생성",
+      "알고리즘을 캡슐화하여 교체 가능하게 함"
+    ],
+    "answer": 1,
+    "explanation": "Facade 패턴은 복잡한 서브시스템(여러 클래스와 메서드)을 단순하고 통합된 인터페이스로 감싸서 클라이언트가 쉽게 사용할 수 있게 합니다. 레이어 간 의존성 감소, API 단순화에 유용합니다."
+  },
+  {
+    "id": "design-c009",
+    "difficulty": "basic",
+    "type": "concept",
+    "question": "Template Method 패턴의 구조는?",
+    "options": [
+      "인터페이스를 통해 알고리즘을 교체 가능하게 구성",
+      "상위 클래스에서 알고리즘의 골격을 정의하고, 특정 단계는 서브클래스에서 오버라이드",
+      "객체 생성을 전담하는 템플릿 클래스를 별도로 분리",
+      "여러 객체의 공통 동작을 하나의 메서드로 통합"
+    ],
+    "answer": 1,
+    "explanation": "Template Method는 상위 클래스에서 알고리즘의 뼈대(템플릿 메서드)를 정의하고, 가변적인 단계는 추상 메서드 또는 훅 메서드로 서브클래스에서 구현합니다. '할리우드 원칙(Don't call us, we'll call you)'의 예입니다."
+  },
+  {
+    "id": "design-c010",
+    "difficulty": "basic",
+    "type": "concept",
+    "question": "Composite 패턴이 해결하는 문제는?",
+    "options": [
+      "동일 인터페이스로 단일 객체와 객체 컬렉션(트리 구조)을 처리",
+      "객체의 내부 상태에 따라 행동이 바뀌는 문제",
+      "복잡한 쿼리를 단계별로 조합하는 문제",
+      "다수의 알고리즘을 동적으로 선택하는 문제"
+    ],
+    "answer": 0,
+    "explanation": "Composite 패턴은 객체들을 트리 구조로 구성하여 단일 객체(Leaf)와 복합 객체(Composite)를 동일한 인터페이스로 처리합니다. 파일 시스템의 파일/폴더, UI의 컴포넌트 계층 등이 대표적인 예입니다."
+  },
+  {
+    "id": "design-c011",
+    "difficulty": "intermediate",
+    "type": "concept",
+    "question": "Abstract Factory 패턴과 Factory Method 패턴의 차이는?",
+    "options": [
+      "Abstract Factory는 하나의 객체, Factory Method는 여러 객체를 생성",
+      "Abstract Factory는 관련 객체 패밀리 전체를 생성하는 인터페이스 제공, Factory Method는 단일 객체 생성을 서브클래스에 위임",
+      "Abstract Factory는 구조 패턴, Factory Method는 생성 패턴",
+      "둘 다 동일한 패턴으로 구현 방식만 다름"
+    ],
+    "answer": 1,
+    "explanation": "Factory Method는 하나의 제품(Product)을 생성하는 메서드를 서브클래스에 위임합니다. Abstract Factory는 관련된 여러 제품군(ProductA, ProductB)을 일관되게 생성하는 인터페이스를 제공합니다. 예: UI 테마별 Button, TextField, Checkbox를 함께 생성."
+  },
+  {
+    "id": "design-c012",
+    "difficulty": "intermediate",
+    "type": "concept",
+    "question": "Command 패턴의 핵심 이점은?",
+    "options": [
+      "객체 간의 직접 통신을 제거하여 결합도 감소",
+      "요청을 객체로 캡슐화하여 실행 취소(Undo)/재실행(Redo), 큐잉, 로깅을 가능하게 함",
+      "복잡한 객체 생성 과정을 단순화",
+      "알고리즘을 교체 가능한 형태로 캡슐화"
+    ],
+    "answer": 1,
+    "explanation": "Command 패턴은 요청 자체를 객체로 캡슐화합니다. 덕분에 실행 취소(Undo/Redo), 작업 큐잉, 트랜잭션, 로깅이 가능해집니다. 발신자(Invoker)와 수신자(Receiver)가 분리되어 결합도도 낮아집니다."
+  },
+  {
+    "id": "design-c013",
+    "difficulty": "intermediate",
+    "type": "concept",
+    "question": "Proxy 패턴의 종류와 각 용도로 올바른 것은?",
+    "options": [
+      "가상 프록시(무거운 객체 지연 생성), 보호 프록시(접근 제어), 원격 프록시(원격 객체 로컬 대리)",
+      "프록시 패턴은 캐싱 목적으로만 사용",
+      "프록시는 항상 원본 객체보다 느리므로 성능이 중요한 곳에 미사용",
+      "프록시와 Decorator는 완전히 동일한 패턴"
+    ],
+    "answer": 0,
+    "explanation": "Proxy 종류: ①가상 프록시(Virtual): 무거운 객체의 지연 초기화 ②보호 프록시(Protection): 접근 권한 제어 ③원격 프록시(Remote): 원격 객체에 로컬처럼 접근 ④캐싱 프록시: 결과 캐싱. Spring AOP, Hibernate Lazy Loading이 프록시 패턴을 활용합니다."
+  },
+  {
+    "id": "design-c014",
+    "difficulty": "intermediate",
+    "type": "concept",
+    "question": "Chain of Responsibility(책임 연쇄) 패턴의 동작 방식은?",
+    "options": [
+      "모든 핸들러가 요청을 순서대로 처리",
+      "요청을 처리할 수 있는 핸들러를 찾을 때까지 핸들러 체인을 따라 전달",
+      "하나의 핸들러가 모든 요청을 중재",
+      "요청자와 수신자를 완전히 분리하여 중간 객체가 처리"
+    ],
+    "answer": 1,
+    "explanation": "Chain of Responsibility는 요청을 처리할 수 있는 핸들러가 나타날 때까지 핸들러 체인을 따라 요청을 전달합니다. 각 핸들러는 처리하거나 다음 핸들러에게 넘깁니다. Spring Security의 FilterChain, Java 서블릿 필터가 이 패턴을 구현합니다."
+  },
+  {
+    "id": "design-c015",
+    "difficulty": "intermediate",
+    "type": "concept",
+    "question": "State 패턴과 Strategy 패턴의 차이는?",
+    "options": [
+      "State는 행동 패턴, Strategy는 생성 패턴",
+      "State는 객체 내부 상태에 따라 행동이 자동으로 전환, Strategy는 클라이언트가 외부에서 알고리즘을 선택",
+      "State는 단일 알고리즘, Strategy는 다중 알고리즘을 관리",
+      "둘 다 동일한 패턴으로 명칭만 다름"
+    ],
+    "answer": 1,
+    "explanation": "Strategy는 클라이언트가 명시적으로 알고리즘(전략)을 선택합니다. State는 객체가 내부 상태를 추적하고 상태 전이에 따라 자동으로 행동이 변경됩니다. 상태 전이를 State 객체 자신이 관리하는 것이 핵심 차이입니다."
+  },
+  {
+    "id": "design-t001",
+    "difficulty": "intermediate",
+    "type": "tradeoff",
+    "question": "Singleton 패턴 사용의 트레이드오프는?",
+    "options": [
+      "Singleton은 스레드 안전성을 자동 보장하므로 멀티스레드에 최적",
+      "전역 상태 공유로 접근이 편리하지만 강한 결합·테스트 어려움(목 주입 불가)·스레드 안전 구현 복잡성의 단점",
+      "Singleton은 메모리를 많이 사용하므로 작은 객체에만 사용",
+      "Singleton은 항상 DI 컨테이너로 대체해야 함"
+    ],
+    "answer": 1,
+    "explanation": "Singleton의 장점: 단일 인스턴스로 자원 절약, 전역 접근점 제공. 단점: 전역 상태로 인한 강한 결합, 단위 테스트 시 목(Mock) 대체 어려움, 멀티스레드 환경에서 Double-Checked Locking 등 안전 구현 필요, 라이프사이클 관리 복잡성."
+  },
+  {
+    "id": "design-t002",
+    "difficulty": "intermediate",
+    "type": "tradeoff",
+    "question": "상속(Inheritance) vs 합성(Composition) 선택의 트레이드오프는?",
+    "options": [
+      "합성은 항상 상속보다 낫다",
+      "상속은 코드 재사용이 직관적이나 강한 결합·유연성 부족, 합성은 유연하고 테스트 용이하나 구조가 복잡해질 수 있음",
+      "상속은 행동 패턴, 합성은 구조 패턴에서만 사용",
+      "합성은 Java에서만 지원, 상속은 모든 언어에서 지원"
+    ],
+    "answer": 1,
+    "explanation": "상속은 'is-a' 관계에서 직관적이나 부모 변경이 자식에 모두 영향을 주는 강한 결합이 생깁니다. 합성('has-a')은 필요한 인터페이스를 위임하여 유연하고 테스트가 용이하지만 위임 메서드를 명시적으로 작성해야 합니다. GoF는 '합성을 상속보다 선호하라'를 권장합니다."
+  },
+  {
+    "id": "design-t003",
+    "difficulty": "intermediate",
+    "type": "tradeoff",
+    "question": "Observer 패턴의 트레이드오프는?",
+    "options": [
+      "Observer는 구독자 수에 관계없이 항상 O(1) 성능",
+      "느슨한 결합으로 유연한 이벤트 처리가 가능하지만, 예측하기 어려운 알림 순서·메모리 누수(미해제 구독)·과도한 알림으로 성능 저하 가능",
+      "Observer는 동기 방식만 지원하여 비동기 처리 불가",
+      "Observer는 일대일 관계에만 적합"
+    ],
+    "answer": 1,
+    "explanation": "Observer의 장점: 발행자-구독자 간 느슨한 결합, 런타임에 구독자 추가/제거 용이. 단점: 구독자 미해제 시 메모리 누수(특히 Java에서 강한 참조), 알림 순서 보장 어려움, 구독자가 많으면 알림 비용 증가, 연쇄 업데이트로 인한 디버깅 어려움."
+  },
+  {
+    "id": "design-t004",
+    "difficulty": "intermediate",
+    "type": "tradeoff",
+    "question": "Decorator 패턴 vs 서브클래싱(Subclassing)의 트레이드오프는?",
+    "options": [
+      "Decorator는 런타임 기능 조합이 유연하나 래퍼가 많아지면 복잡해짐, 서브클래싱은 정적이나 계층이 명확함",
+      "Decorator는 항상 더 빠르고 간결",
+      "서브클래싱은 Spring Framework에서 사용 불가",
+      "Decorator는 인터페이스 없이 구현 불가"
+    ],
+    "answer": 0,
+    "explanation": "서브클래싱은 기능 조합마다 새 클래스가 필요하여 조합 폭발이 생깁니다. Decorator는 기본 객체에 기능 래퍼를 중첩하여 런타임에 유연하게 조합하지만, 많은 작은 객체와 래퍼 중첩으로 디버깅이 어려울 수 있습니다."
+  },
+  {
+    "id": "design-t005",
+    "difficulty": "intermediate",
+    "type": "tradeoff",
+    "question": "Strategy 패턴 vs if-else/switch 구문 선택 기준은?",
+    "options": [
+      "if-else가 성능이 좋으므로 항상 우선",
+      "알고리즘이 2-3개로 단순하면 if-else가 간결, 알고리즘 종류가 많거나 자주 추가되면 Strategy가 OCP를 준수하여 유지보수 용이",
+      "Strategy 패턴은 Java에서만 사용 가능",
+      "if-else와 Strategy 패턴은 성능 차이가 없음"
+    ],
+    "answer": 1,
+    "explanation": "단순한 분기(2-3개)는 if-else가 더 간결하고 이해하기 쉽습니다. 그러나 분기가 많고 자주 추가된다면 매번 조건문을 수정해야 하므로 OCP(개방-폐쇄 원칙) 위반입니다. Strategy 패턴은 새 전략을 클래스로 추가하기만 하면 됩니다."
+  },
+  {
+    "id": "design-t006",
+    "difficulty": "intermediate",
+    "type": "tradeoff",
+    "question": "Facade 패턴의 트레이드오프는?",
+    "options": [
+      "Facade는 항상 성능을 향상시킴",
+      "클라이언트 코드 단순화와 서브시스템 보호의 이점, 그러나 Facade가 God Object가 될 위험·서브시스템 세밀한 기능 접근을 막을 수 있음",
+      "Facade는 구조 패턴이 아닌 행동 패턴",
+      "Facade 없이는 서브시스템에 접근 불가"
+    ],
+    "answer": 1,
+    "explanation": "Facade의 장점: 클라이언트가 복잡한 서브시스템을 몰라도 되므로 결합도 감소, API 단순화. 단점: Facade에 너무 많은 책임이 집중되면 God Object 안티패턴이 될 수 있고, 고급 기능이 필요한 클라이언트는 Facade를 우회해야 합니다."
+  },
+  {
+    "id": "design-t007",
+    "difficulty": "advanced",
+    "type": "tradeoff",
+    "question": "Event-Driven Architecture(이벤트 주도 아키텍처)와 직접 메서드 호출의 트레이드오프는?",
+    "options": [
+      "이벤트 방식은 항상 직접 호출보다 빠름",
+      "이벤트 방식은 느슨한 결합·확장성이 좋으나 흐름 추적 어려움·이벤트 순서 보장 어려움·최종 일관성(Eventual Consistency) 처리 복잡, 직접 호출은 명확하나 강한 결합",
+      "직접 호출은 MSA에서 불가능",
+      "이벤트 방식은 동기 처리만 지원"
+    ],
+    "answer": 1,
+    "explanation": "직접 호출은 흐름이 명확하고 즉각적인 일관성을 보장하지만 발행자와 수신자가 강하게 결합됩니다. 이벤트 방식은 발행자-구독자 분리로 확장성이 뛰어나지만 이벤트 전파 경로 추적, 실패한 이벤트 재처리, 순서 보장 등 운영 복잡도가 증가합니다."
+  },
+  {
+    "id": "design-t008",
+    "difficulty": "advanced",
+    "type": "tradeoff",
+    "question": "Mediator 패턴 vs Observer 패턴 선택 기준은?",
+    "options": [
+      "Mediator는 행동 패턴, Observer는 구조 패턴",
+      "객체들이 복잡하게 서로 의존할 때 Mediator(중앙 중재자로 통신 집중화), 단순 일대다 알림이면 Observer(Subject → Observer 직접 알림)",
+      "Observer는 단방향, Mediator는 양방향 통신만 지원",
+      "Mediator는 Java에서 Observer로 구현 불가"
+    ],
+    "answer": 1,
+    "explanation": "Observer는 Subject가 Observer들에게 직접 알림을 보내는 단순한 일대다 구조입니다. Mediator는 모든 통신을 중재자를 통해 처리하여 객체들이 서로를 직접 참조하지 않습니다. 복잡한 다대다 통신에서는 Mediator가 결합도를 더 효과적으로 낮춥니다."
+  },
+  {
+    "id": "design-t009",
+    "difficulty": "advanced",
+    "type": "tradeoff",
+    "question": "Flyweight 패턴 사용의 트레이드오프는?",
+    "options": [
+      "Flyweight는 항상 메모리를 절약하면서 성능도 향상",
+      "공유 가능한 내재 상태(Intrinsic)를 캐싱하여 메모리 절약하지만, 외재 상태(Extrinsic) 분리 복잡성·스레드 안전 공유 객체 관리·CPU↔메모리 트레이드오프",
+      "Flyweight는 불변 객체에만 사용 가능",
+      "Flyweight는 Java에서 Integer 캐시(-128~127)로만 구현됨"
+    ],
+    "answer": 1,
+    "explanation": "Flyweight는 객체의 공유 가능한 부분(내재 상태)만 캐싱하여 수백만 개의 객체 대신 소수의 공유 객체를 사용합니다. 단, 내재/외재 상태 분리가 복잡하고, 공유 객체의 스레드 안전성 보장이 필요하며, CPU 연산이 늘어날 수 있습니다."
+  },
+  {
+    "id": "design-t010",
+    "difficulty": "intermediate",
+    "type": "tradeoff",
+    "question": "Builder 패턴의 트레이드오프는?",
+    "options": [
+      "Builder는 항상 생성자보다 빠름",
+      "복잡한 객체 생성의 가독성·불변 객체 생성 용이성의 장점, 그러나 Builder 클래스 추가로 코드량 증가",
+      "Builder 패턴은 불변 객체 생성에 사용 불가",
+      "Builder는 단순한 객체 생성에 적합"
+    ],
+    "answer": 1,
+    "explanation": "Builder의 장점: ①매개변수가 많은 생성자 문제 해결 ②선택적 필드를 명확하게 표현 ③불변 객체 생성 용이(build() 호출 전 유효성 검사 가능). 단점: 필드마다 Builder에 setter를 추가해야 하여 코드량 증가, 단순한 객체에는 과도한 설계."
+  },
+  {
+    "id": "design-t011",
+    "difficulty": "intermediate",
+    "type": "tradeoff",
+    "question": "Template Method vs Strategy 패턴 선택 기준은?",
+    "options": [
+      "Template Method는 구조 패턴, Strategy는 행동 패턴이므로 목적이 다름",
+      "알고리즘의 골격이 고정되고 일부 단계만 변경되면 Template Method(상속 기반), 알고리즘 전체를 교체해야 하면 Strategy(합성 기반)",
+      "Template Method는 인터페이스, Strategy는 추상 클래스를 사용",
+      "Template Method는 상위 클래스에서 모든 로직을 구현"
+    ],
+    "answer": 1,
+    "explanation": "Template Method는 상위 클래스에서 알고리즘 뼈대를 정의하고 일부 단계(훅 메서드)를 서브클래스에서 오버라이드합니다. 상속 관계로 강한 결합이 있습니다. Strategy는 알고리즘 전체를 외부 객체로 교체하는 합성 방식으로 더 유연합니다."
+  },
+  {
+    "id": "design-t012",
+    "difficulty": "advanced",
+    "type": "tradeoff",
+    "question": "SOLID 원칙 중 개방-폐쇄 원칙(OCP)의 적용 트레이드오프는?",
+    "options": [
+      "OCP를 준수하면 코드가 항상 단순해짐",
+      "OCP 준수로 기존 코드 수정 없이 확장 가능하지만, 추상화 레이어 증가로 복잡성 증가·초기 설계 비용 상승",
+      "OCP는 Java에서만 적용 가능한 원칙",
+      "OCP를 완벽하게 준수하면 버그가 발생하지 않음"
+    ],
+    "answer": 1,
+    "explanation": "OCP(확장에 열리고 수정에 닫힌)를 위해 추상화(인터페이스, 추상 클래스)를 도입하면 새 기능 추가가 쉬워지지만, 인터페이스와 구현체가 늘어나 코드 복잡도가 증가합니다. 모든 변경 지점을 미리 예측하기 어려우므로 YAGNI(You Aren't Gonna Need It) 원칙과 균형이 필요합니다."
+  },
+  {
+    "id": "design-t013",
+    "difficulty": "intermediate",
+    "type": "tradeoff",
+    "question": "Repository 패턴 사용의 트레이드오프는?",
+    "options": [
+      "Repository 패턴은 JPA를 사용할 때만 의미 있음",
+      "도메인 레이어와 데이터 접근 레이어를 분리하여 테스트 용이성과 교체 가능성을 높이지만, 추상화 계층 추가로 간단한 조회도 복잡해질 수 있음",
+      "Repository는 항상 인터페이스로 정의해야 함",
+      "Repository 패턴은 성능 저하를 유발"
+    ],
+    "answer": 1,
+    "explanation": "Repository 패턴은 데이터 접근 로직을 도메인에서 분리하여 DB 기술 교체(JPA → MyBatis)나 테스트 시 인메모리 구현체 대체가 쉬워집니다. 단, 단순한 CRUD 앱에서는 불필요한 추상화 레이어가 생겨 개발 속도를 저하시킬 수 있습니다."
+  },
+  {
+    "id": "design-t014",
+    "difficulty": "advanced",
+    "type": "tradeoff",
+    "question": "Microservices Architecture vs Monolithic의 디자인 패턴 측면 트레이드오프는?",
+    "options": [
+      "MSA는 항상 모놀리식보다 디자인 패턴을 더 많이 사용",
+      "MSA는 Saga, API Gateway, Circuit Breaker 등 분산 패턴이 필요하여 복잡도 증가, 모놀리식은 전통적 패턴(MVC 등)으로 단순하지만 확장 한계",
+      "모놀리식에서는 디자인 패턴을 사용할 수 없음",
+      "MSA에서는 Singleton 패턴 사용이 불가"
+    ],
+    "answer": 1,
+    "explanation": "모놀리식은 전통적인 GoF 패턴(MVC, Repository, Strategy 등)으로 구성됩니다. MSA는 추가로 Saga(분산 트랜잭션), API Gateway(진입점 통합), Circuit Breaker(장애 격리), Service Mesh, Sidecar 등 분산 시스템 패턴이 필요하여 운영 복잡도가 크게 증가합니다."
+  },
+  {
+    "id": "design-t015",
+    "difficulty": "intermediate",
+    "type": "tradeoff",
+    "question": "MVC vs MVVM 아키텍처 패턴 선택의 트레이드오프는?",
+    "options": [
+      "MVC는 백엔드, MVVM은 프론트엔드 전용",
+      "MVC는 서버 사이드 렌더링에 적합하고 구조가 단순, MVVM은 데이터 바인딩으로 UI-로직 분리가 명확하나 학습 곡선이 있음",
+      "MVVM은 Java에서만 구현 가능",
+      "MVC는 단방향, MVVM은 양방향 데이터 흐름만 지원"
+    ],
+    "answer": 1,
+    "explanation": "MVC는 Controller가 Model과 View를 연결하는 전통적 패턴으로 서버 사이드 렌더링(Spring MVC 등)에 잘 맞습니다. MVVM은 ViewModel이 View와 데이터 바인딩되어 View의 상태를 자동 업데이트하며 복잡한 클라이언트 UI(Angular, Vue, WPF)에 적합합니다."
+  },
+  {
+    "id": "design-s001",
+    "difficulty": "intermediate",
+    "type": "scenario",
+    "question": "알림 시스템에서 이메일, SMS, 푸시 알림을 각각 또는 조합하여 발송해야 합니다. 새 알림 채널이 자주 추가됩니다. 가장 적합한 패턴은?",
+    "options": [
+      "Singleton — 알림 서비스를 단일 인스턴스로 관리",
+      "Decorator — 기본 알림에 이메일, SMS, 푸시 기능을 동적으로 추가 조합",
+      "Template Method — 알림 발송의 공통 절차를 정의",
+      "Factory Method — 알림 타입별 객체를 생성"
+    ],
+    "answer": 1,
+    "explanation": "Decorator 패턴을 사용하면 `new PushDecorator(new SmsDecorator(new EmailNotification()))`처럼 동적으로 기능을 조합할 수 있습니다. 새 채널 추가 시 기존 코드 수정 없이 새 Decorator 클래스만 추가하면 됩니다(OCP 준수)."
+  },
+  {
+    "id": "design-s002",
+    "difficulty": "intermediate",
+    "type": "scenario",
+    "question": "텍스트 에디터에서 글자 입력, 삭제, 서식 변경을 실행 취소(Ctrl+Z)하고 재실행(Ctrl+Y)해야 합니다. 가장 적합한 패턴은?",
+    "options": [
+      "Observer — 편집 이벤트를 구독하여 처리",
+      "Command — 각 편집 작업을 객체로 캡슐화하여 실행 취소/재실행 스택 관리",
+      "Strategy — 편집 알고리즘을 교체 가능하게 구성",
+      "State — 에디터 상태에 따라 다른 편집 동작"
+    ],
+    "answer": 1,
+    "explanation": "Command 패턴은 각 작업(Insert, Delete, Format)을 execute()와 undo() 메서드를 가진 객체로 만들어 실행 히스토리 스택에 저장합니다. Ctrl+Z 시 스택에서 꺼내 undo()를, Ctrl+Y 시 redo 스택에서 execute()를 호출합니다."
+  },
+  {
+    "id": "design-s003",
+    "difficulty": "intermediate",
+    "type": "scenario",
+    "question": "결제 시스템에서 신용카드, 계좌이체, 간편결제 등 여러 결제 방식을 지원하고, 런타임에 결제 방식을 선택해야 합니다. 가장 적합한 패턴은?",
+    "options": [
+      "Singleton — 결제 매니저를 단일 인스턴스로 관리",
+      "Strategy — 결제 알고리즘을 캡슐화하여 런타임에 교체",
+      "Template Method — 결제 절차의 공통 단계를 정의",
+      "Factory Method — 결제 타입별 객체를 생성"
+    ],
+    "answer": 1,
+    "explanation": "Strategy 패턴으로 `PaymentStrategy` 인터페이스를 구현하는 `CreditCardStrategy`, `BankTransferStrategy` 등을 만들면 `order.setPaymentStrategy(new CreditCardStrategy())` 처럼 런타임에 결제 방식을 교체할 수 있습니다."
+  },
+  {
+    "id": "design-s004",
+    "difficulty": "intermediate",
+    "type": "scenario",
+    "question": "UI 컴포넌트 라이브러리에서 버튼, 텍스트박스, 체크박스를 OS 테마(Windows, Mac, Linux)에 맞게 일관되게 생성해야 합니다. 가장 적합한 패턴은?",
+    "options": [
+      "Factory Method — OS별 컴포넌트를 개별 생성",
+      "Abstract Factory — OS별 컴포넌트 패밀리(버튼+텍스트박스+체크박스)를 일관되게 생성",
+      "Builder — 컴포넌트를 단계적으로 조립",
+      "Prototype — 기존 컴포넌트를 복사하여 생성"
+    ],
+    "answer": 1,
+    "explanation": "Abstract Factory는 관련 객체군(동일 OS의 Button, TextField, Checkbox)을 함께 생성합니다. `WindowsFactory`, `MacFactory`가 각 OS에 맞는 전체 컴포넌트 세트를 생성하므로 UI 일관성을 보장하고 OS 전환 시 팩토리만 교체하면 됩니다."
+  },
+  {
+    "id": "design-s005",
+    "difficulty": "intermediate",
+    "type": "scenario",
+    "question": "파일 시스템에서 파일과 폴더를 동일한 방식으로 처리해야 합니다(폴더는 파일과 다른 폴더를 포함). 가장 적합한 패턴은?",
+    "options": [
+      "Decorator — 파일에 폴더 기능을 동적으로 추가",
+      "Composite — 파일(Leaf)과 폴더(Composite)를 동일 Component 인터페이스로 처리하는 트리 구조",
+      "Facade — 복잡한 파일 시스템을 단순 인터페이스로 감춤",
+      "Iterator — 파일 시스템을 순차적으로 탐색"
+    ],
+    "answer": 1,
+    "explanation": "Composite 패턴은 `FileComponent` 인터페이스를 `File(Leaf)`와 `Folder(Composite)`가 구현합니다. `Folder`는 `List<FileComponent>`를 가지고, `getSize()`를 재귀적으로 처리합니다. 클라이언트는 파일과 폴더를 동일하게 취급할 수 있습니다."
+  },
+  {
+    "id": "design-s006",
+    "difficulty": "intermediate",
+    "type": "scenario",
+    "question": "주문 처리 시스템에서 유효성 검사 → 재고 확인 → 결제 → 배송 순서로 처리하며, 각 단계마다 다음 단계 진행 여부를 결정합니다. 가장 적합한 패턴은?",
+    "options": [
+      "Template Method — 주문 처리 알고리즘의 골격을 정의",
+      "Chain of Responsibility — 각 처리 단계를 핸들러로 만들어 체인으로 연결",
+      "Command — 각 처리 단계를 객체로 캡슐화",
+      "State — 주문 상태에 따라 처리 방식 변경"
+    ],
+    "answer": 1,
+    "explanation": "Chain of Responsibility에서 `ValidationHandler → InventoryHandler → PaymentHandler → ShippingHandler`를 체인으로 연결합니다. 각 핸들러는 처리 후 다음 핸들러를 호출하거나 중단할 수 있습니다. 새 처리 단계 추가 시 기존 코드 수정 없이 체인에 삽입 가능합니다."
+  },
+  {
+    "id": "design-s007",
+    "difficulty": "advanced",
+    "type": "scenario",
+    "question": "대규모 게임에서 수백만 개의 총알(Bullet) 객체를 생성해야 합니다. 각 총알은 색상·크기·이미지는 같지만 위치·속도는 개별적으로 다릅니다. 메모리를 최적화하는 패턴은?",
+    "options": [
+      "Prototype — 기존 총알 객체를 복사하여 생성",
+      "Flyweight — 공유 가능한 내재 상태(색상, 이미지)를 캐싱하고, 위치/속도는 외재 상태로 분리",
+      "Object Pool — 총알 객체를 미리 생성하여 재사용",
+      "Singleton — 모든 총알이 단일 인스턴스를 공유"
+    ],
+    "answer": 1,
+    "explanation": "Flyweight 패턴에서 `BulletType`(색상, 크기, 이미지 — 내재 상태)은 캐시에서 공유하고, 각 총알의 위치·속도(외재 상태)는 컨텍스트로 분리합니다. 수백만 개의 총알이 `BulletType` 인스턴스를 공유하므로 메모리를 획기적으로 절약합니다."
+  },
+  {
+    "id": "design-s008",
+    "difficulty": "advanced",
+    "type": "scenario",
+    "question": "레거시 라이브러리(XmlParser)를 새 시스템의 JsonParser 인터페이스에 맞게 사용해야 합니다. 레거시 코드는 수정 불가입니다. 가장 적합한 패턴은?",
+    "options": [
+      "Facade — 복잡한 레거시 API를 단순화",
+      "Adapter — XmlParser를 JsonParser 인터페이스에 맞게 변환하는 래퍼 생성",
+      "Proxy — 레거시 라이브러리에 대한 접근을 제어",
+      "Decorator — 레거시 라이브러리에 기능을 동적으로 추가"
+    ],
+    "answer": 1,
+    "explanation": "`XmlParserAdapter`가 `JsonParser` 인터페이스를 구현하고 내부적으로 `XmlParser`에 위임하여 데이터를 변환합니다. 레거시 코드 수정 없이 새 시스템과 호환됩니다. Adapter는 '번역기' 역할로 호환되지 않는 인터페이스 간 통합에 사용합니다."
+  },
+  {
+    "id": "design-s009",
+    "difficulty": "advanced",
+    "type": "scenario",
+    "question": "복잡한 쿼리 빌더 라이브러리에서 `SELECT`, `FROM`, `WHERE`, `ORDER BY`, `LIMIT` 절을 순서대로 또는 선택적으로 조합해야 합니다. 가장 적합한 패턴은?",
+    "options": [
+      "Factory Method — 쿼리 타입별로 별도 팩토리 생성",
+      "Builder — 각 쿼리 절을 단계별로 추가하고 최종 build()로 완성된 쿼리 생성",
+      "Chain of Responsibility — 각 절을 핸들러로 처리",
+      "Composite — 쿼리 절들을 트리 구조로 조합"
+    ],
+    "answer": 1,
+    "explanation": "Builder 패턴은 `QueryBuilder.select(\"*\").from(\"users\").where(\"age > 18\").orderBy(\"name\").limit(10).build()` 처럼 메서드 체이닝으로 쿼리를 단계적으로 구성합니다. 선택적 절은 필요한 것만 호출하면 되어 유연합니다."
+  },
+  {
+    "id": "design-s010",
+    "difficulty": "advanced",
+    "type": "scenario",
+    "question": "주식 거래 시스템에서 주문 상태가 '대기 → 처리 중 → 완료/취소'로 전이되며, 각 상태에서 허용되는 동작이 다릅니다. 가장 적합한 패턴은?",
+    "options": [
+      "Strategy — 거래 알고리즘을 상태별로 교체",
+      "State — 주문 상태를 객체로 캡슐화하여 상태별 행동과 전이를 관리",
+      "Observer — 상태 변화를 구독자에게 알림",
+      "Command — 각 거래 작업을 객체로 캡슐화"
+    ],
+    "answer": 1,
+    "explanation": "State 패턴에서 `PendingState`, `ProcessingState`, `CompletedState`, `CancelledState`가 각 상태의 허용 동작과 전이를 정의합니다. 예: `PendingState`에서는 cancel() 가능하지만 `CompletedState`에서는 불가. 새 상태 추가 시 기존 코드 수정이 최소화됩니다."
+  },
+  {
+    "id": "design-d001",
+    "difficulty": "intermediate",
+    "type": "debug",
+    "question": "다음 Singleton 구현의 문제점은?\n```java\npublic class Config {\n    private static Config instance = new Config();\n    public static Config getInstance() {\n        return instance;\n    }\n    private Config() {\n        loadFromFile(); // 파일 I/O\n    }\n}\n```",
+    "options": [
+      "getInstance()가 synchronized가 아니어서 스레드 비안전",
+      "클래스 로드 시 즉시 초기화되어 사용하지 않아도 파일 I/O 비용 발생 — 지연 초기화(Lazy Initialization) 필요",
+      "private 생성자로 인해 상속 불가",
+      "문제 없는 올바른 Eager Initialization Singleton"
+    ],
+    "answer": 1,
+    "explanation": "Eager Initialization은 클래스가 로드될 때 즉시 인스턴스를 생성합니다. Config를 사용하지 않더라도 파일 I/O가 발생합니다. 해결: 정적 내부 클래스(Holder) 패턴으로 실제 사용 시점에 초기화. 단, 예외 처리가 필요한 초기화라면 추가 처리 필요."
+  },
+  {
+    "id": "design-d002",
+    "difficulty": "intermediate",
+    "type": "debug",
+    "question": "다음 Observer 패턴 구현의 메모리 누수 원인은?\n```java\npublic class EventBus {\n    private List<Listener> listeners = new ArrayList<>();\n    public void subscribe(Listener l) { listeners.add(l); }\n    // unsubscribe 메서드 없음\n}\n// UI 컴포넌트가 EventBus에 구독\neventBus.subscribe(new ButtonClickListener());\n// UI가 닫혀도 listeners에 계속 참조됨\n```",
+    "options": [
+      "ArrayList는 메모리 누수를 유발하므로 LinkedList 사용 필요",
+      "unsubscribe 메서드가 없어 UI 컴포넌트가 소멸해도 listeners가 강한 참조를 유지하여 GC 불가",
+      "Listener 인터페이스 구현 시 메모리가 자동 해제",
+      "EventBus가 static이 아니어서 발생"
+    ],
+    "answer": 1,
+    "explanation": "Observer 패턴에서 Subject(EventBus)가 Observer(Listener)에 대한 강한 참조를 유지하면 Observer가 필요 없어져도 GC되지 않습니다. 해결: ①`unsubscribe(Listener)` 메서드 제공 ②WeakReference로 Listener 저장 ③try-with-resources 패턴으로 구독 해제 자동화."
+  },
+  {
+    "id": "design-d003",
+    "difficulty": "advanced",
+    "type": "debug",
+    "question": "다음 Decorator 패턴 구현의 문제를 찾으세요.\n```java\ninterface Coffee { int cost(); }\nclass SimpleCoffee implements Coffee {\n    public int cost() { return 1000; }\n}\nclass MilkDecorator implements Coffee {\n    private Coffee coffee;\n    public MilkDecorator(Coffee c) { this.coffee = c; }\n    public int cost() { return coffee.cost() + 500; }\n}\n// 사용\nCoffee c = new MilkDecorator(new MilkDecorator(new SimpleCoffee()));\nSystem.out.println(c.cost()); // 2000 출력\n```",
+    "options": [
+      "MilkDecorator를 중첩하여 사용할 수 없음",
+      "코드는 올바르게 동작하며 우유 두 번 추가 = 1000+500+500=2000이 출력됨 — 동작은 맞지만 중복 추가 방지 로직이 없다면 실수 가능",
+      "인터페이스 대신 추상 클래스를 사용해야 함",
+      "cost()가 int를 반환하여 소수점 가격 처리 불가"
+    ],
+    "answer": 1,
+    "explanation": "코드 자체는 의도대로 동작합니다(2000원 출력). 그러나 동일 Decorator를 실수로 중첩 적용하는 것을 방지하는 로직이 없습니다. 실제 시스템에서는 ①중복 Decorator 체크 ②데코레이터 설명 메서드 추가 ③빌더 패턴과 조합하여 사용자 실수를 방지합니다."
+  },
+  {
+    "id": "design-d004",
+    "difficulty": "advanced",
+    "type": "debug",
+    "question": "다음 Factory Method 구현에서 OCP 위반을 찾으세요.\n```java\npublic class ShapeFactory {\n    public Shape create(String type) {\n        if (type.equals(\"circle\")) return new Circle();\n        else if (type.equals(\"rect\")) return new Rectangle();\n        // 새 도형 추가마다 이 메서드 수정 필요!\n        else throw new IllegalArgumentException();\n    }\n}\n```",
+    "options": [
+      "Shape 인터페이스가 없어서 문제 발생",
+      "새 도형 추가 시마다 ShapeFactory 클래스를 수정해야 하여 OCP 위반",
+      "문자열 비교로 타입을 판단하는 것은 일반적인 방식",
+      "throw 문이 잘못된 예외를 던짐"
+    ],
+    "answer": 1,
+    "explanation": "OCP(개방-폐쇄 원칙)는 확장에는 열리고 수정에는 닫혀야 합니다. 새 도형 추가마다 `ShapeFactory`를 수정해야 하므로 OCP 위반입니다. 해결: ①Map으로 타입-생성자 매핑 ②리플렉션 ③별도 ConcreteCreator(서브클래스)로 분리 ④`@ShapeType` 어노테이션 기반 등록."
+  },
+  {
+    "id": "design-d005",
+    "difficulty": "advanced",
+    "type": "debug",
+    "question": "다음 Strategy 패턴 적용 코드에서 문제를 찾으세요.\n```java\npublic class Sorter {\n    private SortStrategy strategy;\n    \n    public void sort(int[] data) {\n        if (strategy == null) {\n            strategy = new QuickSort(); // 기본값 직접 생성\n        }\n        strategy.sort(data);\n    }\n}\n```",
+    "options": [
+      "SortStrategy 인터페이스 타입으로 선언하면 안 됨",
+      "null 체크 후 기본 전략을 직접 생성하여 Sorter가 QuickSort에 의존 — DI 또는 생성자에서 기본값 설정으로 개선",
+      "sort() 메서드가 반환값이 없어서 문제",
+      "문제 없는 올바른 Strategy 패턴 구현"
+    ],
+    "answer": 1,
+    "explanation": "Strategy 패턴의 목적은 알고리즘을 외부에서 주입하는 것인데, 내부에서 `new QuickSort()`로 기본 전략을 생성하면 Sorter가 QuickSort에 직접 의존하게 됩니다. 개선: ①생성자 주입 `public Sorter(SortStrategy strategy)` ②기본값을 외부에서 설정 ③Optional.ofNullable(strategy).orElse(defaultStrategy) 활용."
+  },
+  {
+    "id": "design-o001",
+    "difficulty": "basic",
+    "type": "ordering",
+    "question": "Builder 패턴으로 객체를 생성하는 올바른 순서는?\n1. build()를 호출하여 최종 객체 생성\n2. Builder 인스턴스 생성\n3. 선택적 속성 설정(set 메서드 체이닝)\n4. 필수 속성 설정",
+    "options": [
+      "1 → 2 → 3 → 4",
+      "2 → 4 → 3 → 1",
+      "4 → 2 → 3 → 1",
+      "2 → 3 → 4 → 1"
+    ],
+    "answer": 1,
+    "explanation": "Builder 패턴 사용 순서: ①Builder 생성(필수값을 생성자로 받거나 이후 설정) → ②필수 속성 설정 → ③선택적 속성 메서드 체이닝 → ④build()로 불변 객체 생성(유효성 검사 포함 가능)."
+  },
+  {
+    "id": "design-o002",
+    "difficulty": "basic",
+    "type": "ordering",
+    "question": "Observer 패턴에서 이벤트 발생 시 처리 순서로 올바른 것은?\n1. 등록된 모든 Observer의 update() 호출\n2. Subject의 상태 변경\n3. Observer가 Subject에 구독 등록\n4. Observer들이 변경 내용을 처리",
+    "options": [
+      "2 → 3 → 1 → 4",
+      "3 → 2 → 1 → 4",
+      "1 → 3 → 2 → 4",
+      "3 → 1 → 2 → 4"
+    ],
+    "answer": 1,
+    "explanation": "Observer 패턴 순서: ①Observer가 Subject에 구독(subscribe/register) → ②Subject의 상태 변경 발생 → ③Subject가 등록된 모든 Observer에게 notify() → ④각 Observer가 update()를 받아 처리."
+  },
+  {
+    "id": "design-o003",
+    "difficulty": "intermediate",
+    "type": "ordering",
+    "question": "Chain of Responsibility 패턴에서 요청 처리 순서로 올바른 것은?\n1. 현재 핸들러가 요청 처리 또는 다음 핸들러로 전달\n2. 클라이언트가 첫 번째 핸들러에 요청 전송\n3. 체인의 끝에 도달하거나 처리 완료\n4. 핸들러 체인 구성",
+    "options": [
+      "2 → 4 → 1 → 3",
+      "4 → 2 → 1 → 3",
+      "2 → 1 → 4 → 3",
+      "1 → 4 → 2 → 3"
+    ],
+    "answer": 1,
+    "explanation": "Chain of Responsibility 순서: ①핸들러 체인 구성(HandlerA → HandlerB → HandlerC) → ②클라이언트가 첫 핸들러에 요청 전송 → ③각 핸들러가 처리 가능하면 처리하고, 불가능하면 다음 핸들러로 전달 → ④처리 핸들러를 찾거나 체인 끝에 도달."
+  },
+  {
+    "id": "design-o004",
+    "difficulty": "intermediate",
+    "type": "ordering",
+    "question": "Decorator 패턴으로 커피에 기능을 추가하는 순서로 올바른 것은?\n(최종 결과: 우유+시럽이 추가된 에스프레소)\n1. SyrupDecorator로 MilkCoffee를 감쌈\n2. 결과 객체의 cost()와 description() 호출\n3. MilkDecorator로 Espresso를 감쌈\n4. 기본 Espresso 객체 생성",
+    "options": [
+      "1 → 4 → 3 → 2",
+      "4 → 3 → 1 → 2",
+      "4 → 1 → 3 → 2",
+      "3 → 4 → 1 → 2"
+    ],
+    "answer": 1,
+    "explanation": "Decorator 적용 순서: ①기본 객체 생성(`new Espresso()`) → ②첫 번째 Decorator로 감쌈(`new MilkDecorator(espresso)`) → ③두 번째 Decorator로 감쌈(`new SyrupDecorator(milkCoffee)`) → ④최종 객체의 메서드 호출(내부 위임 체인 실행)."
+  },
+  {
+    "id": "design-o005",
+    "difficulty": "advanced",
+    "type": "ordering",
+    "question": "SOLID 원칙을 적용하여 코드를 리팩토링하는 일반적인 우선순위 순서로 올바른 것은?\n1. OCP: 확장에 열리고 수정에 닫히도록 추상화 추가\n2. SRP: 클래스가 하나의 책임만 갖도록 분리\n3. DIP: 고수준 모듈이 저수준 모듈이 아닌 추상화에 의존\n4. LSP: 서브타입이 기반 타입을 대체 가능한지 검증",
+    "options": [
+      "3 → 2 → 1 → 4",
+      "2 → 4 → 1 → 3",
+      "1 → 2 → 3 → 4",
+      "4 → 1 → 3 → 2"
+    ],
+    "answer": 1,
+    "explanation": "SOLID 리팩토링 순서(실무 접근): ①SRP로 클래스 책임 분리(God Class 제거) → ②LSP로 상속 계층 올바른지 검증 → ③OCP를 위해 인터페이스/추상화 추가 → ④DIP로 고수준 모듈이 추상화에 의존하도록 DI 적용. ISP는 인터페이스 분리로 필요 시 적용."
+  }
+]
