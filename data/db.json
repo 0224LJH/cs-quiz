@@ -1,5 +1,916 @@
 {
   "topic": "db",
   "label": "데이터베이스",
-  "questions": []
+  "questions": [
+    {
+      "id": "db-c001",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "ACID 속성 중 '원자성(Atomicity)'의 의미로 옳은 것은?",
+      "options": [
+        "트랜잭션 내 연산이 동시에 실행된다",
+        "트랜잭션의 모든 연산이 완전히 수행되거나 전혀 수행되지 않아야 한다",
+        "트랜잭션 완료 후 결과가 영구히 저장된다",
+        "동시에 실행되는 트랜잭션이 서로 영향을 주지 않는다"
+      ],
+      "answer": 1,
+      "explanation": "원자성(Atomicity)은 트랜잭션의 All-or-Nothing 속성입니다. 계좌 이체에서 출금과 입금 중 하나만 실행되면 안 되고 모두 성공하거나 모두 실패해야 합니다. 실패 시 롤백(Rollback)으로 이전 상태로 복구합니다."
+    },
+    {
+      "id": "db-c002",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "인덱스(Index)를 사용하는 주된 목적으로 옳은 것은?",
+      "options": [
+        "데이터 중복을 방지하기 위해",
+        "테이블의 데이터를 압축하기 위해",
+        "특정 컬럼의 조회 속도를 향상시키기 위해",
+        "트랜잭션의 원자성을 보장하기 위해"
+      ],
+      "answer": 2,
+      "explanation": "인덱스는 특정 컬럼의 값을 별도로 저장하여 전체 테이블 스캔 없이 빠르게 데이터를 찾을 수 있게 합니다. 책의 색인처럼 동작하여 조회 성능을 O(n)에서 O(log n)으로 향상시킵니다. 단, 삽입·수정·삭제 시 인덱스도 갱신해야 합니다."
+    },
+    {
+      "id": "db-c003",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "기본 키(Primary Key)의 특성으로 옳은 것은?",
+      "options": [
+        "NULL 값을 허용하며 중복 값이 가능하다",
+        "NULL 값을 허용하지 않고 테이블 내에서 유일해야 한다",
+        "테이블당 여러 개의 기본 키를 설정할 수 있다",
+        "기본 키는 인덱스를 자동으로 생성하지 않는다"
+      ],
+      "answer": 1,
+      "explanation": "기본 키(PK)는 테이블의 각 행을 유일하게 식별하는 컬럼으로 NULL 불허, 중복 불허 조건을 만족해야 합니다. 테이블당 하나만 설정 가능하며 자동으로 클러스터드 인덱스(또는 유니크 인덱스)가 생성됩니다."
+    },
+    {
+      "id": "db-c004",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "외래 키(Foreign Key)의 역할로 옳은 것은?",
+      "options": [
+        "테이블의 각 행을 유일하게 식별한다",
+        "두 테이블 간의 참조 무결성을 보장한다",
+        "컬럼의 NULL 값을 방지한다",
+        "데이터 중복을 물리적으로 제거한다"
+      ],
+      "answer": 1,
+      "explanation": "외래 키(FK)는 한 테이블의 컬럼이 다른 테이블의 기본 키를 참조하도록 하여 참조 무결성을 유지합니다. 예를 들어 주문 테이블의 고객ID는 고객 테이블의 기본 키를 참조해야 합니다. 존재하지 않는 고객 ID로 주문 생성을 방지합니다."
+    },
+    {
+      "id": "db-c005",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "SQL에서 INNER JOIN의 결과로 옳은 것은?",
+      "options": [
+        "왼쪽 테이블의 모든 행과 오른쪽 테이블에서 일치하는 행만 포함한다",
+        "두 테이블에서 조인 조건을 만족하는 행만 포함한다",
+        "두 테이블의 모든 행을 포함하고 불일치 행은 NULL로 채운다",
+        "오른쪽 테이블의 모든 행과 왼쪽 테이블에서 일치하는 행만 포함한다"
+      ],
+      "answer": 1,
+      "explanation": "INNER JOIN은 두 테이블에서 조인 조건(ON 절)을 만족하는 행만 반환합니다. 한쪽에만 존재하는 행은 결과에서 제외됩니다. LEFT/RIGHT JOIN은 한쪽 테이블의 모든 행을 포함하고 불일치 행은 NULL로 채웁니다."
+    },
+    {
+      "id": "db-c006",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "제1 정규형(1NF)의 조건으로 옳은 것은?",
+      "options": [
+        "부분 함수 종속을 제거해야 한다",
+        "모든 컬럼이 원자값(Atomic Value)을 가져야 한다(반복 그룹 제거)",
+        "이행적 함수 종속을 제거해야 한다",
+        "다치 종속을 제거해야 한다"
+      ],
+      "answer": 1,
+      "explanation": "1NF: 모든 컬럼 값이 원자적이어야 합니다(하나의 셀에 여러 값 불허). 예를 들어 '전화번호' 컬럼에 '010-1234, 010-5678'처럼 여러 값이 들어가면 1NF 위반입니다. 2NF는 부분 종속, 3NF는 이행 종속, BCNF는 더 엄격한 조건을 제거합니다."
+    },
+    {
+      "id": "db-c007",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "트랜잭션의 COMMIT과 ROLLBACK의 설명으로 옳은 것은?",
+      "options": [
+        "COMMIT은 변경 사항을 취소하고 ROLLBACK은 영구 저장한다",
+        "COMMIT은 변경 사항을 영구 저장하고 ROLLBACK은 변경 사항을 취소한다",
+        "ROLLBACK은 데이터베이스를 초기화한다",
+        "COMMIT 후에도 ROLLBACK으로 취소할 수 있다"
+      ],
+      "answer": 1,
+      "explanation": "COMMIT은 트랜잭션의 모든 변경 사항을 영구적으로 데이터베이스에 반영합니다. ROLLBACK은 트랜잭션 시작 이후의 모든 변경 사항을 취소하고 이전 상태로 되돌립니다. COMMIT 이후에는 ROLLBACK이 불가능합니다."
+    },
+    {
+      "id": "db-c008",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "NoSQL 데이터베이스의 특성으로 옳은 것은?",
+      "options": [
+        "항상 ACID 트랜잭션을 완전히 지원한다",
+        "고정된 스키마가 필요하다",
+        "수평 확장(Scale-out)에 유리하고 유연한 스키마를 지원한다",
+        "관계형 모델을 기반으로 한다"
+      ],
+      "answer": 2,
+      "explanation": "NoSQL은 고정 스키마 없이 유연한 데이터 모델(키-값, 문서, 컬럼, 그래프)을 지원하고 수평 확장에 유리합니다. 일부는 ACID를 완전히 지원하지 않고 BASE(Basically Available, Soft state, Eventually consistent)를 따르기도 합니다."
+    },
+    {
+      "id": "db-c009",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "SQL의 GROUP BY와 HAVING의 설명으로 옳은 것은?",
+      "options": [
+        "HAVING은 GROUP BY 없이 사용 가능하며 WHERE과 동일하다",
+        "GROUP BY는 특정 컬럼을 기준으로 그룹화하고 HAVING은 그룹에 대한 조건을 필터링한다",
+        "WHERE은 집계 함수 결과에 조건을 적용할 수 있다",
+        "GROUP BY 이후에는 개별 행 데이터를 SELECT할 수 있다"
+      ],
+      "answer": 1,
+      "explanation": "GROUP BY는 컬럼 값이 같은 행들을 그룹으로 묶습니다. HAVING은 집계 함수(SUM, COUNT, AVG 등) 결과에 조건을 적용합니다. WHERE은 그룹화 전 개별 행에 조건을 적용하며 집계 함수를 사용할 수 없습니다."
+    },
+    {
+      "id": "db-c010",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "데이터베이스 뷰(View)의 특성으로 옳은 것은?",
+      "options": [
+        "뷰는 데이터를 물리적으로 복사하여 독립적으로 저장한다",
+        "뷰는 저장된 SELECT 쿼리로 원본 테이블의 데이터를 가상으로 보여준다",
+        "뷰를 통한 데이터 수정은 원본 테이블에 영향을 주지 않는다",
+        "뷰는 항상 원본 테이블보다 조회 속도가 빠르다"
+      ],
+      "answer": 1,
+      "explanation": "뷰(View)는 저장된 SELECT 쿼리로 실제 데이터를 복사하지 않고 가상 테이블로 존재합니다. 복잡한 쿼리를 단순화하고 특정 컬럼만 노출하는 보안 용도로도 사용됩니다. 단순 뷰는 수정 시 원본 테이블에 반영됩니다."
+    },
+    {
+      "id": "db-c011",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "트랜잭션 격리 수준(Isolation Level) 중 REPEATABLE READ에 대한 설명으로 옳은 것은?",
+      "options": [
+        "커밋되지 않은 다른 트랜잭션의 변경 사항을 읽을 수 있다",
+        "같은 트랜잭션 내에서 동일 쿼리를 두 번 실행하면 항상 같은 결과를 반환한다",
+        "팬텀 리드(Phantom Read) 현상이 발생하지 않는다",
+        "다른 트랜잭션이 커밋한 변경 사항도 읽지 못한다"
+      ],
+      "answer": 1,
+      "explanation": "REPEATABLE READ는 트랜잭션 시작 시 스냅샷을 생성하여 동일 쿼리가 항상 같은 결과를 반환합니다. Dirty Read, Non-Repeatable Read를 방지하지만 Phantom Read(새로운 행 추가/삭제)는 발생할 수 있습니다. MySQL InnoDB의 기본 격리 수준입니다."
+    },
+    {
+      "id": "db-c012",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "B+트리 인덱스가 B트리보다 데이터베이스에서 더 많이 사용되는 이유로 옳은 것은?",
+      "options": [
+        "B+트리는 모든 노드에 데이터를 저장하여 탐색이 빠르다",
+        "B+트리는 리프 노드에만 데이터를 저장하고 리프 노드가 연결 리스트로 연결되어 범위 쿼리가 효율적이다",
+        "B+트리는 B트리보다 트리 높이가 높아 더 많은 데이터를 저장할 수 있다",
+        "B+트리는 내부 노드에 더 많은 데이터를 저장한다"
+      ],
+      "answer": 1,
+      "explanation": "B+트리는 리프 노드에만 실제 데이터(또는 포인터)를 저장하고 리프 노드들이 링크드 리스트로 연결됩니다. 내부 노드는 키만 저장하여 더 많은 키를 담아 트리 높이가 낮아집니다. 범위 쿼리(BETWEEN, >, <)에서 리프 노드 링크를 따라 순차 탐색이 가능합니다."
+    },
+    {
+      "id": "db-c013",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "데이터베이스에서 발생하는 Dirty Read의 설명으로 옳은 것은?",
+      "options": [
+        "같은 트랜잭션에서 동일 쿼리를 두 번 실행했을 때 결과가 다른 현상",
+        "한 트랜잭션이 아직 커밋되지 않은 다른 트랜잭션의 변경 데이터를 읽는 현상",
+        "트랜잭션 완료 후 데이터가 유실되는 현상",
+        "범위 쿼리 결과가 트랜잭션 중간에 달라지는 현상"
+      ],
+      "answer": 1,
+      "explanation": "Dirty Read는 트랜잭션 A가 변경한 데이터를 트랜잭션 B가 읽었는데, A가 롤백되면 B는 존재하지 않는 데이터를 읽은 셈이 됩니다. READ UNCOMMITTED 격리 수준에서 발생하며 READ COMMITTED 이상에서 방지됩니다."
+    },
+    {
+      "id": "db-c014",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "데이터베이스 정규화(Normalization)의 목적으로 옳은 것은?",
+      "options": [
+        "쿼리 성능을 향상시키기 위해 데이터를 중복 저장한다",
+        "데이터 중복을 줄이고 삽입·수정·삭제 이상(Anomaly)을 방지한다",
+        "조인 연산을 줄이기 위해 여러 테이블을 하나로 합친다",
+        "인덱스 생성을 자동화하기 위해"
+      ],
+      "answer": 1,
+      "explanation": "정규화는 함수 종속성 분석을 통해 데이터 중복을 제거하고 삽입·수정·삭제 이상을 방지합니다. 단, 과도한 정규화는 JOIN 증가로 성능 저하를 유발할 수 있어 적절한 수준에서 반정규화(Denormalization)를 고려합니다."
+    },
+    {
+      "id": "db-c015",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "데이터베이스 락(Lock)에서 공유 락(Shared Lock)과 배타 락(Exclusive Lock)의 차이로 옳은 것은?",
+      "options": [
+        "공유 락은 읽기와 쓰기 모두 허용하고 배타 락은 읽기만 허용한다",
+        "공유 락은 여러 트랜잭션이 동시에 획득 가능하며 읽기에 사용되고, 배타 락은 하나의 트랜잭션만 획득하며 쓰기에 사용된다",
+        "공유 락과 배타 락은 동시에 같은 자원에 설정될 수 있다",
+        "배타 락은 다른 트랜잭션의 읽기도 허용한다"
+      ],
+      "answer": 1,
+      "explanation": "공유 락(S-Lock)은 읽기 시 사용되며 여러 트랜잭션이 동시 획득 가능합니다. 배타 락(X-Lock)은 쓰기 시 사용되며 다른 모든 락(S-Lock, X-Lock)과 충돌합니다. S-Lock과 X-Lock은 공존할 수 없어 읽기 중 쓰기가 차단됩니다."
+    },
+    {
+      "id": "db-c016",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "데이터베이스 클러스터드 인덱스(Clustered Index)와 논클러스터드 인덱스의 차이로 옳은 것은?",
+      "options": [
+        "클러스터드 인덱스는 인덱스와 데이터가 별도로 저장된다",
+        "클러스터드 인덱스는 데이터 행 자체가 인덱스 순서대로 물리적으로 정렬되며 테이블당 하나만 존재한다",
+        "논클러스터드 인덱스는 테이블당 하나만 만들 수 있다",
+        "클러스터드 인덱스는 범위 쿼리에서 논클러스터드 인덱스보다 느리다"
+      ],
+      "answer": 1,
+      "explanation": "클러스터드 인덱스는 리프 노드가 실제 데이터 행이며 데이터가 물리적으로 정렬됩니다(테이블당 1개). 논클러스터드 인덱스는 리프 노드가 데이터 행의 포인터(클러스터드 인덱스 키)이며 여러 개 생성 가능합니다. 클러스터드 인덱스는 범위 검색에 효율적입니다."
+    },
+    {
+      "id": "db-c017",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "CAP 이론에서 분산 시스템이 세 가지 속성 중 동시에 보장할 수 없는 것으로 옳은 것은?",
+      "options": [
+        "원자성(Atomicity), 일관성(Consistency), 지속성(Durability)",
+        "일관성(Consistency), 가용성(Availability), 분단 내성(Partition Tolerance)",
+        "격리성(Isolation), 가용성(Availability), 원자성(Atomicity)",
+        "일관성(Consistency), 내구성(Durability), 원자성(Atomicity)"
+      ],
+      "answer": 1,
+      "explanation": "CAP 이론: 분산 시스템은 일관성(C), 가용성(A), 분단 내성(P) 중 두 가지만 동시에 보장할 수 있습니다. 네트워크 분단(P)은 현실에서 피할 수 없으므로 실제로는 CP(HBase, ZooKeeper)와 AP(Cassandra, DynamoDB) 중 선택합니다."
+    },
+    {
+      "id": "db-c018",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "쿼리 실행 계획(Explain Plan)에서 'Full Table Scan'이 발생하는 원인으로 옳은 것은?",
+      "options": [
+        "테이블에 인덱스가 너무 많은 경우",
+        "조건 컬럼에 인덱스가 없거나, 인덱스가 있어도 옵티마이저가 사용하지 않을 때",
+        "SELECT * 대신 특정 컬럼을 지정한 경우",
+        "INNER JOIN 대신 LEFT JOIN을 사용한 경우"
+      ],
+      "answer": 1,
+      "explanation": "Full Table Scan은 WHERE 조건 컬럼에 인덱스가 없거나, 함수로 감싼 컬럼(예: WHERE YEAR(created_at) = 2024), 부정 조건(!=, NOT IN), 낮은 선택성(많은 중복 값), 또는 소규모 테이블일 때 옵티마이저가 선택합니다."
+    },
+    {
+      "id": "db-c019",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "데이터베이스 샤딩(Sharding)에 대한 설명으로 옳은 것은?",
+      "options": [
+        "하나의 데이터베이스를 읽기 전용 복제본으로 분산하는 기법",
+        "데이터를 여러 데이터베이스 서버에 수평 분할하여 저장하는 기법",
+        "데이터를 열(Column) 기준으로 여러 테이블로 나누는 기법",
+        "마스터-슬레이브 복제를 통한 읽기 성능 향상 기법"
+      ],
+      "answer": 1,
+      "explanation": "샤딩은 데이터를 샤드 키 기준으로 여러 서버에 수평 분할하여 저장합니다. 각 서버가 일부 데이터만 담당하여 쓰기 부하를 분산합니다. 반면 읽기 분산은 레플리케이션(Replication)이, 수직 분할(컬럼 분리)은 파티셔닝이 담당합니다."
+    },
+    {
+      "id": "db-c020",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "데이터베이스 인덱스 사용을 피해야 하는 경우로 옳은 것은?",
+      "options": [
+        "자주 조회되는 외래 키 컬럼",
+        "WHERE 절에서 자주 사용되는 컬럼",
+        "테이블 데이터가 적거나 조회보다 삽입/수정/삭제가 압도적으로 많은 경우",
+        "ORDER BY에 자주 사용되는 컬럼"
+      ],
+      "answer": 2,
+      "explanation": "인덱스는 조회 속도를 높이지만 삽입/수정/삭제 시 인덱스도 갱신되어 쓰기 비용이 증가합니다. 소규모 테이블은 Full Scan이 인덱스 탐색보다 빠를 수 있습니다. 쓰기 부하가 압도적인 테이블에서는 인덱스를 최소화해야 합니다."
+    },
+    {
+      "id": "db-t001",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "정규화를 적용하는 대신 반정규화(Denormalization)를 선택하는 상황으로 적합한 것은?",
+      "options": [
+        "데이터 무결성이 최우선이고 쓰기 작업이 많은 OLTP 시스템",
+        "복잡한 JOIN이 빈번하게 발생하여 읽기 성능이 심각하게 저하된 읽기 중심의 시스템",
+        "테이블 수가 적고 데이터 중복이 없는 단순한 시스템",
+        "데이터 변경이 자주 발생하여 중복 데이터 관리 비용이 허용되는 경우"
+      ],
+      "answer": 1,
+      "explanation": "반정규화는 데이터 중복을 허용하는 대신 JOIN을 줄여 조회 성능을 향상시킵니다. 읽기 비중이 높고(OLAP, 분석 시스템), JOIN 비용이 크다면 반정규화가 효과적입니다. 단, 데이터 변경 시 중복된 여러 곳을 동시에 업데이트해야 합니다."
+    },
+    {
+      "id": "db-t002",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "관계형 DB(RDBMS) 대신 문서 지향 NoSQL(MongoDB)을 선택하는 상황으로 적합한 것은?",
+      "options": [
+        "복잡한 다단계 트랜잭션이 많고 데이터 무결성이 최우선인 경우",
+        "스키마가 자주 변경되고 중첩된 구조의 데이터를 함께 읽는 비율이 높은 경우",
+        "강력한 JOIN 연산과 복잡한 집계 쿼리가 필요한 경우",
+        "정규화된 데이터 모델로 중복을 완전히 제거해야 하는 경우"
+      ],
+      "answer": 1,
+      "explanation": "MongoDB 같은 문서 DB는 스키마 유연성이 높아 자주 변경되는 구조에 적합합니다. 관련 데이터를 하나의 문서에 내장(embedding)하여 JOIN 없이 조회 가능합니다. 복잡한 트랜잭션, 정규화, 복잡한 집계는 RDBMS가 더 적합합니다."
+    },
+    {
+      "id": "db-t003",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "READ COMMITTED 격리 수준보다 SERIALIZABLE을 선택하는 상황으로 적합한 것은?",
+      "options": [
+        "높은 동시성이 요구되고 일부 일관성 문제를 허용할 수 있는 경우",
+        "금융 이중 출금 방지처럼 완벽한 데이터 일관성이 필수이고 동시성 저하를 감수할 수 있는 경우",
+        "읽기 전용 쿼리가 대부분인 분석 시스템",
+        "Non-Repeatable Read 현상이 허용되는 게시판 조회 수 집계"
+      ],
+      "answer": 1,
+      "explanation": "SERIALIZABLE은 모든 동시성 문제(Dirty Read, Non-Repeatable Read, Phantom Read)를 방지하지만 성능 비용이 가장 큽니다. 금융 거래처럼 절대적인 일관성이 필요한 경우에 사용합니다. 일반 서비스는 REPEATABLE READ나 READ COMMITTED를 사용합니다."
+    },
+    {
+      "id": "db-t004",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "RDBMS의 수직 확장(Scale-up) 대신 NoSQL의 수평 확장(Scale-out)을 선택하는 상황은?",
+      "options": [
+        "데이터 규모가 단일 서버로 충분히 처리 가능하고 복잡한 트랜잭션이 많은 경우",
+        "데이터가 수십 TB 이상으로 단일 서버 한계를 초과하고 쓰기 부하가 극단적으로 많은 경우",
+        "스키마가 고정되어 있고 관계형 데이터 모델이 적합한 경우",
+        "ACID 트랜잭션이 반드시 필요한 경우"
+      ],
+      "answer": 1,
+      "explanation": "수직 확장은 하드웨어 한계가 있고 비용이 급격히 증가합니다. 데이터 규모가 단일 서버를 초과하거나 초대용량 쓰기 부하가 있을 때 NoSQL의 수평 확장이 효과적입니다. 단, 트랜잭션이나 복잡한 쿼리를 희생해야 할 수 있습니다."
+    },
+    {
+      "id": "db-t005",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "복합 인덱스(Composite Index) 생성 시 컬럼 순서 결정에서 옳은 것은?",
+      "options": [
+        "컬럼 알파벳 순서로 배치한다",
+        "선택성이 높은 컬럼(중복 값이 적은)을 앞에 배치하고 자주 WHERE 조건에 사용되는 컬럼을 우선한다",
+        "항상 외래 키 컬럼을 가장 앞에 배치한다",
+        "데이터 타입이 작은 컬럼을 앞에 배치한다"
+      ],
+      "answer": 1,
+      "explanation": "복합 인덱스는 왼쪽에서 오른쪽으로 순서대로 적용됩니다(Leftmost Prefix 규칙). 선택성이 높은 컬럼을 앞에 두면 초기에 더 많은 행을 걸러낼 수 있습니다. WHERE a=? AND b=? 쿼리에서 (a, b) 순서로 만들면 a만 조건으로 사용하는 쿼리도 인덱스를 사용할 수 있습니다."
+    },
+    {
+      "id": "db-t006",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "데이터베이스 파티셔닝(Partitioning)이 유리한 상황으로 옳은 것은?",
+      "options": [
+        "테이블 크기가 작고 쿼리 패턴이 다양한 경우",
+        "수억 건 이상의 대용량 테이블에서 날짜 범위나 키 범위 기반 쿼리가 주를 이루는 경우",
+        "여러 테이블을 JOIN하는 복잡한 쿼리가 많은 경우",
+        "모든 행이 동일한 빈도로 균등하게 조회되는 경우"
+      ],
+      "answer": 1,
+      "explanation": "파티셔닝은 대용량 테이블을 날짜, 범위, 해시 등 기준으로 분할하여 쿼리 시 일부 파티션만 스캔합니다(파티션 프루닝). 오래된 데이터 삭제(파티션 삭제)도 빠릅니다. 테이블이 작거나 전체 스캔이 필요한 경우는 오버헤드만 증가합니다."
+    },
+    {
+      "id": "db-t007",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "데이터베이스 쓰기에서 동기식(Synchronous) 복제 대신 비동기식(Asynchronous) 복제를 선택하는 상황은?",
+      "options": [
+        "장애 발생 시 데이터 손실이 절대 허용되지 않는 금융 시스템",
+        "마스터의 쓰기 성능이 중요하고 소량의 데이터 손실을 감수할 수 있는 경우",
+        "강력한 일관성(Strong Consistency)이 요구되는 경우",
+        "슬레이브의 데이터가 마스터와 항상 동일해야 하는 경우"
+      ],
+      "answer": 1,
+      "explanation": "동기 복제는 슬레이브 확인 후 커밋하여 데이터 손실 없이 일관성을 보장하지만 쓰기 지연이 증가합니다. 비동기 복제는 마스터 커밋 후 슬레이브에 전파하여 쓰기 성능이 높지만 마스터 장애 시 일부 데이터 손실(RPO > 0) 위험이 있습니다."
+    },
+    {
+      "id": "db-t008",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "ORM(Object-Relational Mapping) 대신 직접 SQL을 작성하는 것이 적합한 상황은?",
+      "options": [
+        "단순한 CRUD 작업이 대부분인 일반 웹 애플리케이션",
+        "복잡한 집계 쿼리, 벌크 연산, 세밀한 성능 최적화가 필요한 경우",
+        "개발 생산성이 최우선이고 쿼리가 단순한 경우",
+        "데이터베이스 종류가 자주 변경되는 경우"
+      ],
+      "answer": 1,
+      "explanation": "ORM은 개발 생산성과 이식성을 높이지만 복잡한 쿼리에서 비효율적인 SQL을 생성하거나 N+1 문제가 발생할 수 있습니다. 복잡한 집계, 대용량 벌크 연산, 세밀한 인덱스 힌트가 필요할 때는 네이티브 SQL이 더 적합합니다."
+    },
+    {
+      "id": "db-t009",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "Redis를 데이터베이스 캐시로 사용 시 Cache-Aside(Lazy Loading) 대신 Write-Through를 선택하는 상황은?",
+      "options": [
+        "읽기가 매우 많고 캐시 미스가 자주 발생하는 경우",
+        "쓰기 시 캐시와 DB를 동시에 업데이트하여 항상 최신 데이터를 캐시에 유지해야 하는 경우",
+        "캐시된 데이터의 일부만 자주 읽히는 경우",
+        "초기 캐시 준비(Warming)가 불필요한 경우"
+      ],
+      "answer": 1,
+      "explanation": "Write-Through는 쓰기 시 캐시와 DB를 동시에 업데이트하여 캐시가 항상 최신 상태를 유지합니다. Cache-Aside(Lazy Loading)는 읽을 때만 캐시를 채워 사용량이 많은 데이터만 캐싱되지만 첫 조회 시 캐시 미스가 발생합니다."
+    },
+    {
+      "id": "db-t010",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "OLTP 시스템에서 OLAP(분석) 쿼리 실행 시 발생하는 문제와 해결 방법으로 옳은 것은?",
+      "options": [
+        "OLAP 쿼리는 OLTP 시스템에서 실행해도 영향이 없다",
+        "OLAP 쿼리는 대용량 스캔으로 OLTP 성능에 영향을 주므로 별도 Data Warehouse나 Read Replica로 분리해야 한다",
+        "인덱스를 추가하면 OLAP 쿼리도 빠르게 처리된다",
+        "OLAP 쿼리는 항상 NoSQL에서만 실행해야 한다"
+      ],
+      "answer": 1,
+      "explanation": "OLAP 쿼리는 대용량 데이터를 스캔하여 CPU·IO를 많이 사용하므로 OLTP 성능에 심각한 영향을 줍니다. 이를 분리하기 위해 별도 Data Warehouse(BigQuery, Redshift), Read Replica, 또는 HTAP 아키텍처를 사용합니다."
+    },
+    {
+      "id": "db-t011",
+      "difficulty": "advanced",
+      "type": "tradeoff",
+      "question": "이벤트 소싱(Event Sourcing) 패턴을 전통적인 상태 저장 방식 대신 선택하는 상황으로 적합한 것은?",
+      "options": [
+        "단순 CRUD 애플리케이션으로 최신 상태만 필요한 경우",
+        "전체 변경 이력 감사(Audit Trail)가 필요하고 특정 시점으로 상태를 복원해야 하는 금융·회계 시스템",
+        "데이터 모델이 단순하고 쿼리가 주로 최신 상태를 조회하는 경우",
+        "이벤트 순서나 이력이 전혀 중요하지 않은 경우"
+      ],
+      "answer": 1,
+      "explanation": "이벤트 소싱은 상태 변화를 이벤트로 저장하여 전체 이력을 보존하고 특정 시점 상태를 재구성할 수 있습니다. 감사 로그, CQRS, 금융 거래 이력에 적합합니다. 단, 현재 상태 조회 시 이벤트를 모두 재생해야 하는 복잡성이 있습니다."
+    },
+    {
+      "id": "db-t012",
+      "difficulty": "advanced",
+      "type": "tradeoff",
+      "question": "분산 데이터베이스에서 2PC(Two-Phase Commit)를 사용하는 것의 트레이드오프로 옳은 것은?",
+      "options": [
+        "2PC는 분산 트랜잭션을 효율적으로 처리하여 성능 오버헤드가 없다",
+        "2PC는 분산 트랜잭션 원자성을 보장하지만 코디네이터 장애 시 블로킹이 발생하고 성능 오버헤드가 크다",
+        "2PC는 항상 최종 일관성(Eventual Consistency)만 제공한다",
+        "2PC는 단일 서버에서만 사용 가능하다"
+      ],
+      "answer": 1,
+      "explanation": "2PC는 분산 환경에서 ACID 원자성을 보장하지만, 코디네이터(Coordinator) 장애 시 모든 참여자가 블로킹 상태에 빠지는 단점이 있습니다. 또한 여러 라운드트립으로 성능 오버헤드가 큽니다. 이를 개선한 3PC나 Saga 패턴이 사용됩니다."
+    },
+    {
+      "id": "db-t013",
+      "difficulty": "advanced",
+      "type": "tradeoff",
+      "question": "MVCC(Multi-Version Concurrency Control)를 2PL(Two-Phase Locking) 대신 사용하는 장점으로 옳은 것은?",
+      "options": [
+        "MVCC는 쓰기-쓰기 충돌도 없어 더욱 높은 동시성을 제공한다",
+        "MVCC는 읽기 트랜잭션이 쓰기 트랜잭션을 차단하지 않아 읽기 성능이 높고 데드락 가능성이 낮다",
+        "MVCC는 2PL보다 스토리지 공간을 적게 사용한다",
+        "MVCC는 직렬화 가능성(Serializability)을 항상 자동으로 보장한다"
+      ],
+      "answer": 1,
+      "explanation": "MVCC는 데이터를 수정할 때 새 버전을 생성하여 읽기 트랜잭션이 이전 버전을 읽을 수 있게 합니다. 읽기와 쓰기가 서로를 차단하지 않아 높은 동시성을 제공합니다. 단, 오래된 버전 정리(Vacuum)를 위한 추가 공간과 처리가 필요합니다."
+    },
+    {
+      "id": "db-t014",
+      "difficulty": "advanced",
+      "type": "tradeoff",
+      "question": "와이드 컬럼 스토어(Cassandra)를 사용하는 것이 적합한 상황은?",
+      "options": [
+        "복잡한 다중 테이블 JOIN이 필요한 경우",
+        "시계열 데이터, IoT 센서 데이터처럼 쓰기가 매우 많고 특정 파티션 키로 조회하는 패턴이 명확한 경우",
+        "ACID 트랜잭션이 반드시 필요한 경우",
+        "스키마가 복잡하고 자주 변경되는 경우"
+      ],
+      "answer": 1,
+      "explanation": "Cassandra는 파티션 키 기반 수평 분산으로 초고속 쓰기와 선형 확장을 제공합니다. 시계열 데이터, 로그, IoT 센서 데이터처럼 쓰기가 많고 파티션 키로 범위 조회하는 패턴에 최적화됩니다. JOIN이나 복잡한 트랜잭션에는 적합하지 않습니다."
+    },
+    {
+      "id": "db-t015",
+      "difficulty": "advanced",
+      "type": "tradeoff",
+      "question": "데이터베이스 커넥션 풀(Connection Pool) 크기를 크게 설정하는 것이 역효과를 낼 수 있는 이유는?",
+      "options": [
+        "커넥션 수가 많을수록 항상 처리량이 선형적으로 증가하기 때문에",
+        "DB 서버가 처리할 수 있는 동시 연결 한계를 초과하면 컨텍스트 스위칭과 경쟁 오버헤드로 성능이 오히려 저하된다",
+        "커넥션 풀이 크면 메모리 효율이 향상된다",
+        "커넥션 수는 DB 성능에 전혀 영향을 주지 않는다"
+      ],
+      "answer": 1,
+      "explanation": "커넥션 풀 크기는 DB 서버의 코어 수와 I/O 특성에 따라 최적값이 있습니다. 너무 많은 연결은 DB 서버의 컨텍스트 스위칭 오버헤드, 락 경쟁 증가, 메모리 사용량 증가로 오히려 성능이 저하됩니다. HikariCP는 ((코어 수 * 2) + 디스크 스핀들 수)를 권장합니다."
+    },
+    {
+      "id": "db-s001",
+      "difficulty": "intermediate",
+      "type": "scenario",
+      "question": "사용자 테이블(10만 건)에서 email 컬럼으로 WHERE 검색 시 응답이 2초 이상 걸립니다. 가장 빠른 개선 방법은?",
+      "options": [
+        "DB 서버의 CPU를 업그레이드한다",
+        "email 컬럼에 인덱스를 생성한다",
+        "테이블을 여러 개로 분리한다",
+        "쿼리 캐시를 활성화한다"
+      ],
+      "answer": 1,
+      "explanation": "email 컬럼에 인덱스가 없으면 Full Table Scan으로 10만 건을 모두 검색합니다. 인덱스 생성 후 B+트리 탐색으로 O(log n)에 검색 가능하여 응답 시간이 대폭 줄어듭니다. ALTER TABLE users ADD INDEX idx_email (email); 한 줄로 해결됩니다."
+    },
+    {
+      "id": "db-s002",
+      "difficulty": "intermediate",
+      "type": "scenario",
+      "question": "온라인 쇼핑몰에서 상품 목록 조회 API가 느립니다. 쿼리를 보니 상품 테이블과 카테고리, 브랜드 테이블을 3중 JOIN하고 있습니다. 데이터 변경은 드뭅니다. 가장 효과적인 개선 방법은?",
+      "options": [
+        "JOIN을 제거하고 서브쿼리로 교체한다",
+        "Redis에 JOIN 결과를 캐싱하여 DB 조회를 줄인다",
+        "테이블을 정규화하여 컬럼 수를 줄인다",
+        "SELECT * 대신 필요한 컬럼만 선택한다"
+      ],
+      "answer": 1,
+      "explanation": "데이터 변경이 드물고 읽기가 많은 상품 목록은 캐싱 효과가 큽니다. Redis에 JOIN 결과를 저장하고 TTL 설정으로 만료 시 갱신하면 DB 부하 없이 빠른 응답이 가능합니다. CDN이나 애플리케이션 레벨 캐싱도 함께 고려할 수 있습니다."
+    },
+    {
+      "id": "db-s003",
+      "difficulty": "intermediate",
+      "type": "scenario",
+      "question": "은행 이체 서비스에서 A 계좌 출금과 B 계좌 입금이 하나의 트랜잭션으로 처리되어야 합니다. 중간에 오류가 발생하면 어떻게 처리해야 하나요?",
+      "options": [
+        "출금만 완료하고 입금은 나중에 재시도한다",
+        "트랜잭션을 롤백하여 출금도 취소하고 두 계좌를 원래 상태로 복원한다",
+        "오류 로그만 기록하고 입금 처리를 생략한다",
+        "출금과 입금을 별도의 독립된 트랜잭션으로 처리한다"
+      ],
+      "answer": 1,
+      "explanation": "이체는 원자성이 필수입니다. 출금과 입금을 하나의 트랜잭션으로 묶어 중간에 오류 발생 시 ROLLBACK으로 모든 변경을 취소합니다. 출금만 되고 입금이 안 되거나 그 반대 상황은 절대 허용될 수 없습니다."
+    },
+    {
+      "id": "db-s004",
+      "difficulty": "intermediate",
+      "type": "scenario",
+      "question": "ORDER BY created_at DESC LIMIT 10 쿼리가 수백만 건 테이블에서 느립니다. 가장 적절한 개선 방법은?",
+      "options": [
+        "LIMIT 값을 100으로 늘린다",
+        "created_at 컬럼에 인덱스를 생성한다",
+        "ORDER BY를 제거한다",
+        "데이터를 삭제하여 테이블 크기를 줄인다"
+      ],
+      "answer": 1,
+      "explanation": "ORDER BY + LIMIT 쿼리는 인덱스가 없으면 전체 테이블을 정렬해야 합니다. created_at에 인덱스를 생성하면 이미 정렬된 인덱스에서 상위 10개만 읽어 O(1)에 가까운 성능을 낼 수 있습니다."
+    },
+    {
+      "id": "db-s005",
+      "difficulty": "intermediate",
+      "type": "scenario",
+      "question": "JPA/Hibernate를 사용하는 애플리케이션에서 게시글 목록을 조회할 때 N+1 문제가 발생합니다. 게시글이 100개면 101개의 쿼리가 실행됩니다. 해결 방법으로 옳은 것은?",
+      "options": [
+        "게시글 조회 시 LIMIT을 1개로 줄인다",
+        "JOIN FETCH 또는 @EntityGraph를 사용하여 연관 데이터를 한 번에 가져온다",
+        "캐시를 적용하여 반복 쿼리 실행을 방지한다",
+        "연관 관계를 모두 제거하고 별도로 조회한다"
+      ],
+      "answer": 1,
+      "explanation": "N+1 문제는 연관 엔티티를 Lazy Loading으로 개별 조회할 때 발생합니다. JPQL의 JOIN FETCH나 @EntityGraph로 Eager Loading하면 단일 JOIN 쿼리로 모든 데이터를 가져옵니다. 또는 @BatchSize로 IN절 배치 조회도 가능합니다."
+    },
+    {
+      "id": "db-s006",
+      "difficulty": "intermediate",
+      "type": "scenario",
+      "question": "재고 관리 시스템에서 두 사용자가 동시에 마지막 재고 1개를 구매하려 합니다. 재고가 음수가 되는 것을 방지하는 방법으로 옳은 것은?",
+      "options": [
+        "SELECT로 재고 확인 후 UPDATE를 별도 트랜잭션으로 실행한다",
+        "SELECT ... FOR UPDATE로 비관적 락을 획득하거나 UPDATE stock SET quantity = quantity - 1 WHERE quantity > 0으로 원자적 업데이트를 사용한다",
+        "애플리케이션 레벨에서 synchronized 키워드로 동기화한다",
+        "재고를 별도 캐시에서 관리하여 DB 접근을 줄인다"
+      ],
+      "answer": 1,
+      "explanation": "SELECT 후 UPDATE는 두 트랜잭션이 동시에 같은 재고를 읽으면 Race Condition이 발생합니다. SELECT ... FOR UPDATE로 비관적 락을 걸거나, WHERE quantity > 0 조건의 원자적 UPDATE로 초과 차감을 방지합니다. 낙관적 락(version 컬럼)도 사용 가능합니다."
+    },
+    {
+      "id": "db-s007",
+      "difficulty": "intermediate",
+      "type": "scenario",
+      "question": "수십억 건 로그 데이터를 저장하는 테이블에서 최근 7일 데이터만 주로 조회됩니다. 오래된 데이터는 보관만 하면 됩니다. 성능 개선 방법으로 가장 적합한 것은?",
+      "options": [
+        "더 많은 인덱스를 생성한다",
+        "날짜 기준 파티셔닝(Range Partition)으로 최근 파티션만 스캔하도록 최적화한다",
+        "테이블을 삭제하고 새로 만든다",
+        "복제 서버를 추가한다"
+      ],
+      "answer": 1,
+      "explanation": "날짜 기준 파티셔닝으로 7일 이내 파티션만 스캔하면 성능이 대폭 향상됩니다. 오래된 파티션은 아카이브로 이동하거나 삭제(DROP PARTITION)할 수 있어 관리도 용이합니다."
+    },
+    {
+      "id": "db-s008",
+      "difficulty": "intermediate",
+      "type": "scenario",
+      "question": "사용자가 상품을 검색할 때 LIKE '%검색어%' 쿼리를 사용하니 인덱스를 사용하지 못해 느립니다. 개선 방법으로 옳은 것은?",
+      "options": [
+        "LIKE 조건에 인덱스를 추가한다",
+        "전문 검색 엔진(Elasticsearch)이나 DB의 Full-Text Search 기능을 사용한다",
+        "검색어 앞에 와일드카드를 제거한다",
+        "캐시를 적용하여 DB 조회를 줄인다"
+      ],
+      "answer": 1,
+      "explanation": "LIKE '%검색어%' 앞에 와일드카드가 있으면 B+트리 인덱스를 사용할 수 없어 Full Table Scan이 발생합니다. Elasticsearch 같은 전문 검색 엔진이나 MySQL의 FULLTEXT INDEX, PostgreSQL의 tsvector를 사용하면 역인덱스 기반으로 빠른 검색이 가능합니다."
+    },
+    {
+      "id": "db-s009",
+      "difficulty": "advanced",
+      "type": "scenario",
+      "question": "글로벌 서비스에서 사용자의 지역 데이터를 해당 지역 DB에만 저장해야 하는 데이터 주권(Data Residency) 요건이 있습니다. 동시에 글로벌 사용자 조회도 가능해야 합니다. 아키텍처 전략으로 옳은 것은?",
+      "options": [
+        "단일 글로벌 DB에 모든 데이터를 저장한다",
+        "지역별 샤딩으로 각 지역 데이터를 해당 지역 DB에 저장하고, 글로벌 메타데이터는 별도 DB에 관리하며 GeoDNS로 라우팅한다",
+        "모든 데이터를 각 지역에 복제하여 저장한다",
+        "데이터 주권 요건을 무시하고 성능 최적화만 고려한다"
+      ],
+      "answer": 1,
+      "explanation": "지역별 샤딩으로 사용자 데이터를 해당 지역 DB에만 저장하고, 글로벌 라우팅을 위한 최소한의 메타데이터만 글로벌 DB에 저장합니다. GeoDNS나 사용자 ID에 지역 정보를 인코딩하여 올바른 샤드로 라우팅합니다."
+    },
+    {
+      "id": "db-s010",
+      "difficulty": "advanced",
+      "type": "scenario",
+      "question": "마이크로서비스 환경에서 주문 서비스와 재고 서비스가 각각 다른 DB를 사용합니다. 주문 생성 시 재고 차감을 원자적으로 처리해야 합니다. 가장 적합한 패턴은?",
+      "options": [
+        "2PC(Two-Phase Commit)로 두 서비스의 DB를 단일 트랜잭션으로 묶는다",
+        "Saga 패턴으로 각 서비스에서 로컬 트랜잭션을 실행하고 실패 시 보상 트랜잭션(Compensating Transaction)으로 롤백한다",
+        "두 서비스의 DB를 하나로 합쳐 단일 트랜잭션으로 처리한다",
+        "동기 API 호출로 주문 생성과 재고 차감을 순서대로 실행한다"
+      ],
+      "answer": 1,
+      "explanation": "마이크로서비스에서 2PC는 강한 결합과 가용성 문제가 있습니다. Saga 패턴은 각 서비스가 로컬 트랜잭션을 실행하고 실패 시 이전 단계의 보상 트랜잭션을 실행합니다. Choreography(이벤트 기반) 또는 Orchestration(중앙 조율) 방식으로 구현합니다."
+    },
+    {
+      "id": "db-s011",
+      "difficulty": "advanced",
+      "type": "scenario",
+      "question": "읽기가 압도적으로 많은 서비스에서 마스터 DB의 읽기 부하를 줄이려 합니다. 읽기 전용 복제본(Read Replica)을 추가했는데 복제 지연(Replication Lag)이 문제가 됩니다. 해결 방법으로 옳은 것은?",
+      "options": [
+        "복제본 수를 줄인다",
+        "쓰기 직후 즉시 읽어야 하는 요청은 마스터에서 처리하고, 약간의 지연을 허용하는 읽기는 복제본에서 처리하는 Read-Your-Writes 전략을 적용한다",
+        "모든 읽기를 마스터에서 처리하도록 롤백한다",
+        "동기 복제로 전환하여 지연을 제거한다"
+      ],
+      "answer": 1,
+      "explanation": "복제 지연은 비동기 복제의 특성입니다. Read-Your-Writes 전략으로 사용자 자신의 쓰기 직후 읽기는 마스터에서, 다른 사용자 데이터 읽기는 복제본에서 처리합니다. 사용자 세션에 마지막 쓰기 타임스탬프를 저장하여 충분히 복제된 복제본만 사용하는 방법도 있습니다."
+    },
+    {
+      "id": "db-s012",
+      "difficulty": "advanced",
+      "type": "scenario",
+      "question": "대용량 테이블에서 DELETE FROM orders WHERE created_at < '2020-01-01' 실행 시 다른 쿼리가 블로킹되고 언두 로그가 폭증합니다. 개선 방법으로 옳은 것은?",
+      "options": [
+        "DELETE 쿼리에 INDEX 힌트를 추가한다",
+        "1000건씩 나눠 배치 삭제하고 중간에 COMMIT하는 청크 삭제 방식으로 실행한다",
+        "트랜잭션 격리 수준을 READ UNCOMMITTED로 낮춘다",
+        "파티션을 사용하지 않는다"
+      ],
+      "answer": 1,
+      "explanation": "대량 DELETE는 거대한 단일 트랜잭션으로 언두 로그 폭증, 락 타임아웃, 다른 쿼리 블로킹을 유발합니다. 1000~10000건씩 나눠 삭제하고 각 배치 후 COMMIT하면 락 범위를 줄이고 언두 로그를 관리 가능한 크기로 유지합니다. 파티션 사용 시 DROP PARTITION이 가장 빠릅니다."
+    },
+    {
+      "id": "db-s013",
+      "difficulty": "advanced",
+      "type": "scenario",
+      "question": "사용자 활동 이벤트를 실시간으로 저장하는데 초당 100,000건의 INSERT가 필요합니다. 단일 MySQL 서버로는 처리 불가능합니다. 아키텍처 전략으로 옳은 것은?",
+      "options": [
+        "MySQL 서버의 RAM을 최대로 늘린다",
+        "Kafka로 이벤트를 수신하여 버퍼링하고 Cassandra나 ClickHouse 같은 고쓰기 성능 DB에 배치로 저장한다",
+        "모든 이벤트를 로컬 파일에 저장한다",
+        "이벤트 수를 줄이도록 클라이언트 측에서 샘플링한다"
+      ],
+      "answer": 1,
+      "explanation": "초당 10만 INSERT는 단일 RDBMS의 한계를 초과합니다. Kafka로 이벤트를 수신하여 순간 부하를 흡수하고, 고쓰기 성능 DB(Cassandra, ClickHouse, TimescaleDB)로 배치 저장하면 확장성을 확보할 수 있습니다."
+    },
+    {
+      "id": "db-s014",
+      "difficulty": "advanced",
+      "type": "scenario",
+      "question": "MySQL 테이블에 인덱스가 20개나 있는데 INSERT/UPDATE 성능이 매우 느립니다. 인덱스 최적화 방법으로 옳은 것은?",
+      "options": [
+        "인덱스를 모두 삭제하고 처음부터 다시 만든다",
+        "EXPLAIN으로 실제 사용되는 인덱스를 분석하고, 미사용 인덱스와 중복 인덱스를 제거한다",
+        "인덱스를 더 추가하여 조회를 빠르게 한다",
+        "테이블을 복사하고 원본을 삭제한다"
+      ],
+      "answer": 1,
+      "explanation": "인덱스가 많으면 모든 쓰기 연산에서 해당 인덱스를 갱신해야 하므로 쓰기 성능이 저하됩니다. sys.schema_unused_indexes(MySQL), pg_stat_user_indexes(PostgreSQL)로 미사용 인덱스를 찾아 제거하고, 중복 인덱스(A, (A,B) 동시 존재 등)도 통합합니다."
+    },
+    {
+      "id": "db-s015",
+      "difficulty": "advanced",
+      "type": "scenario",
+      "question": "트랜잭션 A가 Table1을 락하고 Table2를 기다리고, 트랜잭션 B가 Table2를 락하고 Table1을 기다리는 데드락이 발생했습니다. DB가 자동으로 하나를 롤백했습니다. 재발 방지 방법으로 옳은 것은?",
+      "options": [
+        "트랜잭션 크기를 늘려 한 번에 모든 자원을 획득한다",
+        "모든 트랜잭션이 항상 동일한 순서(Table1 → Table2)로 자원을 획득하도록 표준화한다",
+        "트랜잭션 격리 수준을 READ UNCOMMITTED로 낮춘다",
+        "인덱스를 모두 제거하여 락 범위를 줄인다"
+      ],
+      "answer": 1,
+      "explanation": "데드락은 자원 획득 순서가 다를 때 발생합니다. 모든 코드에서 항상 동일한 순서(예: 항상 작은 ID의 테이블/행을 먼저 락)로 자원을 획득하면 환형 대기 조건을 제거하여 데드락을 방지할 수 있습니다. 트랜잭션 크기를 최소화하는 것도 중요합니다."
+    },
+    {
+      "id": "db-d001",
+      "difficulty": "intermediate",
+      "type": "debug",
+      "question": "다음 트랜잭션 격리 수준에 대한 설명 중 틀린 것은?",
+      "options": [
+        "READ UNCOMMITTED는 Dirty Read가 발생할 수 있다",
+        "READ COMMITTED는 Non-Repeatable Read가 발생할 수 있다",
+        "REPEATABLE READ는 Phantom Read가 절대 발생하지 않는다",
+        "SERIALIZABLE은 모든 동시성 문제를 방지하지만 성능이 가장 낮다"
+      ],
+      "answer": 2,
+      "explanation": "REPEATABLE READ는 일반적으로 Phantom Read가 발생할 수 있습니다. MySQL InnoDB는 MVCC와 갭 락(Gap Lock)으로 Phantom Read를 방지하지만, SQL 표준 REPEATABLE READ에서는 Phantom Read가 발생 가능합니다."
+    },
+    {
+      "id": "db-d002",
+      "difficulty": "intermediate",
+      "type": "debug",
+      "question": "다음 SQL 인덱스 사용에 대한 설명 중 틀린 것은?",
+      "options": [
+        "WHERE name LIKE 'Kim%'은 name 인덱스를 사용할 수 있다",
+        "WHERE name LIKE '%Kim'은 name 인덱스를 사용할 수 없다",
+        "WHERE UPPER(name) = 'KIM'은 name 인덱스를 효율적으로 사용한다",
+        "WHERE age > 20 AND age < 30은 age 인덱스를 사용할 수 있다"
+      ],
+      "answer": 2,
+      "explanation": "인덱스 컬럼에 함수를 적용하면(UPPER(name)) 인덱스를 사용할 수 없습니다. 옵티마이저는 모든 행에 UPPER()를 적용해야 하므로 Full Table Scan이 발생합니다. 대소문자 무시 검색은 함수 기반 인덱스나 컬럼에 CI(Case Insensitive) Collation을 설정해야 합니다."
+    },
+    {
+      "id": "db-d003",
+      "difficulty": "intermediate",
+      "type": "debug",
+      "question": "다음 정규화에 대한 설명 중 틀린 것은?",
+      "options": [
+        "1NF는 모든 컬럼이 원자값을 가져야 한다",
+        "2NF는 부분 함수 종속을 제거한다",
+        "3NF는 이행적 함수 종속을 제거한다",
+        "정규화를 높은 단계로 할수록 항상 쿼리 성능이 향상된다"
+      ],
+      "answer": 3,
+      "explanation": "정규화가 높을수록 중복은 줄지만 JOIN이 증가하여 복잡한 쿼리의 성능이 저하될 수 있습니다. 실무에서는 성능 요건에 따라 3NF를 기준으로 하되 필요 시 반정규화(Denormalization)를 적용합니다."
+    },
+    {
+      "id": "db-d004",
+      "difficulty": "intermediate",
+      "type": "debug",
+      "question": "다음 JOIN에 대한 설명 중 틀린 것은?",
+      "options": [
+        "INNER JOIN은 양쪽 테이블에서 조건을 만족하는 행만 반환한다",
+        "LEFT JOIN은 왼쪽 테이블의 모든 행과 오른쪽에서 일치하는 행을 반환한다",
+        "CROSS JOIN은 두 테이블의 카테시안 곱으로 ON 조건이 필요하다",
+        "FULL OUTER JOIN은 양쪽 테이블의 모든 행을 반환하고 불일치는 NULL로 채운다"
+      ],
+      "answer": 2,
+      "explanation": "CROSS JOIN은 카테시안 곱으로 두 테이블의 모든 행 조합을 반환하며 ON 조건이 없습니다. ON 조건을 지정하면 INNER JOIN과 동일한 결과가 됩니다. CROSS JOIN 결과는 m × n개의 행입니다."
+    },
+    {
+      "id": "db-d005",
+      "difficulty": "intermediate",
+      "type": "debug",
+      "question": "다음 NoSQL에 대한 설명 중 틀린 것은?",
+      "options": [
+        "MongoDB는 문서 지향 데이터베이스로 JSON 형식의 문서를 저장한다",
+        "Redis는 주로 인메모리 키-값 스토어로 캐시에 활용된다",
+        "Cassandra는 강력한 ACID 트랜잭션을 기본으로 지원한다",
+        "Elasticsearch는 역인덱스 기반의 검색 엔진으로 전문 검색에 적합하다"
+      ],
+      "answer": 2,
+      "explanation": "Cassandra는 AP(Availability + Partition Tolerance) 시스템으로 강한 일관성보다 가용성을 우선합니다. 기본적으로 최종 일관성(Eventual Consistency)을 제공하며 ACID 트랜잭션 지원이 제한적입니다. Cassandra 4.0부터 일부 경량 트랜잭션(LWT)을 지원합니다."
+    },
+    {
+      "id": "db-d006",
+      "difficulty": "advanced",
+      "type": "debug",
+      "question": "다음 데이터베이스 인덱스에 대한 설명 중 틀린 것은?",
+      "options": [
+        "복합 인덱스 (a, b, c)는 a 단독 조건과 a, b 조건에도 사용된다",
+        "복합 인덱스 (a, b, c)는 b 단독 조건에도 인덱스를 효율적으로 사용한다",
+        "카디널리티가 높은 컬럼에 인덱스를 생성하는 것이 일반적으로 유리하다",
+        "복합 인덱스 (a, b, c)는 a, c 조건일 때 a까지만 인덱스를 사용한다"
+      ],
+      "answer": 1,
+      "explanation": "복합 인덱스는 Leftmost Prefix 규칙에 따라 왼쪽부터 순서대로 사용됩니다. (a, b, c) 인덱스는 a, (a,b), (a,b,c) 조건에 사용되지만 b 단독, c 단독, (b,c) 조건에는 사용되지 않습니다. b 단독 조건에 인덱스를 쓰려면 별도로 b 인덱스가 필요합니다."
+    },
+    {
+      "id": "db-d007",
+      "difficulty": "advanced",
+      "type": "debug",
+      "question": "다음 데이터베이스 락에 대한 설명 중 틀린 것은?",
+      "options": [
+        "행 수준 락(Row-level Lock)은 테이블 수준 락보다 동시성이 높다",
+        "SELECT ... FOR UPDATE는 조회한 행에 배타 락을 설정한다",
+        "데드락은 행 수준 락에서는 절대 발생하지 않는다",
+        "갭 락(Gap Lock)은 인덱스 범위에서 새로운 행 삽입을 방지한다"
+      ],
+      "answer": 2,
+      "explanation": "데드락은 행 수준 락에서도 발생합니다. 트랜잭션 A가 행1을 락하고 행2를 기다리고, 트랜잭션 B가 행2를 락하고 행1을 기다리면 행 수준에서도 데드락이 발생합니다. 데드락은 락의 단위(행, 테이블)와 무관하게 자원 획득 순서가 다를 때 발생합니다."
+    },
+    {
+      "id": "db-d008",
+      "difficulty": "advanced",
+      "type": "debug",
+      "question": "다음 쿼리 성능 최적화에 대한 설명 중 틀린 것은?",
+      "options": [
+        "SELECT *는 필요 없는 컬럼도 전송하여 네트워크·메모리 사용이 증가할 수 있다",
+        "서브쿼리보다 JOIN이 항상 더 빠르다",
+        "EXPLAIN ANALYZE로 실제 실행 계획과 소요 시간을 확인할 수 있다",
+        "쿼리 캐시는 쓰기가 많은 테이블에서 효율이 낮다"
+      ],
+      "answer": 1,
+      "explanation": "'JOIN이 항상 서브쿼리보다 빠르다'는 틀렸습니다. 최신 DBMS 옵티마이저는 서브쿼리를 JOIN으로 변환하거나 세미조인 최적화를 적용하여 서브쿼리도 효율적으로 처리할 수 있습니다. 상황에 따라 서브쿼리가 더 직관적이고 성능도 동등할 수 있습니다."
+    },
+    {
+      "id": "db-d009",
+      "difficulty": "advanced",
+      "type": "debug",
+      "question": "다음 데이터베이스 복제(Replication)에 대한 설명 중 틀린 것은?",
+      "options": [
+        "마스터-슬레이브 복제에서 슬레이브는 마스터의 변경 사항을 비동기적으로 적용한다",
+        "복제 지연(Replication Lag)은 슬레이브에서 읽기 시 오래된 데이터를 반환할 수 있다",
+        "마스터에 장애가 발생하면 슬레이브가 자동으로 마스터로 승격되어 데이터 손실이 없다",
+        "읽기 전용 슬레이브를 추가하면 마스터의 읽기 부하를 분산할 수 있다"
+      ],
+      "answer": 2,
+      "explanation": "비동기 복제에서 마스터 장애 시 슬레이브에 복제되지 않은 데이터가 있을 수 있습니다(RPO > 0). 자동 장애 조치(Auto-failover)는 Orchestrator나 MHA 같은 추가 도구가 필요하며, 데이터 손실 없는 장애 조치는 동기 복제나 반동기 복제가 필요합니다."
+    },
+    {
+      "id": "db-d010",
+      "difficulty": "advanced",
+      "type": "debug",
+      "question": "다음 데이터베이스 NULL 처리에 대한 설명 중 틀린 것은?",
+      "options": [
+        "NULL = NULL은 TRUE를 반환하지 않고 NULL을 반환한다",
+        "NULL 비교는 IS NULL 또는 IS NOT NULL을 사용해야 한다",
+        "COUNT(*)는 NULL을 포함한 모든 행을 카운트한다",
+        "NULL이 포함된 컬럼에 NOT IN 조건을 사용하면 항상 기대한 결과를 반환한다"
+      ],
+      "answer": 3,
+      "explanation": "NOT IN 서브쿼리에 NULL이 포함되면 아무 행도 반환되지 않을 수 있습니다. NULL과의 비교는 항상 UNKNOWN이 되어 NOT IN 조건 전체가 UNKNOWN으로 평가됩니다. NOT IN 대신 NOT EXISTS를 사용하면 NULL 처리 문제를 피할 수 있습니다."
+    },
+    {
+      "id": "db-o001",
+      "difficulty": "basic",
+      "type": "ordering",
+      "question": "SQL 쿼리의 논리적 실행 순서로 올바른 것은?",
+      "options": [
+        "① SELECT → ② FROM → ③ WHERE → ④ GROUP BY → ⑤ HAVING → ⑥ ORDER BY",
+        "① FROM → ② WHERE → ③ GROUP BY → ④ HAVING → ⑤ SELECT → ⑥ ORDER BY",
+        "① WHERE → ② FROM → ③ SELECT → ④ GROUP BY → ⑤ HAVING → ⑥ ORDER BY",
+        "① FROM → ② SELECT → ③ WHERE → ④ GROUP BY → ⑤ HAVING → ⑥ ORDER BY"
+      ],
+      "answer": 1,
+      "explanation": "SQL 논리적 실행 순서: FROM(테이블 특정) → WHERE(행 필터링) → GROUP BY(그룹화) → HAVING(그룹 필터링) → SELECT(컬럼 선택 및 별칭 적용) → ORDER BY(정렬). WHERE에서 SELECT 별칭을 사용할 수 없는 이유가 바로 이 순서 때문입니다."
+    },
+    {
+      "id": "db-o002",
+      "difficulty": "basic",
+      "type": "ordering",
+      "question": "트랜잭션 처리 과정의 순서로 올바른 것은?",
+      "options": [
+        "① COMMIT → ② 연산 실행 → ③ BEGIN → ④ 오류 시 ROLLBACK",
+        "① BEGIN/START TRANSACTION → ② SQL 연산 실행 → ③ 오류 없으면 COMMIT, 오류 발생 시 ROLLBACK",
+        "① SQL 연산 → ② 자동 커밋 → ③ BEGIN → ④ 결과 확인",
+        "① ROLLBACK → ② BEGIN → ③ 연산 → ④ COMMIT"
+      ],
+      "answer": 1,
+      "explanation": "트랜잭션: BEGIN(트랜잭션 시작) → SQL DML 연산 실행(INSERT/UPDATE/DELETE) → 모든 연산 성공 시 COMMIT(영구 반영), 오류 발생 시 ROLLBACK(변경 취소). 자동 커밋(autocommit) 모드에서는 각 SQL이 자동으로 BEGIN-COMMIT으로 감싸집니다."
+    },
+    {
+      "id": "db-o003",
+      "difficulty": "intermediate",
+      "type": "ordering",
+      "question": "B+트리 인덱스에서 특정 키를 탐색하는 순서로 옳은 것은?",
+      "options": [
+        "① 리프 노드 탐색 → ② 루트 노드 탐색 → ③ 내부 노드 탐색",
+        "① 루트 노드에서 키 비교하여 자식 포인터 선택 → ② 내부 노드를 반복 탐색 → ③ 리프 노드에서 실제 데이터 포인터 확인",
+        "① 전체 리프 노드 스캔 → ② 키 발견 시 반환",
+        "① 인덱스 전체 로드 → ② 이진 탐색 → ③ 결과 반환"
+      ],
+      "answer": 1,
+      "explanation": "B+트리 탐색: 루트 노드에서 키와 비교하여 적절한 자식 포인터를 선택 → 내부 노드를 따라 반복 하강 → 리프 노드에 도달하여 실제 데이터 행 포인터(또는 클러스터드 인덱스 키) 확인 → 실제 데이터 접근. 높이가 낮아 보통 3~4단계만 필요합니다."
+    },
+    {
+      "id": "db-o004",
+      "difficulty": "intermediate",
+      "type": "ordering",
+      "question": "데이터베이스 장애 복구(WAL - Write-Ahead Logging) 순서로 옳은 것은?",
+      "options": [
+        "① 데이터 파일에 직접 쓰기 → ② 로그 기록 → ③ 커밋",
+        "① 트랜잭션 시작 → ② 변경 사항을 WAL에 먼저 기록 → ③ 데이터 파일에 적용 → ④ 커밋 레코드를 WAL에 기록 → ⑤ 응답 반환",
+        "① 데이터 파일 쓰기 → ② 커밋 → ③ 로그 기록",
+        "① 커밋 → ② 로그 기록 → ③ 데이터 파일 쓰기"
+      ],
+      "answer": 1,
+      "explanation": "WAL(Write-Ahead Logging): 트랜잭션 시작 → 변경 사항을 먼저 WAL(로그)에 기록 → 실제 데이터 파일 수정(나중에 비동기로 가능) → 커밋 레코드를 WAL에 기록 → 클라이언트에 응답. 장애 발생 시 WAL을 재생(Redo)하여 복구합니다."
+    },
+    {
+      "id": "db-o005",
+      "difficulty": "advanced",
+      "type": "ordering",
+      "question": "데이터베이스 샤딩 환경에서 사용자 ID로 레코드를 조회하는 순서로 옳은 것은?",
+      "options": [
+        "① 모든 샤드에 쿼리 → ② 결과 병합 → ③ 반환",
+        "① 사용자 ID에 샤딩 함수 적용(예: ID % 샤드 수) → ② 해당 샤드 서버로 쿼리 라우팅 → ③ 해당 샤드에서 데이터 조회 → ④ 결과 반환",
+        "① 임의 샤드에 쿼리 → ② 없으면 다른 샤드 시도 → ③ 반환",
+        "① 마스터 샤드에서 조회 → ② 다른 샤드로 전달 → ③ 반환"
+      ],
+      "answer": 1,
+      "explanation": "샤딩 조회: 샤드 키(사용자 ID)에 샤딩 함수(hash, range, directory 기반)를 적용하여 해당 샤드 식별 → 해당 샤드 서버로 쿼리 라우팅 → 단일 샤드에서 조회 후 반환. 샤드 키가 없는 쿼리는 모든 샤드에 분산 쿼리(Scatter-Gather)를 실행해야 하므로 비효율적입니다."
+    }
+  ]
 }
