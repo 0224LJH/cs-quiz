@@ -1,5 +1,702 @@
-{
-  "topic": "general",
-  "label": "개발자 필수 지식",
-  "questions": []
-}
+[
+  {
+    "id": "general-c001",
+    "difficulty": "basic",
+    "type": "concept",
+    "question": "RESTful API에서 HTTP 메서드와 CRUD 매핑으로 올바른 것은?",
+    "options": [
+      "GET=생성, POST=조회, PUT=수정, DELETE=삭제",
+      "GET=조회, POST=생성, PUT/PATCH=수정, DELETE=삭제",
+      "GET=조회, POST=수정, PATCH=생성, DELETE=삭제",
+      "GET=삭제, POST=생성, PUT=조회, DELETE=수정"
+    ],
+    "answer": 1,
+    "explanation": "RESTful CRUD 매핑: GET(조회, 안전·멱등), POST(생성, 비멱등), PUT(전체 수정, 멱등), PATCH(부분 수정, 비멱등), DELETE(삭제, 멱등). 멱등성: 동일 요청을 여러 번 보내도 결과가 같음."
+  },
+  {
+    "id": "general-c002",
+    "difficulty": "basic",
+    "type": "concept",
+    "question": "Git에서 `git merge`와 `git rebase`의 차이는?",
+    "options": [
+      "merge는 브랜치를 삭제하고, rebase는 브랜치를 유지",
+      "merge는 병합 커밋을 생성하여 히스토리를 보존, rebase는 커밋을 재적용하여 선형 히스토리 생성",
+      "merge는 로컬, rebase는 원격 브랜치에만 사용",
+      "둘 다 동일한 결과를 만들며 명칭만 다름"
+    ],
+    "answer": 1,
+    "explanation": "`git merge`는 두 브랜치의 공통 조상을 기반으로 3-way 병합하고 병합 커밋을 생성합니다. 히스토리가 보존되지만 복잡해집니다. `git rebase`는 커밋을 다른 브랜치 위에 재적용하여 선형 히스토리를 만들지만 공개된 커밋을 rebase하면 위험합니다."
+  },
+  {
+    "id": "general-c003",
+    "difficulty": "basic",
+    "type": "concept",
+    "question": "CI/CD에서 CI(Continuous Integration)의 주요 목적은?",
+    "options": [
+      "운영 서버에 자동으로 코드를 배포",
+      "코드 변경 시 자동으로 빌드·테스트를 실행하여 통합 문제를 조기 발견",
+      "코드 리뷰 자동화를 통해 PR을 자동 승인",
+      "개발자 간 코드 충돌을 실시간으로 해결"
+    ],
+    "answer": 1,
+    "explanation": "CI(지속적 통합)는 개발자가 코드를 push할 때마다 자동으로 빌드·테스트를 실행하여 통합 버그를 빠르게 발견합니다. '늦게 통합할수록 더 많이 고통스럽다'는 원칙에서 시작되었으며 GitHub Actions, Jenkins, GitLab CI 등이 CI 도구입니다."
+  },
+  {
+    "id": "general-c004",
+    "difficulty": "basic",
+    "type": "concept",
+    "question": "단위 테스트(Unit Test)와 통합 테스트(Integration Test)의 차이는?",
+    "options": [
+      "단위 테스트는 운영 환경, 통합 테스트는 개발 환경에서 실행",
+      "단위 테스트는 개별 함수/클래스를 격리하여 테스트, 통합 테스트는 여러 컴포넌트(DB, API 등)의 상호작용을 테스트",
+      "단위 테스트는 수동, 통합 테스트는 자동으로 실행",
+      "단위 테스트는 성능, 통합 테스트는 기능을 검증"
+    ],
+    "answer": 1,
+    "explanation": "단위 테스트는 하나의 함수/클래스를 외부 의존성 없이(Mock 사용) 빠르게 테스트합니다. 통합 테스트는 실제 DB, API, 외부 서비스 등 여러 컴포넌트가 함께 동작하는지 검증합니다. 테스트 피라미드: 단위 테스트(많음) > 통합 테스트 > E2E 테스트(적음)."
+  },
+  {
+    "id": "general-c005",
+    "difficulty": "basic",
+    "type": "concept",
+    "question": "클린코드에서 함수는 한 가지 일만 해야 한다(SRP)는 원칙의 이점은?",
+    "options": [
+      "함수의 실행 속도가 향상됨",
+      "이해·테스트·재사용·수정이 쉬워지고 부작용이 줄어듦",
+      "함수 이름을 짧게 유지할 수 있음",
+      "컴파일 오류가 감소함"
+    ],
+    "answer": 1,
+    "explanation": "한 가지 일만 하는 함수는 ①이름이 명확해져 이해하기 쉽고 ②독립적으로 테스트하기 용이하고 ③다른 곳에서 재사용하기 쉬우며 ④변경 시 영향 범위가 좁아 부작용이 줄어듭니다. 클린코드의 핵심 원칙입니다."
+  },
+  {
+    "id": "general-c006",
+    "difficulty": "basic",
+    "type": "concept",
+    "question": "객체지향의 4대 특성 중 캡슐화(Encapsulation)의 의미는?",
+    "options": [
+      "한 클래스가 여러 타입으로 동작하는 것",
+      "클래스의 내부 구현을 숨기고 외부에는 필요한 인터페이스만 공개하여 변경을 차단",
+      "부모 클래스의 속성과 메서드를 자식 클래스가 물려받는 것",
+      "같은 이름의 메서드가 다양한 동작을 하는 것"
+    ],
+    "answer": 1,
+    "explanation": "캡슐화는 데이터(필드)와 행동(메서드)을 하나로 묶고, 내부 구현을 private으로 숨깁니다. 외부에는 public 인터페이스만 노출하여 내부 구현을 자유롭게 변경해도 외부 코드에 영향을 주지 않습니다."
+  },
+  {
+    "id": "general-c007",
+    "difficulty": "basic",
+    "type": "concept",
+    "question": "HTTP 상태 코드 200, 201, 400, 401, 403, 404, 500의 의미로 올바른 것은?",
+    "options": [
+      "200=생성됨, 201=성공, 400=서버오류, 401=권한없음, 403=미인증, 404=찾을수없음, 500=잘못된요청",
+      "200=성공, 201=생성됨, 400=잘못된요청, 401=미인증, 403=접근금지, 404=찾을수없음, 500=서버오류",
+      "200=성공, 201=리다이렉션, 400=클라이언트오류, 401=서버오류, 403=찾을수없음, 404=미인증, 500=접근금지",
+      "200=성공, 201=성공, 400=찾을수없음, 401=접근금지, 403=미인증, 404=잘못된요청, 500=서버오류"
+    ],
+    "answer": 1,
+    "explanation": "HTTP 상태코드: 2xx(성공) — 200 OK, 201 Created; 4xx(클라이언트 오류) — 400 Bad Request, 401 Unauthorized(미인증), 403 Forbidden(인증됐지만 권한 없음), 404 Not Found; 5xx(서버 오류) — 500 Internal Server Error."
+  },
+  {
+    "id": "general-c008",
+    "difficulty": "basic",
+    "type": "concept",
+    "question": "Git에서 `git stash`의 용도는?",
+    "options": [
+      "커밋되지 않은 변경사항을 원격 저장소에 백업",
+      "작업 중인 변경사항을 임시로 저장하고 워킹 디렉토리를 깨끗하게 유지",
+      "이전 커밋으로 되돌아가고 변경사항 삭제",
+      "원격 브랜치와 로컬 브랜치를 동기화"
+    ],
+    "answer": 1,
+    "explanation": "`git stash`는 커밋하지 않은 변경사항(staged/unstaged)을 스택에 임시 저장하고 워킹 디렉토리를 마지막 커밋 상태로 복원합니다. 급하게 다른 브랜치로 전환해야 할 때 유용합니다. `git stash pop`으로 복원합니다."
+  },
+  {
+    "id": "general-c009",
+    "difficulty": "basic",
+    "type": "concept",
+    "question": "함수형 프로그래밍에서 순수 함수(Pure Function)의 특징은?",
+    "options": [
+      "항상 void를 반환하고 외부 상태만 변경",
+      "동일한 입력에 항상 동일한 출력을 반환하고 부작용(Side Effect)이 없음",
+      "클래스 없이 함수만으로 구성된 프로그램",
+      "재귀 호출만 사용하는 함수"
+    ],
+    "answer": 1,
+    "explanation": "순수 함수의 두 가지 조건: ①동일 입력 → 항상 동일 출력(참조 투명성) ②부작용 없음(전역 변수 수정, I/O, DB 접근 등 없음). 순수 함수는 테스트·예측·병렬 실행이 쉬워 함수형 프로그래밍의 핵심 개념입니다."
+  },
+  {
+    "id": "general-c010",
+    "difficulty": "basic",
+    "type": "concept",
+    "question": "REST API 설계에서 URI 명명 규칙으로 올바른 것은?",
+    "options": [
+      "/getUsers, /createUser, /deleteUser처럼 동사를 URI에 포함",
+      "/users, /users/{id}, /users/{id}/orders처럼 명사(리소스)로 표현하고 동작은 HTTP 메서드로 구분",
+      "/Users, /USER_LIST처럼 대문자 사용 권장",
+      "URI에 버전 정보(v1, v2)는 포함하면 안 됨"
+    ],
+    "answer": 1,
+    "explanation": "RESTful URI 설계 원칙: ①리소스는 명사, 복수형(`/users` not `/getUser`) ②계층 관계는 `/`로 표현 ③소문자와 하이픈(`-`) 사용 ④URI에 동사 지양(HTTP 메서드 활용) ⑤버전은 `/v1/users` 또는 헤더로 관리."
+  },
+  {
+    "id": "general-c011",
+    "difficulty": "intermediate",
+    "type": "concept",
+    "question": "SOLID 원칙 중 의존성 역전 원칙(DIP)의 의미는?",
+    "options": [
+      "고수준 모듈이 저수준 모듈에 직접 의존",
+      "고수준 모듈과 저수준 모듈 모두 추상화(인터페이스)에 의존하며, 구체 구현이 아닌 추상화에 의존",
+      "모든 클래스가 하나의 인터페이스만 구현해야 함",
+      "의존성은 생성자 주입만 사용해야 함"
+    ],
+    "answer": 1,
+    "explanation": "DIP: 고수준 모듈(비즈니스 로직)이 저수준 모듈(DB, 외부 API)의 구체 클래스에 직접 의존하면 저수준 변경이 고수준에 영향을 줍니다. 대신 추상화(인터페이스)에 의존하면 구현체를 교체해도 고수준 모듈은 변경되지 않습니다."
+  },
+  {
+    "id": "general-c012",
+    "difficulty": "intermediate",
+    "type": "concept",
+    "question": "TDD(Test-Driven Development)의 Red-Green-Refactor 사이클이란?",
+    "options": [
+      "①코드 작성 → ②테스트 작성 → ③리팩토링",
+      "①실패하는 테스트 작성(Red) → ②테스트를 통과하는 최소 코드 작성(Green) → ③리팩토링(Refactor)",
+      "①테스트 실행 → ②버그 수정 → ③배포",
+      "①통합 테스트 → ②단위 테스트 → ③성능 테스트"
+    ],
+    "answer": 1,
+    "explanation": "TDD 사이클: ①Red — 아직 없는 기능에 대해 실패하는 테스트 작성 ②Green — 테스트를 통과하는 최소한의 코드 작성(클린하지 않아도 됨) ③Refactor — 동작을 유지하면서 코드를 개선. 이 사이클을 반복하여 테스트로 설계를 주도합니다."
+  },
+  {
+    "id": "general-c013",
+    "difficulty": "intermediate",
+    "type": "concept",
+    "question": "Git Flow 브랜치 전략에서 `main`, `develop`, `feature`, `release`, `hotfix` 브랜치의 역할은?",
+    "options": [
+      "main=개발, develop=배포, feature=릴리즈 준비, release=기능 개발, hotfix=긴급 수정",
+      "main=운영 배포, develop=통합 개발, feature=기능 개발, release=배포 준비, hotfix=운영 긴급 수정",
+      "main=테스트, develop=운영, feature=버그 수정, release=개발, hotfix=기능 추가",
+      "모든 브랜치가 동등하게 배포 가능"
+    ],
+    "answer": 1,
+    "explanation": "Git Flow: main(운영 배포 기준, 항상 안정) → develop(통합 개발 브랜치) → feature/xxx(기능 개발, develop에서 분기) → release/x.x(QA·배포 준비, develop에서 분기) → hotfix/xxx(운영 버그 긴급 수정, main에서 분기 후 main과 develop에 병합)."
+  },
+  {
+    "id": "general-c014",
+    "difficulty": "intermediate",
+    "type": "concept",
+    "question": "함수형 프로그래밍의 `map`, `filter`, `reduce`의 역할은?",
+    "options": [
+      "map=필터링, filter=변환, reduce=반복",
+      "map=각 요소를 변환하여 새 컬렉션 반환, filter=조건을 만족하는 요소만 선택, reduce=요소들을 하나의 값으로 집계",
+      "map=인덱스 접근, filter=정렬, reduce=중복 제거",
+      "세 연산 모두 원본 컬렉션을 수정"
+    ],
+    "answer": 1,
+    "explanation": "`map(x -> x*2)`: 모든 요소에 함수를 적용하여 새 컬렉션 반환(변환). `filter(x -> x>3)`: 조건을 만족하는 요소만 선택(걸러내기). `reduce((a,b) -> a+b)`: 컬렉션의 모든 요소를 순차적으로 연산하여 단일 결과로 집계(누적). 모두 원본을 변경하지 않습니다."
+  },
+  {
+    "id": "general-c015",
+    "difficulty": "intermediate",
+    "type": "concept",
+    "question": "코드 리뷰의 주요 목적은?",
+    "options": [
+      "개발자를 평가하고 순위를 매기기 위해",
+      "버그 조기 발견, 지식 공유, 코드 품질 향상, 팀 코딩 표준 유지",
+      "개발 속도를 느리게 하여 품질을 높이는 것",
+      "PR을 자동으로 병합하기 위한 절차"
+    ],
+    "answer": 1,
+    "explanation": "코드 리뷰의 목적: ①버그·보안 취약점 조기 발견(자동화 테스트가 못 잡는 로직 오류 포함) ②팀 지식 공유(작성자 외 다른 팀원도 코드 이해) ③코딩 컨벤션·아키텍처 일관성 유지 ④주니어 개발자 성장 지원."
+  },
+  {
+    "id": "general-t001",
+    "difficulty": "intermediate",
+    "type": "tradeoff",
+    "question": "REST API vs GraphQL 선택 기준은?",
+    "options": [
+      "GraphQL은 항상 REST보다 성능이 좋음",
+      "REST는 단순하고 캐싱 용이하며 툴링이 풍부, GraphQL은 Over-fetching/Under-fetching 해결·클라이언트 주도 쿼리 가능하나 캐싱 복잡·학습 곡선 있음",
+      "REST는 모바일, GraphQL은 웹에만 적합",
+      "GraphQL은 Spring Boot와 통합 불가"
+    ],
+    "answer": 1,
+    "explanation": "REST의 장점: 단순·범용적·HTTP 캐싱 활용 가능. 단점: Over-fetching(불필요한 데이터), Under-fetching(여러 번 요청 필요). GraphQL의 장점: 원하는 필드만 요청, 단일 엔드포인트. 단점: GET 캐싱 어려움, 복잡한 쿼리로 N+1 발생 가능, 학습 곡선."
+  },
+  {
+    "id": "general-t002",
+    "difficulty": "intermediate",
+    "type": "tradeoff",
+    "question": "Git merge vs rebase의 트레이드오프는?",
+    "options": [
+      "rebase가 항상 더 좋으므로 merge 대신 사용 권장",
+      "merge는 히스토리 보존·충돌 추적 용이하나 히스토리 복잡, rebase는 선형 히스토리·깔끔하나 공개 브랜치에 사용 시 다른 개발자의 히스토리를 재작성하는 위험",
+      "merge는 로컬, rebase는 원격 브랜치에만 사용",
+      "둘의 성능 차이가 크므로 대규모 프로젝트에서는 rebase 금지"
+    ],
+    "answer": 1,
+    "explanation": "merge: 실제 병합 히스토리가 보존되어 언제 어떻게 합쳐졌는지 추적 가능하지만 히스토리가 복잡해집니다. rebase: 선형의 깔끔한 히스토리를 유지하지만 공유된 커밋을 rebase하면 다른 팀원의 히스토리와 충돌('Golden Rule: never rebase shared branches')이 발생합니다."
+  },
+  {
+    "id": "general-t003",
+    "difficulty": "intermediate",
+    "type": "tradeoff",
+    "question": "TDD(Test-Driven Development) 도입의 트레이드오프는?",
+    "options": [
+      "TDD는 항상 개발 속도를 느리게 만들어 스타트업에 부적합",
+      "단기적으로 개발 속도 감소·학습 곡선 있으나, 장기적으로 버그 감소·리팩토링 안전망·설계 품질 향상의 이점",
+      "TDD는 단위 테스트만 작성하므로 통합 버그를 놓침",
+      "TDD를 도입하면 코드 리뷰가 불필요해짐"
+    ],
+    "answer": 1,
+    "explanation": "TDD의 단점: 초기 개발 속도 저하, 테스트 작성 방법 습득 필요, 잘못된 테스트 작성 시 오히려 부담. 장점: 버그를 조기에 발견, 리팩토링 시 회귀 방지, 테스트가 살아있는 문서 역할, 설계를 테스트 가능하게 유도하여 과도한 결합도 방지."
+  },
+  {
+    "id": "general-t004",
+    "difficulty": "intermediate",
+    "type": "tradeoff",
+    "question": "모놀리식(Monolithic) vs 마이크로서비스(MSA) 아키텍처 선택의 트레이드오프는?",
+    "options": [
+      "MSA는 항상 모놀리식보다 더 좋은 아키텍처",
+      "모놀리식은 개발·배포·디버깅 단순하나 확장·기술 선택 한계, MSA는 독립 배포·확장 가능하나 운영 복잡도·네트워크 레이턴시·분산 트랜잭션 복잡성 증가",
+      "MSA는 스타트업, 모놀리식은 대기업에만 적합",
+      "MSA는 Spring Boot로 구현 불가"
+    ],
+    "answer": 1,
+    "explanation": "모놀리식: 단순하고 빠른 개발, 단일 배포, 간단한 트랜잭션. MSA: 서비스별 독립 배포·확장·기술 선택 가능하지만 서비스 간 통신(API, 메시지 큐), 분산 트랜잭션, 서비스 디스커버리, 모니터링 등 운영 부담이 큽니다. '작게 시작하고 필요할 때 분리'가 실용적 접근입니다."
+  },
+  {
+    "id": "general-t005",
+    "difficulty": "intermediate",
+    "type": "tradeoff",
+    "question": "코드 주석(Comment) 작성의 트레이드오프는?",
+    "options": [
+      "주석이 많을수록 코드 품질이 높음",
+      "What/How 주석은 코드로 표현하고, 주석은 Why(이유, 비즈니스 제약, 알고리즘 선택 배경)에 집중해야 하며, 오래된 주석은 잘못된 정보를 제공할 위험",
+      "모든 메서드에 Javadoc을 작성해야 함",
+      "주석 없이 코드만으로 모든 것을 표현해야 함"
+    ],
+    "answer": 1,
+    "explanation": "좋은 코드는 이름과 구조로 스스로를 설명합니다. 주석은 '왜 이렇게 했는가'(비즈니스 규칙, 외부 제약, 성능 이유 등)에 집중해야 합니다. 코드와 주석이 불일치하면 주석이 오히려 혼란을 주고, 주석에 의존하면 코드를 개선할 기회를 놓칩니다."
+  },
+  {
+    "id": "general-t006",
+    "difficulty": "intermediate",
+    "type": "tradeoff",
+    "question": "동기(Synchronous) vs 비동기(Asynchronous) API 설계 트레이드오프는?",
+    "options": [
+      "비동기는 항상 동기보다 빠름",
+      "동기는 단순·직관적이나 블로킹으로 리소스 낭비 가능, 비동기는 높은 처리량과 효율이 가능하나 복잡성·에러 처리·디버깅 어려움 증가",
+      "비동기는 Java에서 CompletableFuture 없이 불가",
+      "동기 API는 REST, 비동기는 WebSocket에만 적용"
+    ],
+    "answer": 1,
+    "explanation": "동기: 흐름이 명확하여 이해·디버깅이 쉽지만 I/O 완료를 기다리는 동안 스레드가 블로킹됩니다. 비동기: 스레드를 블로킹하지 않아 더 많은 동시 요청을 처리할 수 있지만 콜백 지옥, 에러 전파, 상태 추적이 복잡해집니다."
+  },
+  {
+    "id": "general-t007",
+    "difficulty": "advanced",
+    "type": "tradeoff",
+    "question": "SQL vs NoSQL 데이터베이스 선택의 트레이드오프는?",
+    "options": [
+      "NoSQL은 항상 SQL보다 빠름",
+      "SQL은 ACID·복잡한 쿼리·정규화에 강하지만 스케일 아웃 어려움, NoSQL은 수평 확장·유연한 스키마·대용량에 강하지만 트랜잭션·일관성 보장 제한",
+      "SQL은 읽기, NoSQL은 쓰기에만 최적화",
+      "Spring Boot는 NoSQL만 지원"
+    ],
+    "answer": 1,
+    "explanation": "SQL(RDBMS): ACID 트랜잭션, 복잡한 JOIN/집계, 스키마 강제로 데이터 일관성 보장. 수직 확장이 기본이라 대규모 쓰기 부하에 한계. NoSQL: 유연한 스키마, 수평 확장 용이, 대용량 처리. 그러나 최종 일관성, 제한된 트랜잭션, 복잡한 관계 표현의 단점이 있습니다."
+  },
+  {
+    "id": "general-t008",
+    "difficulty": "advanced",
+    "type": "tradeoff",
+    "question": "함수형 프로그래밍(FP) vs 객체지향 프로그래밍(OOP) 패러다임 선택의 트레이드오프는?",
+    "options": [
+      "FP는 항상 OOP보다 성능이 좋음",
+      "OOP는 상태와 동작의 캡슐화·현실 모델링에 강하고 팀 친숙도 높음, FP는 불변성·순수함수로 병렬 처리·테스트 용이하나 학습 곡선·상태 관리 방식이 다름",
+      "FP는 수학적 계산에만 적합",
+      "현대 언어에서는 OOP와 FP 중 하나만 선택 가능"
+    ],
+    "answer": 1,
+    "explanation": "OOP: 현실 세계의 객체 모델링, 캡슐화로 복잡성 관리, 팀 이해도 높음. FP: 불변 데이터와 순수 함수로 부작용 최소화, 병렬 처리 안전, 테스트 용이. Java, Kotlin, Scala 등 현대 언어는 두 패러다임을 혼용합니다(다중 패러다임)."
+  },
+  {
+    "id": "general-t009",
+    "difficulty": "intermediate",
+    "type": "tradeoff",
+    "question": "코드 재사용(Code Reuse) vs 코드 중복(Code Duplication)의 트레이드오프는?",
+    "options": [
+      "코드 중복은 항상 나쁘므로 모든 중복을 제거해야 함",
+      "DRY 원칙으로 중복 제거는 유지보수를 쉽게 하지만, 잘못된 추상화는 변경을 어렵게 만들고 의존성을 증가시킴 — 3번 이상 반복될 때 추상화를 고려(Rule of Three)",
+      "코드 중복은 항상 성능 향상을 가져옴",
+      "재사용 가능한 코드는 항상 라이브러리로 분리해야 함"
+    ],
+    "answer": 1,
+    "explanation": "DRY(Don't Repeat Yourself)는 지식의 중복 제거가 목표이지만, 우연한 중복(서로 다른 이유로 비슷해 보이는 코드)을 잘못 추상화하면 결합도가 증가합니다. '잘못된 추상화가 중복보다 나쁘다'는 원칙처럼 Rule of Three(3번 반복 시 추상화 검토)가 실용적 접근입니다."
+  },
+  {
+    "id": "general-t010",
+    "difficulty": "intermediate",
+    "type": "tradeoff",
+    "question": "Feature Flag(기능 플래그)의 트레이드오프는?",
+    "options": [
+      "Feature Flag는 항상 A/B 테스트에만 사용",
+      "프로덕션 환경에서 코드 변경 없이 기능을 켜고 끌 수 있어 안전한 배포·카나리 릴리즈 가능하지만, Flag 관리 복잡성 증가·오래된 Flag로 코드 복잡성 증가·테스트 경우의 수 증가",
+      "Feature Flag는 Spring Boot에서만 지원",
+      "Feature Flag 사용 시 코드 배포가 불필요해짐"
+    ],
+    "answer": 1,
+    "explanation": "Feature Flag의 장점: 배포와 릴리즈 분리(Dark Launch), 단계적 롤아웃, 문제 시 즉시 롤백 가능. 단점: Flag 수가 늘어나면 코드 복잡성 증가, 만료된 Flag 정리 필요, `if(flagA && flagB && !flagC)` 같은 조합 테스트 어려움."
+  },
+  {
+    "id": "general-t011",
+    "difficulty": "intermediate",
+    "type": "tradeoff",
+    "question": "API 버전 관리 방식(URI vs 헤더 vs 파라미터)의 트레이드오프는?",
+    "options": [
+      "URI 버전(/v1/users)만이 유일한 표준 방식",
+      "URI 버전은 명시적이고 캐싱 용이하나 URL이 지저분해짐, 헤더 버전은 URI를 깔끔하게 유지하나 가시성 낮음, 파라미터 방식은 선택적이지만 URL 캐싱에 영향",
+      "API 버전 관리는 GraphQL에서만 필요",
+      "버전 관리 없이 하위 호환성만 유지하면 됨"
+    ],
+    "answer": 1,
+    "explanation": "URI 버전(`/v1/users`): 명확하고 즐겨찾기·캐싱 가능하지만 URL이 변경되어 클라이언트 업데이트 필요. 헤더 버전(`Accept: application/vnd.api.v1+json`): URI가 깔끔하지만 브라우저에서 테스트 어려움. 파라미터(`?version=1`): 선택적 지정 가능하지만 서버 캐싱에 영향."
+  },
+  {
+    "id": "general-t012",
+    "difficulty": "advanced",
+    "type": "tradeoff",
+    "question": "모킹(Mocking) 테스트 vs 실제 의존성 사용 테스트의 트레이드오프는?",
+    "options": [
+      "Mock을 사용하면 항상 더 좋은 테스트를 만들 수 있음",
+      "Mock은 빠르고 격리된 단위 테스트 가능하나 실제 동작과 괴리 가능, 실제 의존성은 신뢰도가 높으나 느리고 환경 의존적",
+      "Mock은 단위 테스트에만 사용하고 통합 테스트에는 항상 실제 의존성 사용",
+      "Mock은 스레드 안전하지 않아 병렬 테스트 불가"
+    ],
+    "answer": 1,
+    "explanation": "Mock의 장점: 빠른 실행, 외부 서비스 의존성 제거, 네트워크·DB 없이 실행 가능. 단점: 실제 구현과 Mock이 달라질 때 잘못된 신뢰를 줄 수 있습니다. 실제 의존성 사용: 높은 신뢰도이지만 느리고 설정 복잡. 테스트 피라미드: 아래로 갈수록 Mock, 위로 갈수록 실제 사용."
+  },
+  {
+    "id": "general-t013",
+    "difficulty": "advanced",
+    "type": "tradeoff",
+    "question": "이벤트 소싱(Event Sourcing)의 트레이드오프는?",
+    "options": [
+      "이벤트 소싱은 항상 CRUD보다 성능이 좋음",
+      "완전한 감사 추적·시간 여행(Time Travel) 가능하나 이벤트 스키마 진화·스냅샷 관리·최종 상태 조회 복잡성 증가",
+      "이벤트 소싱은 CQRS 없이 사용 불가",
+      "이벤트 소싱은 작은 시스템에 더 적합"
+    ],
+    "answer": 1,
+    "explanation": "이벤트 소싱의 장점: 모든 상태 변화 이력 보존, 특정 시점 재현(Time Travel), 감사 로그 자동 생성, 이벤트 재생으로 다양한 읽기 모델 구성. 단점: 이벤트 스키마 변경 관리, 최신 상태 조회를 위한 스냅샷 필요, 복잡한 쿼리 어려움(CQRS와 함께 사용 권장)."
+  },
+  {
+    "id": "general-t014",
+    "difficulty": "intermediate",
+    "type": "tradeoff",
+    "question": "Agile vs Waterfall 개발 방법론 선택의 트레이드오프는?",
+    "options": [
+      "Agile은 항상 Waterfall보다 좋음",
+      "Waterfall은 요구사항이 명확하고 변경이 적은 프로젝트에 적합, Agile은 요구사항 변경이 잦고 빠른 피드백이 필요한 프로젝트에 적합하나 문서화·계획 예측이 어려움",
+      "Waterfall은 소규모, Agile은 대규모 팀에만 적합",
+      "Agile은 스프린트 계획을 세우지 않음"
+    ],
+    "answer": 1,
+    "explanation": "Waterfall: 요구사항→설계→구현→테스트→배포를 순차적으로 진행. 요구사항이 명확한 대형 계약 프로젝트에 적합하지만 변경 비용이 큽니다. Agile: 짧은 반복(Sprint)으로 빠른 피드백과 변경 적응. 고객 협업이 중요한 제품 개발에 적합하지만 범위 산정이 어렵습니다."
+  },
+  {
+    "id": "general-t015",
+    "difficulty": "advanced",
+    "type": "tradeoff",
+    "question": "CQRS(Command Query Responsibility Segregation) 패턴의 트레이드오프는?",
+    "options": [
+      "CQRS는 모든 프로젝트에 필수로 도입해야 하는 패턴",
+      "읽기·쓰기 모델 분리로 각각 최적화 가능하나 코드 복잡성 증가·최종 일관성 처리 필요·인프라 비용 상승",
+      "CQRS는 마이크로서비스에서만 사용 가능",
+      "CQRS를 사용하면 트랜잭션이 자동으로 관리됨"
+    ],
+    "answer": 1,
+    "explanation": "CQRS의 장점: 읽기 모델과 쓰기 모델을 별도로 최적화(예: 쓰기는 정규화된 DB, 읽기는 비정규화된 읽기 전용 뷰), 높은 읽기/쓰기 부하 처리. 단점: 두 모델 동기화 관리, 최종 일관성 처리 복잡, 이벤트 소싱과 함께 사용 시 더욱 복잡해짐. 복잡한 도메인에서만 이점이 비용을 상회합니다."
+  },
+  {
+    "id": "general-s001",
+    "difficulty": "intermediate",
+    "type": "scenario",
+    "question": "다음 API 설계에서 RESTful 원칙 위반을 찾으세요.\n`POST /api/getUserInfo`\n`GET /api/deleteUser?id=1`\n`POST /api/updateUserName`",
+    "options": [
+      "POST 메서드 사용이 잘못됨",
+      "URI에 동사(getUserInfo, deleteUser, updateUserName) 사용 및 GET으로 삭제를 수행하는 것이 RESTful 위반",
+      "쿼리 파라미터 사용이 잘못됨",
+      "모두 올바른 RESTful 설계"
+    ],
+    "answer": 1,
+    "explanation": "RESTful 올바른 설계: `GET /api/users/{id}` (조회), `DELETE /api/users/{id}` (삭제), `PATCH /api/users/{id}` (부분 수정). URI는 명사(리소스)로, 동작은 HTTP 메서드로 표현합니다. `GET`으로 삭제를 수행하면 브라우저 프리패치 등에 의해 의도치 않게 삭제가 발생할 수 있습니다."
+  },
+  {
+    "id": "general-s002",
+    "difficulty": "intermediate",
+    "type": "scenario",
+    "question": "팀에서 main 브랜치에 직접 push하여 다른 팀원의 작업이 자주 덮어씌워집니다. 이를 방지하는 Git 전략은?",
+    "options": [
+      "모든 팀원이 동시에 작업하지 않도록 작업 시간을 조율",
+      "브랜치 보호 규칙 설정(Branch Protection Rule) + PR 기반 개발 + 코드 리뷰 필수화",
+      "git push --force 사용 금지 교육",
+      "main 브랜치를 삭제하고 develop 브랜치를 기본으로 사용"
+    ],
+    "answer": 1,
+    "explanation": "GitHub/GitLab의 브랜치 보호 규칙으로 ①main에 직접 push 금지 ②최소 1명 이상의 리뷰어 승인 필요 ③CI 통과 필수를 설정합니다. PR 기반 개발 워크플로우로 모든 변경사항이 리뷰를 거치도록 강제하면 덮어씌우기 문제가 해결됩니다."
+  },
+  {
+    "id": "general-s003",
+    "difficulty": "intermediate",
+    "type": "scenario",
+    "question": "다음 코드에서 클린코드 원칙 위반을 찾으세요.\n```java\npublic boolean chk(User u) {\n    if (u.a > 18 && u.b == 1 && u.c != null) {\n        return true;\n    }\n    return false;\n}\n```",
+    "options": [
+      "return 문이 두 개여서 문제",
+      "의미 없는 메서드명(chk), 필드명(a, b, c), 매직 넘버(18, 1), 불필요한 if-return으로 가독성 매우 낮음",
+      "boolean 반환이 잘못됨",
+      "문제 없는 올바른 코드"
+    ],
+    "answer": 1,
+    "explanation": "클린코드 위반: ①`chk` → `isEligibleUser` 같은 의도를 나타내는 이름 ②`u.a`, `u.b`, `u.c` → `user.age`, `user.status`, `user.email` ③매직 넘버 18 → 상수 `MINIMUM_AGE` ④`if(cond) return true; return false` → `return u.age > MINIMUM_AGE && u.status == ACTIVE && u.email != null`."
+  },
+  {
+    "id": "general-s004",
+    "difficulty": "intermediate",
+    "type": "scenario",
+    "question": "CI 파이프라인에서 배포 시 항상 테스트가 실패하여 배포가 중단됩니다. 원인을 찾는 접근 순서로 올바른 것은?",
+    "options": [
+      "테스트를 임시로 비활성화하고 배포 후 수정",
+      "CI 로그에서 실패 테스트 확인 → 로컬에서 재현 → 환경 차이 확인(환경변수, DB 상태) → 코드 수정 → 다시 CI 실행",
+      "CI 서버를 재시작하여 문제 해결",
+      "배포를 수동으로 진행하고 테스트는 나중에 수정"
+    ],
+    "answer": 1,
+    "explanation": "CI 실패 디버깅 접근: ①CI 로그에서 어떤 테스트가 왜 실패하는지 파악 ②로컬에서 동일한 환경(Docker, 환경변수)으로 재현 시도 ③CI와 로컬 환경 차이 확인(환경변수, 외부 서비스 의존성, DB 초기화 상태) ④근본 원인 수정 후 CI 재실행. 테스트를 건너뛰는 것은 절대 해결책이 아닙니다."
+  },
+  {
+    "id": "general-s005",
+    "difficulty": "intermediate",
+    "type": "scenario",
+    "question": "다음 함수형 프로그래밍 코드의 출력 결과는?\n```java\nList<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);\nint result = numbers.stream()\n    .filter(n -> n % 2 == 0)\n    .map(n -> n * n)\n    .reduce(0, Integer::sum);\nSystem.out.println(result);\n```",
+    "options": [
+      "55",
+      "20",
+      "15",
+      "4"
+    ],
+    "answer": 1,
+    "explanation": "단계별 실행: filter(짝수) → [2, 4]; map(제곱) → [4, 16]; reduce(합산) → 0+4+16 = 20. filter로 짝수(2, 4)를 선택하고, 각각 제곱(4, 16)한 후, 0부터 시작하여 모두 더합니다."
+  },
+  {
+    "id": "general-s006",
+    "difficulty": "intermediate",
+    "type": "scenario",
+    "question": "프로덕션 서버에서 갑자기 응답 시간이 10배 느려졌습니다. 원인을 파악하는 접근 순서는?",
+    "options": [
+      "서버를 즉시 재시작하여 문제 해결",
+      "모니터링 지표 확인(CPU/메모리/DB 연결) → APM/로그에서 느린 쿼리·에러 탐색 → 최근 배포 이력 확인 → 원인 파악 후 조치(롤백/쿼리 최적화)",
+      "코드를 처음부터 다시 작성",
+      "사용자에게 점검 공지 후 내일 확인"
+    ],
+    "answer": 1,
+    "explanation": "프로덕션 장애 대응: ①Grafana/CloudWatch 등에서 CPU, 메모리, DB 연결 수, 응답 시간 지표 확인 ②APM(Datadog, New Relic) 또는 로그에서 느린 쿼리·에러 패턴 탐색 ③최근 배포/설정 변경 이력 확인(문제와 상관관계) ④원인에 따라 롤백, 인덱스 추가, 캐시 적용 등 조치."
+  },
+  {
+    "id": "general-s007",
+    "difficulty": "advanced",
+    "type": "scenario",
+    "question": "레거시 코드베이스에서 테스트 없이 중요한 비즈니스 로직을 리팩토링해야 합니다. 안전한 접근 방법은?",
+    "options": [
+      "빠르게 전체 코드를 재작성",
+      "리팩토링 전 현재 동작을 커버하는 특성화 테스트(Characterization Test) 작성 → 작은 단위로 리팩토링 → 테스트로 동작 검증 반복",
+      "테스트 없이 리팩토링하고 QA에서 검증",
+      "기존 코드를 주석 처리하고 새 코드 작성"
+    ],
+    "answer": 1,
+    "explanation": "레거시 리팩토링 접근법: ①특성화 테스트(현재 동작을 그대로 캡처하는 테스트) 작성 — 의도가 아닌 현재 동작을 문서화 ②작은 단위로 리팩토링(함수 추출, 이름 변경 등) ③매 단계 테스트로 동작 보존 확인. Michael Feathers의 'Working Effectively with Legacy Code' 접근법."
+  },
+  {
+    "id": "general-s008",
+    "difficulty": "advanced",
+    "type": "scenario",
+    "question": "다음 SOLID 원칙 위반 코드를 찾으세요.\n```java\npublic class UserService {\n    public void register(User user) {\n        // 유효성 검사\n        // DB 저장\n        // 이메일 발송\n        // 로그 기록\n    }\n}\n```",
+    "options": [
+      "UserService가 인터페이스를 구현하지 않아서 DIP 위반",
+      "하나의 메서드에서 유효성 검사·DB 저장·이메일 발송·로그 기록을 모두 처리하여 SRP 위반",
+      "@Transactional이 없어서 원자성 보장 불가",
+      "문제 없는 올바른 코드"
+    ],
+    "answer": 1,
+    "explanation": "SRP(단일 책임 원칙) 위반: `register()` 메서드가 유효성 검사, 영속화, 이메일 발송, 로깅의 4가지 책임을 가집니다. 분리: `UserValidator`, `UserRepository`, `EmailService`, `AuditLogger`로 책임을 분리하고 각 서비스를 주입받아 조합합니다."
+  },
+  {
+    "id": "general-s009",
+    "difficulty": "advanced",
+    "type": "scenario",
+    "question": "API를 외부에 공개한 후 기존 클라이언트를 지원하면서 새로운 필드를 추가해야 합니다. 가장 안전한 접근은?",
+    "options": [
+      "기존 필드를 삭제하고 새 필드로 교체",
+      "기존 응답에 새 필드를 추가(하위 호환성 유지), 필드 제거나 타입 변경은 새 버전(/v2/) API로 분리",
+      "모든 클라이언트에게 새 API로 즉시 마이그레이션 요청",
+      "새 필드를 기존 필드명으로 덮어씀"
+    ],
+    "answer": 1,
+    "explanation": "API 하위 호환성 원칙: ①기존 필드 추가는 대부분 안전(클라이언트가 모르는 필드 무시) ②기존 필드 제거·타입 변경은 기존 클라이언트를 깨뜨림 → 새 버전으로 분리 ③Semantic Versioning과 Deprecation 기간 제공 ④응답 필드 제거 전 충분한 마이그레이션 기간 보장."
+  },
+  {
+    "id": "general-s010",
+    "difficulty": "advanced",
+    "type": "scenario",
+    "question": "다음 코드에서 불변성(Immutability) 원칙 위반을 찾으세요.\n```java\npublic class Order {\n    private List<Item> items;\n    public List<Item> getItems() {\n        return items; // 직접 반환\n    }\n}\nOrder order = new Order();\norder.getItems().add(new Item(\"무단추가\")); // !\n```",
+    "options": [
+      "getItems()가 public이어서 문제",
+      "내부 컬렉션을 직접 반환하여 외부에서 Order의 items를 무단으로 수정 가능 — 방어적 복사 또는 불변 뷰 반환 필요",
+      "Item 클래스가 불변이 아니어서 문제",
+      "문제 없는 올바른 코드"
+    ],
+    "answer": 1,
+    "explanation": "내부 컬렉션 직접 반환은 캡슐화 위반입니다. 외부에서 `add()`, `remove()`로 Order의 상태를 임의로 변경할 수 있습니다. 해결: ①`return Collections.unmodifiableList(items)` — 읽기 전용 뷰 ②`return new ArrayList<>(items)` — 방어적 복사 ③`return List.copyOf(items)` (Java 10+) — 불변 복사."
+  },
+  {
+    "id": "general-d001",
+    "difficulty": "intermediate",
+    "type": "debug",
+    "question": "다음 Git 상황에서 문제를 찾으세요.\n`git push origin main --force`\n(팀 프로젝트에서 다른 팀원이 작업 중인 main 브랜치에 실행)",
+    "options": [
+      "main 브랜치에는 force push가 허용됨",
+      "force push는 원격 브랜치 히스토리를 덮어써서 다른 팀원의 커밋이 손실될 수 있어 팀 협업에서 매우 위험",
+      "--force 대신 -f 플래그를 사용해야 함",
+      "force push는 로컬에만 영향을 줌"
+    ],
+    "answer": 1,
+    "explanation": "`git push --force`는 원격 브랜치의 히스토리를 로컬 히스토리로 강제 덮어씁니다. 다른 팀원이 pull하지 않은 커밋이 있다면 그 커밋들이 원격 저장소에서 사라집니다. 공유 브랜치에서는 `--force-with-lease`(누군가 새 커밋을 push했으면 실패)를 사용하거나 force push를 금지해야 합니다."
+  },
+  {
+    "id": "general-d002",
+    "difficulty": "intermediate",
+    "type": "debug",
+    "question": "다음 테스트 코드의 문제를 찾으세요.\n```java\n@Test\npublic void testEverything() {\n    // 사용자 생성 테스트\n    // 로그인 테스트\n    // 주문 테스트\n    // 결제 테스트\n    // 이메일 발송 테스트\n    // ...100줄 이상...\n}\n```",
+    "options": [
+      "@Test 어노테이션이 하나의 메서드에만 사용 가능",
+      "하나의 테스트 메서드가 너무 많은 것을 검증하여 실패 시 원인 파악 어렵고, 테스트 유지보수 복잡",
+      "테스트 메서드명에 'test' 접두사 사용이 권장 사항이 아님",
+      "100줄 이상의 메서드는 실행 불가"
+    ],
+    "answer": 1,
+    "explanation": "테스트는 하나의 동작만 검증해야 합니다(Single Assertion Principle). 모든 것을 하나의 테스트에 넣으면 ①실패 시 어디서 왜 실패했는지 찾기 어렵고 ②의존적 테스트로 앞 단계 실패 시 이후 테스트가 실행 안 됨 ③유지보수 시 변경 영향 범위가 큼. 각 동작마다 별도 테스트 메서드로 분리해야 합니다."
+  },
+  {
+    "id": "general-d003",
+    "difficulty": "advanced",
+    "type": "debug",
+    "question": "다음 REST API 응답에서 보안 취약점을 찾으세요.\n```json\n{\n  \"user\": {\n    \"id\": 1,\n    \"name\": \"Alice\",\n    \"password\": \"hashed_password_here\",\n    \"ssn\": \"123-45-6789\",\n    \"creditCard\": \"4111-1111-1111-1111\"\n  }\n}\n```",
+    "options": [
+      "JSON 형식이 잘못됨",
+      "비밀번호(해시 포함), 주민번호, 신용카드 번호 등 민감 정보를 API 응답에 포함하는 것은 심각한 보안 취약점",
+      "creditCard 필드명에 카멜케이스 사용이 문제",
+      "문제 없는 올바른 API 응답"
+    ],
+    "answer": 1,
+    "explanation": "API 응답에 민감 정보를 포함하면 안 됩니다: ①비밀번호는 절대 응답 불가(해시 포함) ②주민번호, 신용카드 번호는 필요 시 마스킹하여 반환 ③최소 권한 원칙: 클라이언트에 필요한 정보만 반환. DTO 패턴으로 응답 모델을 엔티티와 분리하여 노출할 필드를 명시적으로 제어해야 합니다."
+  },
+  {
+    "id": "general-d004",
+    "difficulty": "advanced",
+    "type": "debug",
+    "question": "다음 CI/CD 파이프라인 설정의 문제를 찾으세요.\n```yaml\nsteps:\n  - name: Deploy to Production\n    run: kubectl apply -f k8s/\n    # 조건 없음, 테스트 단계 없음\n    # main에 push하면 즉시 배포\n```",
+    "options": [
+      "kubectl 명령어 사용이 잘못됨",
+      "테스트 실행·코드 리뷰·스테이징 검증 없이 main push만으로 프로덕션에 직접 배포되어 장애 위험이 높음",
+      "yaml 형식이 잘못됨",
+      "문제 없는 올바른 CI/CD 설정"
+    ],
+    "answer": 1,
+    "explanation": "안전한 CI/CD 파이프라인: ①빌드 → ②단위/통합 테스트 → ③코드 품질 검사 → ④스테이징 배포 및 검증 → ⑤수동 승인(Production gate) → ⑥프로덕션 배포 → ⑦모니터링. main에 push할 때마다 바로 프로덕션에 배포하면 테스트 실패·버그가 즉시 사용자에게 영향을 줍니다."
+  },
+  {
+    "id": "general-d005",
+    "difficulty": "advanced",
+    "type": "debug",
+    "question": "다음 코드에서 LSP(리스코프 치환 원칙) 위반을 찾으세요.\n```java\nclass Rectangle {\n    void setWidth(int w) { this.width = w; }\n    void setHeight(int h) { this.height = h; }\n    int area() { return width * height; }\n}\nclass Square extends Rectangle {\n    void setWidth(int w) { this.width = w; this.height = w; } // 항상 같게\n    void setHeight(int h) { this.width = h; this.height = h; } // 항상 같게\n}\n// 테스트\nRectangle r = new Square();\nr.setWidth(4); r.setHeight(5);\nassert r.area() == 20; // 실패! Square는 25를 반환\n```",
+    "options": [
+      "Square가 Rectangle을 상속하는 것 자체가 문제",
+      "Square의 setWidth/setHeight가 Rectangle의 동작 계약을 어겨 Rectangle 타입으로 사용 시 예상과 다른 결과 — LSP 위반",
+      "assert 문의 사용이 Java에서 비권장",
+      "면적 계산 공식이 잘못됨"
+    ],
+    "answer": 1,
+    "explanation": "LSP: 서브타입은 기반 타입으로 치환 가능해야 합니다. Rectangle에서 setWidth(4)+setHeight(5) → area()=20을 기대하지만, Square는 둘 다 같게 설정하므로 area()=25가 됩니다. Rectangle 계약이 깨지므로 LSP 위반입니다. 해결: Square와 Rectangle을 같은 계층으로 만들지 않거나 공통 Shape 인터페이스로 분리."
+  },
+  {
+    "id": "general-o001",
+    "difficulty": "basic",
+    "type": "ordering",
+    "question": "Git Feature Branch 워크플로우의 올바른 순서는?\n1. main(또는 develop)에 병합\n2. 기능 브랜치에서 개발 및 커밋\n3. PR(Pull Request) 생성 및 코드 리뷰\n4. main에서 feature 브랜치 생성",
+    "options": [
+      "1 → 2 → 3 → 4",
+      "4 → 2 → 3 → 1",
+      "2 → 4 → 1 → 3",
+      "4 → 3 → 2 → 1"
+    ],
+    "answer": 1,
+    "explanation": "Feature Branch 워크플로우: ①main에서 기능 브랜치 생성(`git checkout -b feature/login`) → ②기능 개발 및 커밋 → ③PR 생성 및 팀원 코드 리뷰 → ④승인 후 main에 병합(Merge/Squash/Rebase). 이 워크플로우는 main을 항상 안정적으로 유지합니다."
+  },
+  {
+    "id": "general-o002",
+    "difficulty": "basic",
+    "type": "ordering",
+    "question": "TDD(Test-Driven Development) 사이클의 올바른 순서는?\n1. 리팩토링(중복 제거, 코드 개선)\n2. 실패하는 테스트 작성(Red)\n3. 테스트 통과하는 최소 코드 작성(Green)\n4. 다음 기능의 실패 테스트 작성",
+    "options": [
+      "3 → 2 → 1 → 4",
+      "2 → 3 → 1 → 4",
+      "1 → 2 → 3 → 4",
+      "2 → 1 → 3 → 4"
+    ],
+    "answer": 1,
+    "explanation": "TDD Red-Green-Refactor 사이클: ①아직 구현하지 않은 기능의 실패 테스트 작성(Red) → ②테스트를 통과하는 가장 단순한 코드 작성(Green) → ③코드 품질 개선(Refactor, 테스트는 통과 유지) → ④다음 기능의 실패 테스트 작성으로 사이클 반복."
+  },
+  {
+    "id": "general-o003",
+    "difficulty": "intermediate",
+    "type": "ordering",
+    "question": "HTTP 요청-응답 사이클의 올바른 순서는?\n1. 서버가 HTTP 응답 전송(상태코드 + 바디)\n2. 클라이언트가 URL 입력 및 DNS 조회\n3. TCP 연결 수립(3-way handshake)\n4. 클라이언트가 HTTP 요청 전송",
+    "options": [
+      "4 → 2 → 3 → 1",
+      "2 → 3 → 4 → 1",
+      "3 → 2 → 4 → 1",
+      "2 → 4 → 3 → 1"
+    ],
+    "answer": 1,
+    "explanation": "HTTP 요청 순서: ①URL 입력 후 DNS로 IP 주소 조회 → ②TCP 3-way handshake(SYN→SYN-ACK→ACK)로 연결 수립 → ③HTTP 요청 전송(GET/POST + 헤더 + 바디) → ④서버가 처리 후 HTTP 응답 전송(200 OK + 바디). HTTPS는 TLS handshake가 추가됩니다."
+  },
+  {
+    "id": "general-o004",
+    "difficulty": "intermediate",
+    "type": "ordering",
+    "question": "CI/CD 파이프라인의 올바른 실행 순서는?\n1. 프로덕션 배포 및 모니터링\n2. 코드 push 및 빌드\n3. 스테이징 배포 및 통합 테스트\n4. 단위 테스트 및 코드 품질 검사",
+    "options": [
+      "1 → 2 → 3 → 4",
+      "2 → 4 → 3 → 1",
+      "4 → 2 → 3 → 1",
+      "2 → 3 → 4 → 1"
+    ],
+    "answer": 1,
+    "explanation": "CI/CD 파이프라인: ①코드 push → 소스 빌드 ② 단위 테스트 + 정적 분석(SonarQube) + 보안 스캔 → ③스테이징 환경에 배포 후 통합/E2E 테스트 → ④검증 완료 후 프로덕션 배포 + 메트릭 모니터링. 각 단계 실패 시 이후 단계가 중단됩니다."
+  },
+  {
+    "id": "general-o005",
+    "difficulty": "advanced",
+    "type": "ordering",
+    "question": "레거시 시스템을 새 아키텍처로 마이그레이션하는 안전한 순서는?\n1. 레거시 시스템 점진적 제거(Strangler Fig)\n2. 현재 시스템 분석 및 테스트 커버리지 확보\n3. 새 아키텍처 설계 및 파일럿 구현\n4. 트래픽 일부를 새 시스템으로 전환(카나리 배포)",
+    "options": [
+      "3 → 2 → 1 → 4",
+      "2 → 3 → 4 → 1",
+      "1 → 2 → 3 → 4",
+      "2 → 1 → 3 → 4"
+    ],
+    "answer": 1,
+    "explanation": "안전한 마이그레이션 순서: ①현재 시스템 분석 + 특성화 테스트로 동작 문서화 → ②새 아키텍처 설계 및 핵심 기능 파일럿 구현 → ③카나리 배포로 소량 트래픽을 새 시스템으로 전환하며 검증 → ④Strangler Fig 패턴으로 기능 단위로 점진적 마이그레이션 후 레거시 제거."
+  }
+]
