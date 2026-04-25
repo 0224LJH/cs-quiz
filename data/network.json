@@ -1,5 +1,846 @@
 {
   "topic": "network",
   "label": "네트워크",
-  "questions": []
+  "questions": [
+    {
+      "id": "network-c001",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "OSI 7계층 모델에서 아래에서 위 순서로 올바른 것은?",
+      "options": [
+        "물리 → 데이터링크 → 네트워크 → 전송 → 세션 → 표현 → 응용",
+        "응용 → 표현 → 세션 → 전송 → 네트워크 → 데이터링크 → 물리",
+        "물리 → 네트워크 → 데이터링크 → 전송 → 세션 → 표현 → 응용",
+        "물리 → 데이터링크 → 전송 → 네트워크 → 세션 → 표현 → 응용"
+      ],
+      "answer": 0,
+      "explanation": "OSI 7계층은 아래부터 물리(1) → 데이터링크(2) → 네트워크(3) → 전송(4) → 세션(5) → 표현(6) → 응용(7) 순서입니다. '모든 사람이 네트워크 전송 시 표현을 응용한다'처럼 암기할 수 있습니다."
+    },
+    {
+      "id": "network-c002",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "TCP와 UDP의 차이로 올바른 것은?",
+      "options": [
+        "UDP는 연결 지향적이고 TCP는 비연결 지향적이다",
+        "TCP는 신뢰성 있는 데이터 전송을 보장하고 UDP는 빠른 전송을 우선한다",
+        "TCP는 실시간 스트리밍에 적합하고 UDP는 파일 전송에 적합하다",
+        "TCP와 UDP 모두 헤더 오버헤드가 동일하다"
+      ],
+      "answer": 1,
+      "explanation": "TCP는 연결 지향적으로 3-way handshake, 흐름 제어, 오류 제어를 통해 신뢰성 있는 전송을 보장합니다. UDP는 비연결 지향적으로 오버헤드가 적어 빠르지만 데이터 손실이 발생할 수 있습니다."
+    },
+    {
+      "id": "network-c003",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "HTTPS가 HTTP와 다른 점으로 옳은 것은?",
+      "options": [
+        "HTTPS는 HTML 대신 XML 형식으로 데이터를 전송한다",
+        "HTTPS는 TLS/SSL을 통해 데이터를 암호화하여 전송한다",
+        "HTTPS는 UDP 기반이고 HTTP는 TCP 기반이다",
+        "HTTPS는 서버 인증이 필요 없어 더 빠르다"
+      ],
+      "answer": 1,
+      "explanation": "HTTPS는 HTTP에 TLS(Transport Layer Security)/SSL 암호화 계층을 추가하여 데이터 기밀성, 무결성, 서버 인증을 제공합니다. 둘 다 TCP 기반이며 기본 포트는 HTTP 80, HTTPS 443입니다."
+    },
+    {
+      "id": "network-c004",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "DNS(Domain Name System)의 역할로 가장 적절한 것은?",
+      "options": [
+        "IP 주소를 MAC 주소로 변환한다",
+        "도메인 이름을 IP 주소로 변환한다",
+        "HTTP 요청을 HTTPS로 리다이렉트한다",
+        "패킷의 최적 경로를 계산한다"
+      ],
+      "answer": 1,
+      "explanation": "DNS는 사람이 읽기 쉬운 도메인 이름(예: google.com)을 컴퓨터가 이해하는 IP 주소(예: 142.250.196.46)로 변환하는 분산 데이터베이스 시스템입니다. IP → MAC 변환은 ARP의 역할입니다."
+    },
+    {
+      "id": "network-c005",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "IP 주소와 MAC 주소의 차이로 옳은 것은?",
+      "options": [
+        "MAC 주소는 소프트웨어적으로 할당되며 변경 가능하다",
+        "IP 주소는 논리적 주소로 네트워크 간 라우팅에 사용되고, MAC 주소는 물리적 주소로 동일 네트워크 내 통신에 사용된다",
+        "IP 주소는 48비트이고 MAC 주소는 32비트이다",
+        "MAC 주소는 인터넷 전역에서 라우팅에 사용된다"
+      ],
+      "answer": 1,
+      "explanation": "IP 주소는 32비트(IPv4) 논리적 주소로 라우터가 패킷 경로를 결정할 때 사용합니다. MAC 주소는 48비트 물리적 주소로 같은 네트워크 세그먼트 내에서 프레임을 전달할 때 사용합니다. ARP가 IP → MAC 주소를 변환합니다."
+    },
+    {
+      "id": "network-c006",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "TCP 3-way handshake의 목적으로 옳은 것은?",
+      "options": [
+        "데이터 암호화 키를 교환하기 위해",
+        "클라이언트와 서버 간 연결을 수립하고 초기 시퀀스 번호를 동기화하기 위해",
+        "서버의 최대 처리 용량을 확인하기 위해",
+        "네트워크 경로의 지연 시간(RTT)을 측정하기 위해"
+      ],
+      "answer": 1,
+      "explanation": "3-way handshake는 SYN → SYN+ACK → ACK 순서로 진행되며, 양방향 통신을 위한 연결을 수립하고 양쪽의 초기 시퀀스 번호(ISN)를 교환·동기화합니다."
+    },
+    {
+      "id": "network-c007",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "포트(Port) 번호에 대한 설명으로 옳은 것은?",
+      "options": [
+        "포트 번호는 네트워크 상의 컴퓨터를 식별하는 번호이다",
+        "포트 번호는 하나의 컴퓨터에서 실행 중인 여러 프로세스(서비스)를 구별하는 번호이다",
+        "포트 번호는 0~65535 중 모두 사용자가 자유롭게 사용할 수 있다",
+        "포트 번호는 MAC 주소와 함께 2계층에서 사용된다"
+      ],
+      "answer": 1,
+      "explanation": "포트 번호(0~65535)는 전송 계층(4계층)에서 같은 호스트 내 여러 프로세스를 구분합니다. 0~1023은 잘 알려진 포트(예: HTTP 80, HTTPS 443, SSH 22), 1024~49151은 등록 포트, 49152~65535는 동적/임시 포트입니다."
+    },
+    {
+      "id": "network-c008",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "라우터(Router)와 스위치(Switch)의 차이로 옳은 것은?",
+      "options": [
+        "스위치는 IP 주소를 기반으로 서로 다른 네트워크 간 패킷을 라우팅한다",
+        "라우터는 서로 다른 네트워크 간 패킷 경로를 결정하고, 스위치는 같은 네트워크 내에서 MAC 주소로 프레임을 전달한다",
+        "스위치는 3계층 장비이고 라우터는 2계층 장비이다",
+        "라우터와 스위치는 동일한 기능을 수행하며 이름만 다르다"
+      ],
+      "answer": 1,
+      "explanation": "라우터는 3계층(네트워크) 장비로 IP 주소를 기반으로 서로 다른 네트워크 간 최적 경로를 선택합니다. 스위치는 2계층(데이터링크) 장비로 MAC 주소 테이블을 이용해 같은 네트워크 내에서 프레임을 전달합니다."
+    },
+    {
+      "id": "network-c009",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "쿠키(Cookie)와 세션(Session)의 차이로 옳은 것은?",
+      "options": [
+        "쿠키는 서버에 저장되고 세션은 클라이언트에 저장된다",
+        "쿠키는 클라이언트에 저장되고 세션은 서버에 저장되며, HTTP의 무상태(Stateless) 특성을 보완한다",
+        "세션은 만료 시간을 설정할 수 없다",
+        "쿠키와 세션 모두 서버에서만 생성 가능하다"
+      ],
+      "answer": 1,
+      "explanation": "쿠키는 클라이언트(브라우저)에 저장되어 요청마다 서버로 전송됩니다. 세션은 서버에 저장되며 클라이언트는 세션 ID만 쿠키로 보관합니다. 둘 다 HTTP의 무상태 특성을 보완하여 사용자 상태를 유지합니다."
+    },
+    {
+      "id": "network-c010",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "HTTP 상태 코드 분류로 옳은 것은?",
+      "options": [
+        "2xx는 클라이언트 오류, 4xx는 서버 오류를 나타낸다",
+        "2xx는 성공, 3xx는 리다이렉션, 4xx는 클라이언트 오류, 5xx는 서버 오류를 나타낸다",
+        "1xx는 서버 오류이고 5xx는 정보 응답이다",
+        "3xx는 성공 응답이며 추가 처리 없이 요청이 완료됐음을 의미한다"
+      ],
+      "answer": 1,
+      "explanation": "HTTP 상태 코드: 1xx 정보, 2xx 성공(200 OK, 201 Created), 3xx 리다이렉션(301, 302), 4xx 클라이언트 오류(400 Bad Request, 401 Unauthorized, 404 Not Found), 5xx 서버 오류(500 Internal Server Error, 503 Service Unavailable)."
+    },
+    {
+      "id": "network-c011",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "TCP 흐름 제어(Flow Control)와 혼잡 제어(Congestion Control)의 차이로 옳은 것은?",
+      "options": [
+        "흐름 제어는 네트워크 혼잡을 방지하고, 혼잡 제어는 수신자 버퍼 오버플로를 방지한다",
+        "흐름 제어는 수신자의 처리 속도에 맞춰 송신 속도를 조절하고, 혼잡 제어는 네트워크 전체의 혼잡 상태에 따라 송신 속도를 조절한다",
+        "두 제어 기법 모두 수신자와 송신자 간의 속도 차이만을 다룬다",
+        "혼잡 제어는 수신 윈도우(rwnd)를 사용하고 흐름 제어는 혼잡 윈도우(cwnd)를 사용한다"
+      ],
+      "answer": 1,
+      "explanation": "흐름 제어는 수신자의 버퍼 오버플로를 막기 위해 수신 윈도우(rwnd)로 송신 속도를 제한합니다. 혼잡 제어는 네트워크 혼잡을 감지해 혼잡 윈도우(cwnd)를 조절하며, Slow Start·AIMD·Fast Retransmit 등의 알고리즘을 사용합니다."
+    },
+    {
+      "id": "network-c012",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "HTTP/2가 HTTP/1.1에 비해 개선한 주요 점으로 옳지 않은 것은?",
+      "options": [
+        "멀티플렉싱으로 하나의 TCP 연결에서 여러 요청을 동시에 처리한다",
+        "헤더 압축(HPACK)으로 중복 헤더 전송을 줄인다",
+        "서버 푸시로 클라이언트가 요청하기 전에 리소스를 미리 전송할 수 있다",
+        "UDP 기반으로 전환하여 TCP의 Head-of-Line Blocking을 완전히 해결했다"
+      ],
+      "answer": 3,
+      "explanation": "HTTP/2는 여전히 TCP 기반입니다. 멀티플렉싱, 헤더 압축, 서버 푸시, 스트림 우선순위를 도입했지만 TCP 수준의 Head-of-Line Blocking은 남아있습니다. UDP 기반으로 전환하여 이 문제를 해결한 것은 HTTP/3(QUIC)입니다."
+    },
+    {
+      "id": "network-c013",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "CDN(Content Delivery Network)의 동작 원리로 옳은 것은?",
+      "options": [
+        "모든 요청을 원본 서버(Origin)에서 직접 처리하여 일관성을 보장한다",
+        "사용자와 지리적으로 가까운 엣지 서버에 콘텐츠를 캐싱하여 응답 속도를 향상시킨다",
+        "CDN은 동적 콘텐츠(API 응답)만 처리하고 정적 파일은 처리하지 않는다",
+        "CDN은 암호화를 수행할 수 없어 HTTPS와 함께 사용할 수 없다"
+      ],
+      "answer": 1,
+      "explanation": "CDN은 전 세계 여러 위치의 엣지 서버에 콘텐츠를 캐싱하여 사용자가 가장 가까운 서버에서 응답받게 합니다. 이미지, CSS, JS 등 정적 파일은 물론, 일부 CDN은 동적 콘텐츠 가속과 TLS 종료도 지원합니다."
+    },
+    {
+      "id": "network-c014",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "로드밸런싱(Load Balancing) 알고리즘 중 세션 유지(Sticky Session)가 필요한 이유는?",
+      "options": [
+        "모든 서버의 CPU 사용률을 동일하게 유지하기 위해",
+        "같은 클라이언트의 요청이 항상 같은 서버로 가야 하는 상태 기반 세션을 유지하기 위해",
+        "서버 간 데이터베이스 동기화 비용을 줄이기 위해",
+        "Round Robin 알고리즘의 성능을 향상시키기 위해"
+      ],
+      "answer": 1,
+      "explanation": "세션 정보를 서버 로컬 메모리에 저장하는 경우 같은 사용자 요청이 다른 서버로 가면 세션을 찾지 못합니다. Sticky Session은 클라이언트를 특정 서버에 고정시킵니다. 더 좋은 해결책은 Redis 같은 외부 세션 저장소를 사용하는 것입니다."
+    },
+    {
+      "id": "network-c015",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "TLS 핸드셰이크에서 인증서의 역할로 옳은 것은?",
+      "options": [
+        "대칭 암호화 키 자체를 클라이언트에 전달한다",
+        "서버의 공개키를 신뢰할 수 있는 CA(Certificate Authority)의 서명으로 검증하여 서버 신원을 확인한다",
+        "클라이언트의 신원을 서버에게 증명한다",
+        "데이터 압축 알고리즘을 협상하는 용도로 사용된다"
+      ],
+      "answer": 1,
+      "explanation": "TLS 인증서는 서버의 공개키와 도메인 정보를 CA가 서명한 문서입니다. 클라이언트는 신뢰할 수 있는 CA 목록을 통해 인증서를 검증하고, 검증된 공개키로 세션 키 협상을 진행합니다. 이를 통해 중간자 공격(MITM)을 방지합니다."
+    },
+    {
+      "id": "network-c016",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "REST API의 특성으로 옳지 않은 것은?",
+      "options": [
+        "무상태(Stateless): 각 요청은 독립적이며 서버는 클라이언트 상태를 저장하지 않는다",
+        "균일한 인터페이스(Uniform Interface): 자원은 URI로 식별된다",
+        "계층화 시스템: 클라이언트는 직접 연결된 서버 외의 계층을 알지 못할 수 있다",
+        "연결 지향(Connection-Oriented): 클라이언트와 서버 간 지속 연결을 유지해야 한다"
+      ],
+      "answer": 3,
+      "explanation": "REST는 무상태(Stateless) 아키텍처입니다. 각 요청은 독립적이며 서버는 세션 상태를 저장하지 않습니다. '연결 지향'은 REST의 특성이 아닙니다. REST의 6가지 제약: Client-Server, Stateless, Cacheable, Uniform Interface, Layered System, Code on Demand(선택)."
+    },
+    {
+      "id": "network-c017",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "WebSocket이 HTTP와 다른 주요 특징으로 옳은 것은?",
+      "options": [
+        "WebSocket은 UDP 기반이어서 HTTP보다 빠르다",
+        "WebSocket은 한 번 연결 후 양방향 실시간 통신이 가능하며 연결이 유지된다",
+        "WebSocket은 요청-응답 패턴을 따르며 서버가 먼저 데이터를 보낼 수 없다",
+        "WebSocket은 암호화를 지원하지 않는다"
+      ],
+      "answer": 1,
+      "explanation": "WebSocket은 HTTP 업그레이드 요청으로 연결을 수립한 후 TCP 연결을 유지하며 클라이언트-서버 간 양방향 실시간 통신을 지원합니다. 채팅, 게임, 실시간 알림 등에 적합합니다. wss://는 TLS를 통한 암호화된 WebSocket입니다."
+    },
+    {
+      "id": "network-c018",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "CORS(Cross-Origin Resource Sharing)에 대한 설명으로 옳은 것은?",
+      "options": [
+        "CORS는 클라이언트 측에서 다른 출처의 요청을 완전히 차단하는 보안 정책이다",
+        "동일 출처 정책(SOP)에 의해 제한된 교차 출처 요청을 서버가 허용하도록 응답 헤더로 설정하는 메커니즘이다",
+        "CORS는 서버 간 통신에만 적용되며 브라우저에는 영향을 주지 않는다",
+        "CORS preflight 요청은 DELETE 메서드를 사용한다"
+      ],
+      "answer": 1,
+      "explanation": "브라우저의 동일 출처 정책(SOP)은 다른 출처의 리소스 접근을 기본적으로 차단합니다. CORS는 서버가 Access-Control-Allow-Origin 등의 헤더로 허용할 출처를 명시하여 교차 출처 요청을 허용하는 메커니즘입니다. preflight는 OPTIONS 메서드를 사용합니다."
+    },
+    {
+      "id": "network-c019",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "HTTP 캐시 제어 헤더 중 Cache-Control: no-cache와 no-store의 차이로 옳은 것은?",
+      "options": [
+        "no-cache와 no-store 모두 캐시를 완전히 비활성화하여 항상 서버에서 응답을 받는다",
+        "no-cache는 캐시를 저장하되 사용 전 서버에 유효성을 검증하고, no-store는 캐시 자체를 저장하지 않는다",
+        "no-store는 캐시를 저장하되 검증 없이 사용하고, no-cache는 캐시를 저장하지 않는다",
+        "no-cache는 브라우저 캐시를 제어하고 no-store는 CDN 캐시를 제어한다"
+      ],
+      "answer": 1,
+      "explanation": "no-cache는 캐시를 저장할 수 있지만 사용하기 전 서버에 If-None-Match/If-Modified-Since로 유효성을 검증해야 합니다(서버가 304 Not Modified를 반환하면 캐시 사용). no-store는 민감한 정보를 위해 캐시 자체를 저장하지 않습니다."
+    },
+    {
+      "id": "network-c020",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "NAT(Network Address Translation)를 사용하는 주된 이유는?",
+      "options": [
+        "IPv6로의 전환을 가속화하기 위해",
+        "IPv4 주소 고갈 문제를 완화하고 내부 네트워크 구조를 외부에 숨기기 위해",
+        "네트워크 속도를 향상시키기 위해",
+        "DNS 조회 횟수를 줄이기 위해"
+      ],
+      "answer": 1,
+      "explanation": "NAT는 사설 IP 주소를 하나의 공인 IP 주소로 변환하여 여러 기기가 하나의 공인 IP를 공유할 수 있게 합니다. IPv4 주소 고갈을 늦추고 내부 네트워크 구조를 외부에 숨기는 보안 효과도 있습니다."
+    },
+    {
+      "id": "network-t001",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "파일 전송 애플리케이션에서 TCP보다 UDP를 선택하는 것이 적합한 경우는?",
+      "options": [
+        "파일 무결성이 중요하고 손실 없이 완전한 데이터가 필요한 경우",
+        "실시간 비디오 스트리밍에서 약간의 데이터 손실을 감수하고 지연을 최소화해야 하는 경우",
+        "금융 거래처럼 데이터 순서와 신뢰성이 보장되어야 하는 경우",
+        "대용량 파일을 순서대로 정확하게 전달해야 하는 경우"
+      ],
+      "answer": 1,
+      "explanation": "UDP는 오버헤드가 없어 빠르지만 패킷 손실, 순서 역전이 발생할 수 있습니다. 실시간 스트리밍은 약간의 손실보다 지연이 더 큰 문제이므로 UDP가 적합합니다. 파일 전송, 금융 거래, 순서가 중요한 데이터는 TCP가 적합합니다."
+    },
+    {
+      "id": "network-t002",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "REST API 대신 WebSocket을 사용하는 것이 더 적합한 상황은?",
+      "options": [
+        "일회성 CRUD 작업(상품 조회, 주문 생성)을 처리하는 경우",
+        "채팅, 실시간 주식 시세, 협업 도구처럼 서버가 능동적으로 데이터를 push해야 하는 경우",
+        "클라이언트가 가끔 데이터를 요청하고 캐싱이 중요한 경우",
+        "단순한 정적 파일 제공이 필요한 경우"
+      ],
+      "answer": 1,
+      "explanation": "REST는 클라이언트가 요청할 때만 응답하는 단방향 패턴으로 서버 푸시에 적합하지 않습니다. WebSocket은 양방향 실시간 통신으로 서버가 능동적으로 데이터를 전송해야 하는 채팅, 실시간 대시보드 등에 적합합니다."
+    },
+    {
+      "id": "network-t003",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "Round Robin 로드밸런싱보다 Least Connections 알고리즘이 더 적합한 상황은?",
+      "options": [
+        "모든 요청의 처리 시간이 동일한 간단한 API 서버",
+        "요청마다 처리 시간 편차가 크고 일부 요청이 오래 걸리는 서비스",
+        "서버 간 성능 차이가 없고 요청이 균등하게 분산되는 경우",
+        "정적 파일만 제공하는 웹 서버"
+      ],
+      "answer": 1,
+      "explanation": "Round Robin은 처리 시간이 균일할 때 효율적입니다. 요청 처리 시간 편차가 크면 일부 서버에 긴 요청이 몰려 과부하가 생깁니다. Least Connections는 현재 연결 수가 가장 적은 서버로 요청을 보내 부하를 균등하게 분산합니다."
+    },
+    {
+      "id": "network-t004",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "HTTP 폴링 대신 Server-Sent Events(SSE)를 선택하는 상황으로 적합한 것은?",
+      "options": [
+        "클라이언트가 서버로 대량의 데이터를 업로드해야 하는 경우",
+        "서버에서 클라이언트로 단방향 실시간 스트림(알림, 뉴스피드)이 필요하고 폴링 오버헤드를 줄이려는 경우",
+        "양방향 게임 데이터 통신이 필요한 경우",
+        "오프라인 상태에서도 데이터 동기화가 필요한 경우"
+      ],
+      "answer": 1,
+      "explanation": "SSE는 HTTP 연결을 유지하며 서버가 클라이언트로 이벤트를 스트림합니다. 폴링처럼 반복 요청 오버헤드가 없고, WebSocket보다 구현이 단순합니다. 서버→클라이언트 단방향 스트림(알림, 실시간 피드)에 적합합니다."
+    },
+    {
+      "id": "network-t005",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "DNS TTL 값을 짧게 설정하는 것이 유리한 상황은?",
+      "options": [
+        "트래픽이 많아 DNS 조회 부하를 줄여야 하는 경우",
+        "빠른 장애 조치(Failover)나 IP 변경이 필요한 경우",
+        "글로벌 사용자에게 일관된 DNS 응답을 보장해야 하는 경우",
+        "DNS 서버 부하를 최소화해야 하는 소규모 서비스"
+      ],
+      "answer": 1,
+      "explanation": "TTL이 짧으면 DNS 캐시가 자주 만료되어 IP 변경이 빠르게 전파됩니다. 블루-그린 배포, 재해 복구 전환 등 빠른 IP 변경이 필요할 때 유리합니다. TTL이 길면 DNS 조회 빈도가 낮아 트래픽은 줄지만 변경 전파가 느립니다."
+    },
+    {
+      "id": "network-t006",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "L4 로드밸런서와 L7 로드밸런서 중 L7을 선택하는 상황으로 적합한 것은?",
+      "options": [
+        "단순히 TCP 연결을 서버 풀에 분산할 때",
+        "URL 경로, HTTP 헤더, 쿠키 기반으로 요청을 세분화하여 마이크로서비스별로 라우팅할 때",
+        "처리 지연을 최소화해야 하고 패킷 내용 검사가 불필요할 때",
+        "SSL 종료 없이 암호화된 트래픽을 그대로 전달해야 할 때"
+      ],
+      "answer": 1,
+      "explanation": "L7 로드밸런서는 애플리케이션 계층에서 HTTP 콘텐츠를 파악하여 URL 경로(/api → API 서버, /static → CDN), 헤더, 쿠키 등 기반으로 라우팅합니다. 마이크로서비스 환경에서 세밀한 트래픽 분산이 필요할 때 적합합니다."
+    },
+    {
+      "id": "network-t007",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "JWT(JSON Web Token)와 서버 세션 방식 중 JWT를 선택하는 상황으로 적합한 것은?",
+      "options": [
+        "토큰 즉시 무효화(강제 로그아웃)가 중요한 금융 서비스",
+        "수평 확장(Scale-out)이 필요한 마이크로서비스 환경에서 서버 간 세션 공유 없이 인증이 필요한 경우",
+        "세션 데이터가 매우 크고 클라이언트에 저장이 불가능한 경우",
+        "민감한 사용자 정보를 안전하게 서버에 보관해야 하는 경우"
+      ],
+      "answer": 1,
+      "explanation": "JWT는 서버 상태 없이 토큰 자체에 클레임을 담아 검증합니다. 서버 세션 저장소 없이 인증이 가능해 수평 확장에 유리합니다. 단, 토큰 만료 전 즉시 무효화가 어렵고 토큰 크기가 커질 수 있어 민감 서비스에는 주의가 필요합니다."
+    },
+    {
+      "id": "network-t008",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "CDN을 사용하지 않는 것이 더 적합한 상황은?",
+      "options": [
+        "전 세계에 분산된 사용자에게 이미지, 동영상을 제공하는 경우",
+        "사용자가 특정 지역에 집중되어 있고 콘텐츠가 매우 자주 변경되는 동적 API 응답인 경우",
+        "정적 에셋(CSS, JS, 이미지)의 로딩 속도가 중요한 경우",
+        "원본 서버의 트래픽 부하를 줄여야 하는 경우"
+      ],
+      "answer": 1,
+      "explanation": "CDN은 캐싱을 통해 정적 콘텐츠 제공에 효과적입니다. 하지만 매우 자주 변경되는 동적 콘텐츠나 사용자가 특정 지역에 몰려 있는 경우, CDN 비용 대비 효과가 낮을 수 있습니다. 개인화된 API 응답은 캐싱이 어렵습니다."
+    },
+    {
+      "id": "network-t009",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "HTTP Keep-Alive 연결 유지가 불리한 경우는?",
+      "options": [
+        "같은 클라이언트가 동일 서버에 여러 요청을 연속으로 보내는 경우",
+        "동시 접속자가 매우 많고 각 클라이언트가 드물게 요청을 보내는 경우",
+        "웹 브라우저가 여러 리소스를 한 페이지에서 로드하는 경우",
+        "API 서버가 클라이언트로부터 연속적인 요청을 받는 경우"
+      ],
+      "answer": 1,
+      "explanation": "Keep-Alive는 연결 재사용으로 핸드셰이크 오버헤드를 줄이지만, 연결당 서버 자원을 차지합니다. 동시 접속자가 매우 많고 요청 빈도가 낮으면 연결을 유지하는 서버 자원 낭비가 더 클 수 있습니다."
+    },
+    {
+      "id": "network-t010",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "대칭 암호화와 비대칭 암호화 중 비대칭 암호화를 선택하는 상황으로 적합한 것은?",
+      "options": [
+        "대용량 데이터를 빠르게 암호화해야 할 때",
+        "사전 키 공유 없이 처음 만나는 두 당사자 간 안전한 채널을 수립할 때",
+        "AES 같은 빠른 알고리즘으로 스트리밍 데이터를 실시간 암호화할 때",
+        "동일한 키로 암복호화 성능을 최대화해야 할 때"
+      ],
+      "answer": 1,
+      "explanation": "비대칭 암호화(RSA, ECDH)는 공개키/개인키 쌍을 사용하여 사전 키 공유 없이 안전한 채널을 수립합니다. TLS 핸드셰이크에서 세션 키 교환에 사용됩니다. 실제 데이터 암호화에는 빠른 대칭 암호화(AES)를 사용합니다."
+    },
+    {
+      "id": "network-t011",
+      "difficulty": "advanced",
+      "type": "tradeoff",
+      "question": "HTTP/3(QUIC)를 도입하는 것이 가장 효과적인 상황은?",
+      "options": [
+        "서버 간 내부 통신에서 지연 시간이 이미 충분히 낮은 경우",
+        "패킷 손실이 잦은 불안정한 모바일 네트워크에서 Head-of-Line Blocking 없이 빠른 응답이 필요한 경우",
+        "서버가 Linux 커널 4.0 이하를 사용하는 레거시 환경인 경우",
+        "TLS를 사용하지 않는 내부 서비스 통신인 경우"
+      ],
+      "answer": 1,
+      "explanation": "HTTP/3는 UDP 기반 QUIC 프로토콜로 스트림 독립성을 제공하여 패킷 손실이 하나의 스트림에만 영향을 줍니다. 모바일 네트워크처럼 패킷 손실이 잦고 네트워크 전환이 빈번한 환경에서 HTTP/2보다 훨씬 효과적입니다."
+    },
+    {
+      "id": "network-t012",
+      "difficulty": "advanced",
+      "type": "tradeoff",
+      "question": "서비스 메시(Service Mesh)를 도입하는 것이 적합한 상황은?",
+      "options": [
+        "단일 모놀리식 애플리케이션을 운영하는 경우",
+        "수십 개 이상의 마이크로서비스가 상호 통신하며 관찰 가능성, 트래픽 제어, mTLS가 필요한 경우",
+        "서비스가 2~3개뿐이고 팀 규모가 작은 경우",
+        "네트워크 지연 증가와 운영 복잡성이 허용되지 않는 경우"
+      ],
+      "answer": 1,
+      "explanation": "서비스 메시(Istio, Linkerd)는 사이드카 프록시를 통해 서비스 간 통신에 트래픽 제어, mTLS, 관찰 가능성(메트릭/트레이싱), 서킷 브레이커를 제공합니다. 서비스 수가 많고 통신 복잡성이 높은 마이크로서비스 환경에 적합합니다."
+    },
+    {
+      "id": "network-t013",
+      "difficulty": "advanced",
+      "type": "tradeoff",
+      "question": "API Gateway를 사용하는 것이 적합한 상황은?",
+      "options": [
+        "단일 백엔드 서비스만 운영하고 클라이언트가 하나뿐인 경우",
+        "다수의 마이크로서비스에 대한 인증, 속도 제한, 라우팅을 단일 진입점에서 처리해야 하는 경우",
+        "서비스 간 지연을 최소화하고 추가 네트워크 홉을 허용할 수 없는 경우",
+        "내부 서비스 간 통신만 있고 외부 클라이언트가 없는 경우"
+      ],
+      "answer": 1,
+      "explanation": "API Gateway는 클라이언트와 백엔드 서비스 사이의 단일 진입점으로 인증/인가, 속도 제한, 로깅, SSL 종료, 요청 라우팅을 중앙화합니다. 마이크로서비스 환경에서 각 서비스의 공통 기능을 분리하는 데 효과적입니다."
+    },
+    {
+      "id": "network-t014",
+      "difficulty": "advanced",
+      "type": "tradeoff",
+      "question": "Circuit Breaker 패턴을 적용하는 것이 적합한 상황은?",
+      "options": [
+        "모든 서비스가 동기적으로 응답하고 장애가 전혀 발생하지 않는 환경",
+        "의존 서비스의 장애가 연쇄적으로 전파되어 전체 시스템이 다운될 위험이 있는 분산 환경",
+        "단일 데이터베이스에만 의존하는 모놀리식 애플리케이션",
+        "서비스 간 통신이 없는 독립적인 배치 프로세스"
+      ],
+      "answer": 1,
+      "explanation": "Circuit Breaker는 의존 서비스 장애 시 요청을 빠르게 실패시켜(Fail Fast) 스레드 고갈과 연쇄 장애(Cascading Failure)를 방지합니다. 분산 시스템에서 복원력(Resilience)을 높이는 핵심 패턴입니다."
+    },
+    {
+      "id": "network-t015",
+      "difficulty": "advanced",
+      "type": "tradeoff",
+      "question": "mTLS(Mutual TLS)를 서비스 간 통신에 적용하는 것이 적합한 상황은?",
+      "options": [
+        "서비스들이 모두 동일한 물리 서버에서 실행되고 네트워크 분리가 완전한 경우",
+        "Zero Trust 보안 모델을 적용하여 내부 서비스 간에도 클라이언트와 서버 양방향 인증이 필요한 경우",
+        "TLS 핸드셰이크 오버헤드를 최소화해야 하는 초고성능 내부 통신인 경우",
+        "서비스 수가 2개이고 같은 VPC 내에 있어 네트워크 경계 보안만으로 충분한 경우"
+      ],
+      "answer": 1,
+      "explanation": "mTLS는 서버뿐만 아니라 클라이언트도 인증서로 신원을 증명합니다. Zero Trust 아키텍처에서 내부 네트워크를 신뢰하지 않고 모든 서비스 간 통신을 인증·암호화할 때 사용합니다. 서비스 메시와 함께 자주 사용됩니다."
+    },
+    {
+      "id": "network-s001",
+      "difficulty": "intermediate",
+      "type": "scenario",
+      "question": "사용자가 브라우저에 'https://www.example.com'을 입력했는데 페이지가 로드되지 않습니다. DNS 서버는 정상이고 IP로 직접 접속하면 됩니다. 가장 가능성 높은 원인은?",
+      "options": [
+        "서버의 물리적 하드웨어가 고장났다",
+        "TLS 인증서가 만료되었거나 도메인 불일치로 인해 브라우저가 연결을 차단했다",
+        "TCP 3-way handshake가 완료되지 않았다",
+        "HTTP 상태 코드 200을 반환하지 못하고 있다"
+      ],
+      "answer": 1,
+      "explanation": "IP 직접 접속은 되지만 도메인 접속이 안 되는 경우 TLS/SSL 인증서 문제일 가능성이 높습니다. 인증서 만료, 도메인 불일치, 또는 체인 인증서 누락 시 브라우저가 연결을 차단합니다. IP 접속 시 TLS 도메인 검증을 우회하는 경우 이 증상이 나타납니다."
+    },
+    {
+      "id": "network-s002",
+      "difficulty": "intermediate",
+      "type": "scenario",
+      "question": "API 서버가 간헐적으로 504 Gateway Timeout 오류를 반환합니다. 로드밸런서 뒤에 여러 서버가 있으며 특정 시간대에만 발생합니다. 가장 적절한 진단은?",
+      "options": [
+        "DNS 서버에 장애가 발생하여 도메인 조회가 실패하고 있다",
+        "특정 시간대 트래픽 급증으로 백엔드 서버 처리 시간이 로드밸런서 타임아웃을 초과한다",
+        "클라이언트의 네트워크 연결이 불안정하다",
+        "HTTP 헤더 크기가 너무 크다"
+      ],
+      "answer": 1,
+      "explanation": "504는 로드밸런서/프록시가 백엔드 서버로부터 제때 응답을 받지 못했을 때 발생합니다. 특정 시간대(트래픽 피크)에만 발생한다면 서버 처리 능력 부족, 데이터베이스 응답 지연, 또는 로드밸런서 타임아웃 설정이 너무 짧은 것이 원인일 수 있습니다."
+    },
+    {
+      "id": "network-s003",
+      "difficulty": "intermediate",
+      "type": "scenario",
+      "question": "프론트엔드(localhost:3000)에서 백엔드 API(localhost:8080)로 요청 시 브라우저 콘솔에 CORS 오류가 발생합니다. 가장 적절한 해결 방법은?",
+      "options": [
+        "클라이언트 JavaScript 코드에서 요청 URL을 변경한다",
+        "백엔드 서버에서 Access-Control-Allow-Origin 헤더를 올바르게 설정한다",
+        "브라우저의 보안 설정을 비활성화한다",
+        "HTTP 대신 HTTPS를 사용한다"
+      ],
+      "answer": 1,
+      "explanation": "CORS는 브라우저가 강제하는 보안 정책으로 서버가 허용할 출처를 응답 헤더에 명시해야 합니다. 백엔드에서 Access-Control-Allow-Origin: http://localhost:3000을 설정하거나, 개발 환경에서는 프록시를 사용하여 CORS를 우회할 수 있습니다."
+    },
+    {
+      "id": "network-s004",
+      "difficulty": "intermediate",
+      "type": "scenario",
+      "question": "마이크로서비스 A가 서비스 B를 호출하는데 B의 응답이 3초 이상 걸립니다. 결과적으로 A의 스레드가 모두 소진되어 A에 대한 다른 요청도 실패합니다. 이 문제를 방지하는 가장 적절한 패턴은?",
+      "options": [
+        "서비스 B의 인스턴스 수를 2배로 늘린다",
+        "Circuit Breaker와 Timeout을 설정하여 B 장애가 A에 연쇄 전파되는 것을 차단한다",
+        "서비스 A와 B를 하나의 프로세스로 합친다",
+        "서비스 B 앞에 로드밸런서를 추가한다"
+      ],
+      "answer": 1,
+      "explanation": "이는 연쇄 장애(Cascading Failure)의 전형적인 예입니다. Circuit Breaker는 B가 일정 횟수 이상 실패하면 즉시 오류를 반환하여 스레드 고갈을 방지합니다. Timeout 설정으로 무한정 대기하는 스레드를 해제하고, Bulkhead 패턴으로 서비스별 스레드 풀을 분리할 수도 있습니다."
+    },
+    {
+      "id": "network-s005",
+      "difficulty": "intermediate",
+      "type": "scenario",
+      "question": "웹 서버의 동시 접속자가 늘어 응답 속도가 느려졌습니다. 정적 이미지 파일이 전체 트래픽의 70%를 차지합니다. 가장 효과적인 즉시 개선 방법은?",
+      "options": [
+        "웹 서버의 CPU를 업그레이드한다",
+        "CDN을 도입하여 정적 파일을 엣지 서버에서 제공한다",
+        "데이터베이스 인덱스를 최적화한다",
+        "애플리케이션 코드를 리팩토링한다"
+      ],
+      "answer": 1,
+      "explanation": "정적 파일이 트래픽의 70%를 차지한다면 CDN 도입이 가장 효과적입니다. CDN은 사용자 근처의 엣지 서버에서 이미지를 제공하여 원본 서버 트래픽과 부하를 대폭 줄이고 응답 속도도 개선합니다."
+    },
+    {
+      "id": "network-s006",
+      "difficulty": "intermediate",
+      "type": "scenario",
+      "question": "RESTful API에서 클라이언트가 GET /users/123을 호출할 때 항상 최신 데이터가 필요한데, 브라우저가 오래된 캐시를 반환합니다. 올바른 해결 방법은?",
+      "options": [
+        "GET 대신 POST 메서드를 사용한다",
+        "Cache-Control: no-store 또는 적절한 ETag/Last-Modified 헤더를 설정한다",
+        "API 경로에 타임스탬프 쿼리 파라미터를 추가한다",
+        "HTTP를 WebSocket으로 교체한다"
+      ],
+      "answer": 1,
+      "explanation": "브라우저 캐시 문제는 올바른 캐시 제어 헤더로 해결합니다. 항상 최신 데이터가 필요하면 Cache-Control: no-store(캐시 저장 안 함) 또는 no-cache(서버 검증 후 사용)를 설정합니다. ETag/Last-Modified로 조건부 요청(304 Not Modified)을 활용하면 효율적입니다."
+    },
+    {
+      "id": "network-s007",
+      "difficulty": "intermediate",
+      "type": "scenario",
+      "question": "서버가 갑자기 대량의 SYN 패킷을 수신하면서 정상 클라이언트의 연결이 거부됩니다. 서버의 SYN 대기 큐가 꽉 찬 상태입니다. 이 공격의 이름과 대응 방법으로 적절한 것은?",
+      "options": [
+        "SQL Injection 공격이며 입력 검증으로 방어한다",
+        "SYN Flood 공격이며 SYN Cookie 기법이나 방화벽 속도 제한으로 대응한다",
+        "XSS 공격이며 Content Security Policy로 방어한다",
+        "DDoS 반사 공격이며 DNS 서버 설정을 변경한다"
+      ],
+      "answer": 1,
+      "explanation": "SYN Flood는 TCP 3-way handshake의 첫 단계(SYN)만 대량 전송하여 서버의 반연결(Half-open) 상태 큐를 소진시키는 DoS 공격입니다. SYN Cookie는 SYN 대기 큐를 사용하지 않고 쿠키로 상태를 관리하여 방어합니다."
+    },
+    {
+      "id": "network-s008",
+      "difficulty": "intermediate",
+      "type": "scenario",
+      "question": "HTTP API 응답에서 민감한 정보가 리버스 프록시 캐시에 저장되어 다른 사용자에게 노출됩니다. 어떻게 방지해야 하나요?",
+      "options": [
+        "HTTPS 대신 HTTP를 사용하여 캐시를 비활성화한다",
+        "Cache-Control: private를 응답 헤더에 추가하여 공유 캐시(프록시/CDN)에 저장되지 않도록 한다",
+        "응답 크기를 줄여 캐시되지 않게 한다",
+        "요청에 Authorization 헤더를 제거한다"
+      ],
+      "answer": 1,
+      "explanation": "Cache-Control: private는 응답이 단일 사용자의 브라우저 캐시에만 저장되고 공유 캐시(프록시, CDN)에는 저장되지 않도록 합니다. 민감한 개인 정보가 포함된 응답은 반드시 private 또는 no-store를 설정해야 합니다."
+    },
+    {
+      "id": "network-s009",
+      "difficulty": "advanced",
+      "type": "scenario",
+      "question": "글로벌 서비스에서 특정 지역 사용자들만 500ms 이상의 응답 지연을 경험합니다. 해당 지역에는 CDN 엣지 서버가 없습니다. 가장 효과적인 해결 방법은?",
+      "options": [
+        "원본 서버의 CPU와 메모리를 2배로 업그레이드한다",
+        "해당 지역에 CDN 엣지 서버 또는 지역 서버를 추가하거나 GeoDNS로 가까운 서버로 라우팅한다",
+        "TCP 재전송 타임아웃을 줄인다",
+        "HTTP/1.1을 계속 사용하여 연결 수를 줄인다"
+      ],
+      "answer": 1,
+      "explanation": "지역 사용자의 지연은 물리적 거리로 인한 RTT(Round Trip Time) 문제입니다. CDN 엣지 확장, 지역 서버 추가, 또는 GeoDNS로 사용자를 가장 가까운 서버로 라우팅하는 것이 근본적인 해결책입니다."
+    },
+    {
+      "id": "network-s010",
+      "difficulty": "advanced",
+      "type": "scenario",
+      "question": "마이크로서비스 환경에서 사용자 요청이 5개 서비스를 순차 호출합니다. 각 서비스 응답 시간은 100ms인데 전체 응답은 700ms입니다. 원인과 해결 방법으로 옳은 것은?",
+      "options": [
+        "네트워크 대역폭 부족이므로 10Gbps 네트워크로 업그레이드한다",
+        "서비스 간 순차 호출이 직렬화 병목을 만들어 내부 네트워크 오버헤드(약 200ms)가 추가됩니다. 독립적인 서비스 호출은 병렬 처리로 최적화한다",
+        "각 서비스의 코드를 리팩토링하여 100ms를 50ms로 줄인다",
+        "서비스를 하나의 모놀리식 앱으로 합친다"
+      ],
+      "answer": 1,
+      "explanation": "5개 서비스 순차 호출 시 100ms × 5 = 500ms + 서비스 간 네트워크 지연이 합산됩니다. 독립적으로 실행 가능한 서비스 호출은 병렬(async/await Promise.all 등)로 처리하면 전체 시간이 단일 최대값으로 줄어듭니다. 분산 트레이싱(Jaeger, Zipkin)으로 병목을 정확히 파악하는 것이 중요합니다."
+    },
+    {
+      "id": "network-s011",
+      "difficulty": "advanced",
+      "type": "scenario",
+      "question": "HTTPS 서비스에서 중간자 공격(MITM) 가능성을 최소화하려 합니다. TLS 인증서 외에 추가로 적용할 수 있는 보안 헤더는?",
+      "options": [
+        "Content-Type: application/json",
+        "HTTP Strict Transport Security(HSTS): max-age를 설정하여 브라우저가 항상 HTTPS로만 접속하도록 강제한다",
+        "X-Forwarded-For 헤더를 추가한다",
+        "Cache-Control: no-store를 설정한다"
+      ],
+      "answer": 1,
+      "explanation": "HSTS는 브라우저에게 지정된 기간 동안 해당 도메인에 HTTP로 접속하지 말고 항상 HTTPS를 사용하도록 지시합니다. 이를 통해 SSL Stripping 공격(HTTPS → HTTP 다운그레이드)을 방지합니다. Preload 목록에 등록하면 최초 접속부터 HTTPS가 보장됩니다."
+    },
+    {
+      "id": "network-s012",
+      "difficulty": "advanced",
+      "type": "scenario",
+      "question": "TCP 연결이 자주 끊기는 모바일 환경에서 실시간 채팅 앱의 재연결 로직이 문제입니다. 연결이 끊길 때마다 5~10초의 지연이 발생합니다. 가장 효과적인 개선 방법은?",
+      "options": [
+        "재연결 시도 간격을 30초로 늘린다",
+        "Exponential Backoff with Jitter로 재연결을 시도하고, WebSocket Ping/Pong으로 연결 상태를 주기적으로 확인한다",
+        "HTTP 롱폴링으로 교체한다",
+        "서버의 TCP keepalive 타임아웃을 1시간으로 늘린다"
+      ],
+      "answer": 1,
+      "explanation": "WebSocket Ping/Pong으로 연결 상태를 주기적으로 확인하면 조기에 연결 끊김을 감지할 수 있습니다. Exponential Backoff with Jitter는 재연결 시도를 분산시켜 서버 과부하를 방지하면서 빠른 재연결을 시도합니다."
+    },
+    {
+      "id": "network-s013",
+      "difficulty": "advanced",
+      "type": "scenario",
+      "question": "REST API 서버에 초당 10,000 요청이 들어오는데 80%가 동일한 10개 엔드포인트에 대한 GET 요청입니다. 데이터베이스 부하를 줄이기 위한 가장 효과적인 전략은?",
+      "options": [
+        "데이터베이스 서버를 더 강력한 사양으로 교체한다",
+        "Redis 같은 인메모리 캐시를 도입하여 자주 조회되는 응답을 캐싱한다",
+        "모든 GET 요청에 인증을 추가하여 요청 수를 줄인다",
+        "요청 처리 스레드 수를 늘린다"
+      ],
+      "answer": 1,
+      "explanation": "동일 엔드포인트에 반복 조회는 캐싱으로 가장 효과적으로 처리합니다. Redis 같은 인메모리 캐시로 DB 쿼리 없이 응답하면 DB 부하를 80% 이상 줄일 수 있습니다. TTL과 캐시 무효화 전략을 적절히 설계하는 것이 중요합니다."
+    },
+    {
+      "id": "network-s014",
+      "difficulty": "advanced",
+      "type": "scenario",
+      "question": "DNS 조회 시 재귀적 DNS 리졸버(Recursive Resolver)가 응답하는 데 3초 이상 걸립니다. 애플리케이션에서 해결할 수 있는 방법은?",
+      "options": [
+        "HTTP 요청 타임아웃을 10초로 늘린다",
+        "DNS 캐싱(TTL 준수)과 연결 풀링을 활용하여 매 요청마다 DNS 조회를 반복하지 않도록 한다",
+        "모든 서버 도메인을 IP 주소로 교체한다",
+        "UDP 대신 TCP DNS를 사용한다"
+      ],
+      "answer": 1,
+      "explanation": "DNS 결과는 TTL 동안 캐싱하여 반복 조회를 방지합니다. 연결 풀링(HTTP Keep-Alive, 커넥션 풀)으로 한 번 연결된 소켓을 재사용하면 매 요청마다 DNS 조회와 TCP 핸드셰이크가 필요 없습니다. OS DNS 캐시 확인과 로컬 DNS 리졸버 최적화도 고려합니다."
+    },
+    {
+      "id": "network-s015",
+      "difficulty": "advanced",
+      "type": "scenario",
+      "question": "API 서버가 DDoS 공격을 받아 정상 사용자의 요청도 처리하지 못합니다. 공격 트래픽은 여러 IP에서 분산됩니다. 가장 효과적인 방어 전략 조합은?",
+      "options": [
+        "서버 사양을 업그레이드하여 모든 요청을 처리한다",
+        "Rate Limiting(속도 제한), WAF(웹 방화벽), CDN의 DDoS 방어, IP 평판 기반 차단을 조합하여 악성 트래픽을 필터링한다",
+        "모든 요청에 CAPTCHA를 추가한다",
+        "서버 IP 주소를 변경한다"
+      ],
+      "answer": 1,
+      "explanation": "분산 DDoS는 단일 방어로 막기 어렵습니다. Rate Limiting으로 IP당 요청 수를 제한하고, CDN/Anycast로 트래픽을 분산 흡수하며, WAF로 악성 패턴을 차단하고, IP 평판 DB로 알려진 공격 IP를 차단하는 다층 방어가 효과적입니다."
+    },
+    {
+      "id": "network-d001",
+      "difficulty": "intermediate",
+      "type": "debug",
+      "question": "다음 TCP에 대한 설명 중 틀린 것은?",
+      "options": [
+        "TCP는 연결 지향적 프로토콜로 3-way handshake로 연결을 수립한다",
+        "TCP는 흐름 제어와 혼잡 제어를 제공한다",
+        "TCP는 메시지 경계를 보존하여 수신한 데이터가 전송 단위와 동일하게 유지된다",
+        "TCP는 데이터 전송 후 4-way handshake로 연결을 종료한다"
+      ],
+      "answer": 2,
+      "explanation": "TCP는 스트림 기반 프로토콜로 메시지 경계를 보존하지 않습니다. 여러 write()가 하나의 read()로 수신될 수도 있고, 하나의 write()가 여러 read()로 나뉠 수도 있습니다. 메시지 경계를 보존하는 것은 UDP입니다. TCP 사용 시 애플리케이션 레벨에서 길이 필드 등으로 경계를 정의해야 합니다."
+    },
+    {
+      "id": "network-d002",
+      "difficulty": "intermediate",
+      "type": "debug",
+      "question": "다음 HTTP 메서드에 대한 설명 중 틀린 것은?",
+      "options": [
+        "GET은 멱등성(idempotent)을 가지며 서버 상태를 변경하지 않아야 한다",
+        "POST는 멱등성을 가지지 않아 동일 요청을 여러 번 보내면 다른 결과가 생길 수 있다",
+        "PUT은 자원을 완전히 교체하며 멱등성을 가진다",
+        "DELETE 메서드는 멱등성이 없어 같은 자원에 여러 번 호출하면 매번 오류가 발생한다"
+      ],
+      "answer": 3,
+      "explanation": "DELETE는 멱등성을 가집니다. 이미 삭제된 자원에 DELETE를 재시도하면 404를 반환하지만 서버 상태는 변하지 않으므로 멱등성을 만족합니다. POST만 멱등성이 없고, GET/PUT/DELETE/HEAD/OPTIONS는 멱등성을 가집니다."
+    },
+    {
+      "id": "network-d003",
+      "difficulty": "intermediate",
+      "type": "debug",
+      "question": "다음 DNS에 대한 설명 중 틀린 것은?",
+      "options": [
+        "DNS는 기본적으로 UDP 53번 포트를 사용한다",
+        "DNS 조회는 클라이언트 → 로컬 DNS → 루트 DNS → TLD DNS → 권한 DNS 순서로 진행될 수 있다",
+        "DNSSEC은 DNS 응답에 전자 서명을 추가하여 DNS 스푸핑을 방지한다",
+        "DNS TTL은 도메인 소유자가 설정할 수 없으며 IANA가 전역으로 관리한다"
+      ],
+      "answer": 3,
+      "explanation": "DNS TTL은 도메인 소유자(또는 DNS 관리자)가 레코드별로 직접 설정합니다. IANA는 루트 DNS를 관리하지만 TTL 값은 각 도메인의 권한 DNS 서버에서 설정합니다."
+    },
+    {
+      "id": "network-d004",
+      "difficulty": "advanced",
+      "type": "debug",
+      "question": "다음 TLS/SSL에 대한 설명 중 틀린 것은?",
+      "options": [
+        "TLS 1.3은 TLS 1.2보다 핸드셰이크 라운드트립을 줄여 연결 수립이 빠르다",
+        "SSL 3.0과 TLS 1.0은 POODLE, BEAST 취약점으로 인해 현재 사용을 권장하지 않는다",
+        "인증서의 공개키로 데이터를 암호화하고 서버의 개인키로 복호화하여 모든 HTTPS 통신 데이터를 암호화한다",
+        "TLS에서 실제 데이터 암호화는 핸드셰이크에서 협상된 대칭 키로 수행된다"
+      ],
+      "answer": 2,
+      "explanation": "공개키/개인키(비대칭 암호화)는 핸드셰이크에서 세션 키를 안전하게 교환하는 데만 사용됩니다. 실제 통신 데이터는 핸드셰이크에서 협상된 대칭 키(세션 키)로 암호화합니다. 비대칭 암호화는 속도가 느려 대용량 데이터 암호화에 부적합합니다."
+    },
+    {
+      "id": "network-d005",
+      "difficulty": "advanced",
+      "type": "debug",
+      "question": "다음 HTTP/2에 대한 설명 중 틀린 것은?",
+      "options": [
+        "HTTP/2는 하나의 TCP 연결에서 여러 스트림을 멀티플렉싱한다",
+        "HTTP/2는 헤더 압축을 위해 HPACK 알고리즘을 사용한다",
+        "HTTP/2를 사용하면 TCP 수준의 Head-of-Line Blocking이 완전히 해결된다",
+        "HTTP/2에서 서버는 클라이언트가 요청하기 전에 리소스를 푸시할 수 있다"
+      ],
+      "answer": 2,
+      "explanation": "HTTP/2 멀티플렉싱은 애플리케이션 수준의 Head-of-Line Blocking은 해결하지만, TCP 수준의 HoL Blocking은 여전히 존재합니다. TCP 패킷 손실 시 모든 스트림이 영향을 받습니다. 이를 해결한 것이 UDP 기반의 HTTP/3(QUIC)입니다."
+    },
+    {
+      "id": "network-o001",
+      "difficulty": "basic",
+      "type": "ordering",
+      "question": "브라우저에 'https://www.example.com'을 입력했을 때 첫 번째 HTML 바이트를 받기까지의 순서로 올바른 것은?",
+      "options": [
+        "① HTML 수신 → ② DNS 조회 → ③ TCP 연결 → ④ HTTP 요청",
+        "① DNS 조회(IP 확인) → ② TCP 3-way handshake → ③ TLS 핸드셰이크 → ④ HTTP 요청 전송 → ⑤ HTML 응답 수신",
+        "① TLS 핸드셰이크 → ② DNS 조회 → ③ TCP 연결 → ④ HTTP 요청 → ⑤ HTML 수신",
+        "① TCP 연결 → ② DNS 조회 → ③ HTTP 요청 → ④ TLS 핸드셰이크 → ⑤ HTML 수신"
+      ],
+      "answer": 1,
+      "explanation": "HTTPS 페이지 로드: DNS 조회(도메인→IP) → TCP 3-way handshake(SYN/SYN-ACK/ACK) → TLS 핸드셰이크(인증서 검증, 세션 키 협상) → HTTP GET 요청 전송 → 서버 처리 후 HTML 응답 수신 순서입니다."
+    },
+    {
+      "id": "network-o002",
+      "difficulty": "basic",
+      "type": "ordering",
+      "question": "TCP 연결 종료(4-way handshake)의 순서로 올바른 것은?",
+      "options": [
+        "① FIN(클라이언트) → ② FIN(서버) → ③ ACK(클라이언트) → ④ ACK(서버)",
+        "① FIN(클라이언트) → ② ACK(서버) → ③ FIN(서버) → ④ ACK(클라이언트)",
+        "① SYN → ② SYN+ACK → ③ ACK → ④ FIN",
+        "① ACK(클라이언트) → ② FIN(서버) → ③ FIN(클라이언트) → ④ ACK(서버)"
+      ],
+      "answer": 1,
+      "explanation": "TCP 연결 종료: 클라이언트 FIN 전송 → 서버 ACK(수신 확인) → 서버 FIN(서버도 종료 준비 완료) → 클라이언트 ACK(TIME_WAIT 진입). 서버의 ACK와 FIN이 별개로 전송되므로 4-way입니다."
+    },
+    {
+      "id": "network-o003",
+      "difficulty": "intermediate",
+      "type": "ordering",
+      "question": "DNS 재귀 조회(Recursive DNS Resolution) 순서로 올바른 것은?",
+      "options": [
+        "① 클라이언트 → ② 권한 DNS → ③ TLD DNS → ④ 루트 DNS → ⑤ 응답",
+        "① 클라이언트가 로컬 리졸버에 질의 → ② 로컬 리졸버가 루트 DNS에 질의 → ③ 루트 DNS가 TLD DNS 주소 반환 → ④ TLD DNS가 권한 DNS 주소 반환 → ⑤ 권한 DNS가 최종 IP 반환 → ⑥ 클라이언트에 응답",
+        "① 클라이언트 → ② TLD DNS → ③ 루트 DNS → ④ 권한 DNS → ⑤ 응답",
+        "① 클라이언트 → ② 권한 DNS → ③ 응답"
+      ],
+      "answer": 1,
+      "explanation": "DNS 재귀 조회: 브라우저 캐시 확인 → 없으면 OS/로컬 리졸버에 질의 → 로컬 리졸버가 루트 DNS에 TLD 네임서버 주소 요청 → TLD DNS(.com)에서 권한 DNS 주소 반환 → 권한 DNS에서 최종 A 레코드(IP) 반환 → 결과를 TTL 동안 캐싱 후 응답."
+    },
+    {
+      "id": "network-o004",
+      "difficulty": "intermediate",
+      "type": "ordering",
+      "question": "TLS 1.3 핸드셰이크(1-RTT) 순서로 올바른 것은?",
+      "options": [
+        "① 서버 인증서 전송 → ② 클라이언트 Hello → ③ 키 교환 → ④ 암호화 통신 시작",
+        "① 클라이언트 Hello(지원 암호화 목록, 키 공유 전송) → ② 서버 Hello(암호화 선택, 인증서, 서버 키 공유) → ③ 클라이언트 Finished → ④ 암호화 통신 시작",
+        "① TCP 연결 → ② 클라이언트 키 교환 → ③ 서버 인증서 검증 → ④ 암호화 통신",
+        "① 서버 Hello → ② 클라이언트 Hello → ③ 인증서 교환 → ④ 암호화 통신"
+      ],
+      "answer": 1,
+      "explanation": "TLS 1.3 1-RTT: 클라이언트 Hello(버전, 암호화 스위트, 키 공유 전송) → 서버 Hello(암호화 선택, 인증서, 서버 키 공유, Finished) → 클라이언트 Finished → 암호화 통신 시작. TLS 1.2 대비 1 RTT 감소, 이전에 연결한 서버면 0-RTT도 가능합니다."
+    },
+    {
+      "id": "network-o005",
+      "difficulty": "advanced",
+      "type": "ordering",
+      "question": "HTTP 캐시 검증 요청(Conditional Request) 처리 흐름으로 올바른 것은?",
+      "options": [
+        "① 클라이언트가 요청 → ② 서버가 항상 전체 응답 반환 → ③ 클라이언트 캐시 저장",
+        "① 클라이언트가 캐시된 ETag/Last-Modified 포함한 조건부 요청(If-None-Match/If-Modified-Since) → ② 서버가 자원 변경 여부 확인 → ③ 변경 없으면 304 Not Modified(바디 없음) 반환 → ④ 클라이언트가 캐시된 응답 재사용",
+        "① 클라이언트 요청 → ② 캐시 서버가 항상 차단 → ③ 원본 서버로 전달 → ④ 전체 응답 반환",
+        "① 클라이언트가 ETag 생성 → ② 서버에 전송 → ③ 서버가 저장 → ④ 응답"
+      ],
+      "answer": 1,
+      "explanation": "캐시 검증: 클라이언트가 캐시된 응답의 ETag(If-None-Match) 또는 Last-Modified(If-Modified-Since)를 요청 헤더에 포함 → 서버가 비교하여 변경 없으면 304 Not Modified(바디 없이 헤더만) 반환 → 클라이언트는 기존 캐시 재사용. 대역폭을 절약하면서 최신성을 보장합니다."
+    }
+  ]
 }
