@@ -2,916 +2,1195 @@
   "topic": "spring",
   "label": "Spring",
   "questions": [
-  {
-    "id": "spring-c001",
-    "difficulty": "basic",
-    "type": "concept",
-    "question": "Spring의 IoC(Inversion of Control)란 무엇인가요?",
-    "options": [
-      "개발자가 직접 객체를 생성하고 의존성을 관리하는 패턴",
-      "객체의 생성과 의존성 관리를 프레임워크(컨테이너)에 위임하는 설계 원칙",
-      "컨트롤러가 서비스 레이어를 직접 호출하는 패턴",
-      "인터페이스를 통해 구현체를 역방향으로 참조하는 기법"
-    ],
-    "answer": 1,
-    "explanation": "IoC는 객체의 생성·생명주기·의존성 주입을 개발자가 아닌 Spring 컨테이너(ApplicationContext)가 제어하는 원칙입니다. 개발자는 '어떻게 만들지' 대신 '무엇이 필요한지'만 선언하면 됩니다."
-  },
-  {
-    "id": "spring-c002",
-    "difficulty": "basic",
-    "type": "concept",
-    "question": "Spring의 DI(Dependency Injection) 방식 중 생성자 주입(Constructor Injection)의 장점은?",
-    "options": [
-      "런타임에 의존성을 동적으로 교체할 수 있다",
-      "필수 의존성을 강제하고, 불변성 보장, 순환 의존성 컴파일 타임 감지",
-      "선택적 의존성 처리가 용이하다",
-      "코드 양이 가장 적어 간결하다"
-    ],
-    "answer": 1,
-    "explanation": "생성자 주입은 객체 생성 시 모든 의존성이 주입되어 필수 의존성을 보장합니다. final 필드 선언으로 불변성을 유지하고, 순환 의존성을 애플리케이션 시작 시 감지할 수 있습니다. Spring 공식 권장 방식입니다."
-  },
-  {
-    "id": "spring-c003",
-    "difficulty": "basic",
-    "type": "concept",
-    "question": "Spring Bean의 기본 스코프(Scope)는?",
-    "options": [
-      "prototype — 요청마다 새 인스턴스 생성",
-      "singleton — 컨테이너당 하나의 인스턴스",
-      "request — HTTP 요청마다 새 인스턴스",
-      "session — HTTP 세션마다 새 인스턴스"
-    ],
-    "answer": 1,
-    "explanation": "Spring Bean의 기본 스코프는 singleton입니다. 동일한 ApplicationContext 내에서 동일한 Bean 정의에 대해 단 하나의 인스턴스만 생성되어 모든 요청에 공유됩니다. 별도 설정 없이는 모든 Bean이 싱글톤으로 관리됩니다."
-  },
-  {
-    "id": "spring-c004",
-    "difficulty": "basic",
-    "type": "concept",
-    "question": "Spring의 `@Component`, `@Service`, `@Repository`, `@Controller`의 관계는?",
-    "options": [
-      "완전히 다른 기능을 하는 독립적인 어노테이션",
-      "`@Service`, `@Repository`, `@Controller`는 모두 `@Component`의 특수화로 계층별 의미를 부여한 것",
-      "`@Component`는 deprecated되고 나머지 셋을 사용 권장",
-      "`@Repository`는 DB 연결, `@Service`는 트랜잭션을 자동으로 처리"
-    ],
-    "answer": 1,
-    "explanation": "`@Service`, `@Repository`, `@Controller`는 `@Component`를 메타 어노테이션으로 포함하여 컴포넌트 스캔 대상이 됩니다. 계층별 의미를 명확히 하고, `@Repository`는 추가로 데이터 접근 예외를 Spring 예외 계층으로 변환합니다."
-  },
-  {
-    "id": "spring-c005",
-    "difficulty": "basic",
-    "type": "concept",
-    "question": "Spring AOP에서 `@Aspect`와 `@Around` 어노테이션의 역할은?",
-    "options": [
-      "`@Aspect`는 트랜잭션 관리, `@Around`는 예외 처리를 담당",
-      "`@Aspect`는 클래스를 Aspect로 선언, `@Around`는 대상 메서드 실행 전후를 모두 제어하는 Advice 정의",
-      "`@Aspect`는 Bean 등록, `@Around`는 메서드 실행 시간 측정 전용",
-      "둘 다 Spring Security에서 인증/인가를 위해 사용"
-    ],
-    "answer": 1,
-    "explanation": "`@Aspect`는 해당 클래스가 횡단 관심사를 담당하는 Aspect임을 선언합니다. `@Around`는 가장 강력한 Advice로, `ProceedingJoinPoint`를 통해 대상 메서드 실행 전·후·예외 상황 모두를 제어할 수 있습니다."
-  },
-  {
-    "id": "spring-c006",
-    "difficulty": "basic",
-    "type": "concept",
-    "question": "Spring MVC에서 `DispatcherServlet`의 역할은?",
-    "options": [
-      "데이터베이스 연결을 관리하는 서블릿",
-      "모든 HTTP 요청을 받아 적절한 핸들러(Controller)로 라우팅하는 프론트 컨트롤러",
-      "정적 자원(CSS, JS)을 처리하는 서블릿",
-      "세션과 쿠키를 관리하는 서블릿"
-    ],
-    "answer": 1,
-    "explanation": "`DispatcherServlet`은 Spring MVC의 프론트 컨트롤러 패턴 구현체입니다. HandlerMapping으로 요청을 핸들러에 매핑하고, HandlerAdapter로 핸들러를 실행하며, ViewResolver로 뷰를 결정합니다."
-  },
-  {
-    "id": "spring-c007",
-    "difficulty": "basic",
-    "type": "concept",
-    "question": "Spring Boot의 `@SpringBootApplication` 어노테이션이 포함하는 것은?",
-    "options": [
-      "`@Controller`, `@Service`, `@Repository`를 합친 어노테이션",
-      "`@Configuration`, `@EnableAutoConfiguration`, `@ComponentScan`을 합친 복합 어노테이션",
-      "`@Transactional`, `@Cacheable`, `@Async`를 자동 활성화",
-      "Spring Security와 Spring Data를 자동 설정"
-    ],
-    "answer": 1,
-    "explanation": "`@SpringBootApplication`은 ①`@Configuration`(설정 클래스) ②`@EnableAutoConfiguration`(자동 설정 활성화) ③`@ComponentScan`(현재 패키지부터 컴포넌트 탐색)을 합친 편의 어노테이션입니다."
-  },
-  {
-    "id": "spring-c008",
-    "difficulty": "basic",
-    "type": "concept",
-    "question": "`@Transactional` 어노테이션의 기본 동작은?",
-    "options": [
-      "읽기 전용 트랜잭션을 생성하고 커밋 없이 종료",
-      "메서드 시작 시 트랜잭션을 시작하고, 정상 종료 시 커밋, RuntimeException 발생 시 롤백",
-      "새로운 트랜잭션을 항상 생성하며 기존 트랜잭션을 일시 중단",
-      "체크드 예외 발생 시에도 자동 롤백"
-    ],
-    "answer": 1,
-    "explanation": "`@Transactional`의 기본 설정: propagation=REQUIRED(기존 트랜잭션 참여 또는 새 생성), isolation=DEFAULT, rollbackFor=RuntimeException(Unchecked Exception). Checked Exception은 기본적으로 롤백되지 않습니다."
-  },
-  {
-    "id": "spring-c009",
-    "difficulty": "basic",
-    "type": "concept",
-    "question": "Spring Boot 자동 설정(Auto Configuration)의 동작 원리는?",
-    "options": [
-      "개발자가 설정 파일을 명시적으로 import해야 활성화",
-      "클래스패스의 라이브러리와 설정을 감지하여 `@Conditional` 조건에 따라 Bean을 자동 등록",
-      "모든 가능한 Bean을 항상 등록하고 사용하지 않는 것은 나중에 제거",
-      "application.properties 파일의 내용만으로 자동 설정"
-    ],
-    "answer": 1,
-    "explanation": "Spring Boot는 `spring.factories`(또는 `AutoConfiguration.imports`)에 등록된 자동 설정 클래스들을 로드하고, `@ConditionalOnClass`, `@ConditionalOnMissingBean` 등 조건에 따라 필요한 Bean만 자동 등록합니다."
-  },
-  {
-    "id": "spring-c010",
-    "difficulty": "basic",
-    "type": "concept",
-    "question": "Spring에서 `@RequestBody`와 `@ResponseBody`의 역할은?",
-    "options": [
-      "`@RequestBody`는 요청 헤더, `@ResponseBody`는 응답 헤더를 처리",
-      "`@RequestBody`는 HTTP 요청 본문을 Java 객체로 역직렬화, `@ResponseBody`는 Java 객체를 응답 본문으로 직렬화",
-      "`@RequestBody`는 GET 파라미터, `@ResponseBody`는 POST 데이터를 처리",
-      "둘 다 JSON만 처리하며 XML은 별도 어노테이션 필요"
-    ],
-    "answer": 1,
-    "explanation": "`@RequestBody`는 `HttpMessageConverter`를 통해 요청 본문(JSON 등)을 Java 객체로 변환합니다. `@ResponseBody`는 반환 객체를 응답 본문으로 직렬화합니다. `@RestController`는 `@Controller + @ResponseBody`를 합친 것입니다."
-  },
-  {
-    "id": "spring-c011",
-    "difficulty": "intermediate",
-    "type": "concept",
-    "question": "Spring AOP에서 JDK Dynamic Proxy와 CGLIB Proxy의 차이는?",
-    "options": [
-      "JDK Proxy는 XML 기반, CGLIB는 어노테이션 기반 설정에서 사용",
-      "JDK Proxy는 인터페이스가 있을 때 인터페이스 기반 프록시 생성, CGLIB는 인터페이스 없이 클래스를 상속하여 프록시 생성",
-      "JDK Proxy는 성능이 좋고, CGLIB는 기능이 많음",
-      "Spring Boot에서는 항상 JDK Proxy만 사용"
-    ],
-    "answer": 1,
-    "explanation": "JDK Dynamic Proxy는 대상 클래스가 인터페이스를 구현해야 하며 인터페이스 기반으로 프록시를 생성합니다. CGLIB는 클래스를 상속하여 프록시를 생성하므로 인터페이스 없이도 동작합니다. Spring Boot 2.x+는 기본적으로 CGLIB를 사용합니다."
-  },
-  {
-    "id": "spring-c012",
-    "difficulty": "intermediate",
-    "type": "concept",
-    "question": "Spring의 `@Transactional` 전파(Propagation) 속성 중 `REQUIRES_NEW`의 동작은?",
-    "options": [
-      "기존 트랜잭션이 있으면 참여하고, 없으면 새로 생성",
-      "기존 트랜잭션을 일시 중단하고 항상 새 트랜잭션을 생성",
-      "트랜잭션 없이 실행하며, 기존 트랜잭션도 일시 중단",
-      "기존 트랜잭션의 중첩 트랜잭션(Savepoint)으로 실행"
-    ],
-    "answer": 1,
-    "explanation": "`REQUIRES_NEW`는 기존 트랜잭션을 일시 중단(suspend)하고 완전히 독립된 새 트랜잭션을 시작합니다. 새 트랜잭션이 커밋/롤백되어도 원래 트랜잭션에 영향을 주지 않습니다. 로깅, 감사(Audit) 등에 유용합니다."
-  },
-  {
-    "id": "spring-c013",
-    "difficulty": "intermediate",
-    "type": "concept",
-    "question": "Spring Bean 생명주기에서 초기화 콜백의 우선순위 순서는?",
-    "options": [
-      "@Bean(initMethod) → @PostConstruct → InitializingBean.afterPropertiesSet()",
-      "@PostConstruct → InitializingBean.afterPropertiesSet() → @Bean(initMethod)",
-      "InitializingBean → @Bean(initMethod) → @PostConstruct",
-      "모두 동시에 실행되어 순서 없음"
-    ],
-    "answer": 1,
-    "explanation": "Spring Bean 초기화 순서: ①`@PostConstruct` (JSR-250, 권장) → ②`InitializingBean.afterPropertiesSet()` → ③`@Bean(initMethod)` 또는 XML `init-method`. 소멸 순서는 반대: `@PreDestroy` → `DisposableBean.destroy()` → `destroyMethod`."
-  },
-  {
-    "id": "spring-c014",
-    "difficulty": "intermediate",
-    "type": "concept",
-    "question": "Spring의 `@Async` 어노테이션 사용 시 주의사항은?",
-    "options": [
-      "@Async는 모든 메서드에 자동 적용되어 별도 설정 불필요",
-      "같은 클래스 내부 호출은 프록시를 거치지 않아 비동기 미적용, `@EnableAsync` 필요, 반환 타입은 void 또는 Future/CompletableFuture",
-      "@Async 메서드는 반드시 static이어야 함",
-      "@Async는 트랜잭션과 함께 사용 불가"
-    ],
-    "answer": 1,
-    "explanation": "`@Async`는 ①`@EnableAsync` 활성화 필요 ②같은 빈의 내부 메서드 호출 시 프록시를 거치지 않아 비동기 미적용 ③반환 타입은 void, Future, CompletableFuture ④별도 스레드풀 미설정 시 기본 SimpleAsyncTaskExecutor 사용(스레드풀 미사용 주의)."
-  },
-  {
-    "id": "spring-c015",
-    "difficulty": "intermediate",
-    "type": "concept",
-    "question": "Spring Data JPA의 `@EntityGraph`와 `fetch join`의 공통 목적은?",
-    "options": [
-      "엔티티를 여러 데이터베이스에 분산 저장",
-      "N+1 문제를 해결하기 위해 연관 엔티티를 한 쿼리로 함께 조회",
-      "엔티티의 변경을 추적하여 자동으로 UPDATE 쿼리 실행",
-      "읽기 전용 트랜잭션에서 캐싱을 활성화"
-    ],
-    "answer": 1,
-    "explanation": "N+1 문제는 연관 관계를 LAZY 로딩할 때 N개의 엔티티마다 추가 쿼리가 발생하는 문제입니다. `@EntityGraph`와 JPQL `fetch join`은 모두 연관 엔티티를 한 번의 JOIN 쿼리로 함께 조회하여 이 문제를 해결합니다."
-  },
-  {
-    "id": "spring-t001",
-    "difficulty": "intermediate",
-    "type": "tradeoff",
-    "question": "Spring DI에서 필드 주입(Field Injection) vs 생성자 주입(Constructor Injection)의 트레이드오프는?",
-    "options": [
-      "필드 주입이 성능이 더 좋아 대규모 프로젝트에 권장",
-      "필드 주입은 코드가 간결하지만 불변성 미보장·테스트 어려움, 생성자 주입은 코드가 길지만 불변성·테스트 용이성·순환 의존성 감지 가능",
-      "생성자 주입은 Spring 5 이전에만 지원됨",
-      "필드 주입은 인터페이스, 생성자 주입은 구체 클래스에만 사용"
-    ],
-    "answer": 1,
-    "explanation": "필드 주입(`@Autowired` 필드)은 코드가 간결하지만 final 선언 불가, Reflection 사용으로 테스트 시 의존성 주입 어려움, 순환 의존성 런타임 감지 단점이 있습니다. 생성자 주입은 불변성 보장, 테스트 용이성, 필수 의존성 명시성으로 Spring 공식 권장합니다."
-  },
-  {
-    "id": "spring-t002",
-    "difficulty": "intermediate",
-    "type": "tradeoff",
-    "question": "Spring MVC vs Spring WebFlux 선택 기준은?",
-    "options": [
-      "Spring WebFlux는 항상 Spring MVC보다 빠르므로 새 프로젝트는 WebFlux 선택",
-      "동기 블로킹 I/O 위주·팀 친숙도가 높으면 Spring MVC, 고동시성 비동기 I/O 요구·리액티브 생태계 활용 시 WebFlux",
-      "Spring MVC는 REST API, WebFlux는 웹소켓에만 사용",
-      "WebFlux는 Spring Data JPA와 함께 사용 불가"
-    ],
-    "answer": 1,
-    "explanation": "Spring MVC는 스레드당 요청 모델로 팀 친숙도 높고 디버깅 용이합니다. WebFlux는 이벤트 루프 기반으로 적은 스레드로 높은 동시성을 처리하지만 리액티브 프로그래밍 학습 곡선, 디버깅 복잡성이 있습니다. CPU 바운드 작업에서는 차이가 없습니다."
-  },
-  {
-    "id": "spring-t003",
-    "difficulty": "intermediate",
-    "type": "tradeoff",
-    "question": "Spring Cache(`@Cacheable`)를 사용할 때의 트레이드오프는?",
-    "options": [
-      "캐싱은 항상 성능을 향상시키므로 모든 서비스 메서드에 적용 권장",
-      "읽기 성능 향상과 DB 부하 감소의 이점, 캐시 일관성 관리 복잡성·메모리 사용 증가·캐시 무효화 전략 필요의 단점",
-      "캐시는 외부 Redis만 가능하며 로컬 메모리 캐시는 미지원",
-      "@Cacheable은 읽기 전용이므로 쓰기 작업에는 별도 처리 불필요"
-    ],
-    "answer": 1,
-    "explanation": "`@Cacheable`은 반복 호출을 캐시에서 처리하여 DB 부하를 줄이지만, 데이터 변경 시 캐시를 무효화(`@CacheEvict`, `@CachePut`)해야 합니다. TTL 설정, 캐시 키 전략, 분산 환경에서의 일관성 관리가 필요합니다."
-  },
-  {
-    "id": "spring-t004",
-    "difficulty": "intermediate",
-    "type": "tradeoff",
-    "question": "Spring Data JPA의 EAGER vs LAZY 로딩 전략 선택 기준은?",
-    "options": [
-      "EAGER가 성능이 좋으므로 항상 EAGER 사용",
-      "EAGER는 항상 연관 데이터를 즉시 로드하여 N+1 문제 발생 가능, LAZY는 필요 시 로드하여 효율적이나 트랜잭션 외부 접근 시 LazyInitializationException 위험",
-      "LAZY는 읽기 전용 트랜잭션에서만 사용 가능",
-      "Spring Boot에서는 기본적으로 모든 연관관계가 EAGER"
-    ],
-    "answer": 1,
-    "explanation": "JPA 기본값: `@ManyToOne`, `@OneToOne`은 EAGER, `@OneToMany`, `@ManyToMany`는 LAZY. EAGER는 항상 JOIN하여 불필요한 데이터 로드 위험이 있고, LAZY는 트랜잭션 범위 밖에서 접근 시 `LazyInitializationException`이 발생합니다. 일반적으로 LAZY + fetch join 권장."
-  },
-  {
-    "id": "spring-t005",
-    "difficulty": "intermediate",
-    "type": "tradeoff",
-    "question": "Spring에서 `@Transactional(readOnly = true)` 사용의 장단점은?",
-    "options": [
-      "readOnly=true는 데이터 변경을 물리적으로 차단하는 잠금 메커니즘",
-      "더티 체킹 비활성화로 성능 향상, DB에 읽기 전용 힌트 제공 가능, 그러나 트랜잭션 내 쓰기 시도 시 예외 발생 없이 무시될 수 있어 주의 필요",
-      "readOnly=true는 트랜잭션을 완전히 비활성화하여 성능을 극대화",
-      "readOnly=true 설정은 테스트 코드에서만 사용 권장"
-    ],
-    "answer": 1,
-    "explanation": "`readOnly=true`는 ①JPA 더티 체킹(Dirty Checking) 비활성화로 스냅샷 저장을 생략하여 메모리·성능 향상 ②일부 JDBC 드라이버/DB에 읽기 전용 힌트 제공(리플리카 라우팅 가능). 단, 쓰기 연산을 완전히 막는 것은 아니라 주의가 필요합니다."
-  },
-  {
-    "id": "spring-t006",
-    "difficulty": "intermediate",
-    "type": "tradeoff",
-    "question": "Spring Security의 세션 기반 인증 vs JWT 토큰 기반 인증 트레이드오프는?",
-    "options": [
-      "JWT는 항상 세션보다 안전하므로 새 프로젝트는 JWT 선택",
-      "세션은 서버 메모리 사용·스케일 아웃 어려움이 있지만 즉시 무효화 가능, JWT는 무상태·스케일 아웃 용이하지만 토큰 만료 전 강제 무효화 어려움",
-      "세션은 REST API에, JWT는 MVC에 적합",
-      "Spring Security는 JWT를 기본으로 지원하지 않아 별도 라이브러리 필수"
-    ],
-    "answer": 1,
-    "explanation": "세션은 서버 메모리 부담과 분산 환경에서 세션 공유 문제가 있지만 즉각적인 강제 로그아웃이 가능합니다. JWT는 무상태로 수평 확장에 유리하지만 토큰 탈취 시 만료 전까지 무효화가 어렵습니다(Refresh Token + Blacklist 로 보완)."
-  },
-  {
-    "id": "spring-t007",
-    "difficulty": "advanced",
-    "type": "tradeoff",
-    "question": "Spring에서 단일 애플리케이션 vs 마이크로서비스 전환 시 고려 사항은?",
-    "options": [
-      "마이크로서비스는 항상 모놀리식보다 확장성이 좋으므로 신규 프로젝트는 MSA",
-      "모놀리식은 개발·배포·디버깅이 단순하지만 확장 한계, MSA는 독립 배포·기술 다양성 가능하지만 분산 트랜잭션·네트워크 레이턴시·운영 복잡도 증가",
-      "Spring Boot는 마이크로서비스 전용 프레임워크",
-      "마이크로서비스는 팀 규모가 10명 이상일 때만 적합"
-    ],
-    "answer": 1,
-    "explanation": "모놀리식은 트랜잭션 일관성, 단순한 로컬 호출, 쉬운 디버깅의 장점이 있습니다. MSA는 독립 배포·확장·기술 선택의 유연성이 있지만 분산 트랜잭션(Saga 패턴), 서비스 간 통신(API 게이트웨이, 서킷 브레이커), 운영 복잡도(Kubernetes, 모니터링)가 증가합니다."
-  },
-  {
-    "id": "spring-t008",
-    "difficulty": "advanced",
-    "type": "tradeoff",
-    "question": "Spring에서 `@Transactional` 예외 처리 전략의 트레이드오프는?",
-    "options": [
-      "모든 예외에 대해 rollbackFor=Exception.class를 설정하는 것이 항상 안전",
-      "rollbackFor=Exception.class는 모든 예외에 롤백하여 안전하지만 외부 API 호출 실패 등 롤백이 불필요한 경우도 포함, 세밀한 rollbackFor/noRollbackFor 설정이 필요",
-      "Checked Exception은 항상 롤백해야 하므로 rollbackFor 설정 불필요",
-      "RuntimeException 롤백은 성능 저하를 유발하므로 noRollbackFor로 비활성화 권장"
-    ],
-    "answer": 1,
-    "explanation": "기본 설정(RuntimeException 롤백)은 대부분 적절하지만, 복구 가능한 Checked Exception에 대해 무조건 롤백하면 불필요한 데이터 손실이 생길 수 있습니다. 반대로 이미 외부 API 호출이 완료된 상황에서는 DB 롤백만 해도 불일치가 생깁니다."
-  },
-  {
-    "id": "spring-t009",
-    "difficulty": "advanced",
-    "type": "tradeoff",
-    "question": "Spring Batch vs Spring Quartz 선택 기준은?",
-    "options": [
-      "Spring Batch는 소량 데이터, Quartz는 대량 데이터 처리에 적합",
-      "대용량 데이터 처리·청크 기반 I/O·재시작/재처리가 필요하면 Spring Batch, 단순 반복 스케줄링·분산 실행·클러스터링이 목적이면 Quartz",
-      "Quartz는 Spring Boot와 통합 불가",
-      "Spring Batch는 비동기 처리, Quartz는 동기 처리 전용"
-    ],
-    "answer": 1,
-    "explanation": "Spring Batch는 청크 기반(read-process-write) 처리, 실패 지점에서의 재시작, 스킵/재시도 정책, 실행 이력 관리에 특화되어 있습니다. Quartz는 cron 표현식 스케줄링, 클러스터 환경에서의 분산 실행에 특화되어 있으며, 두 기술을 함께 사용할 수도 있습니다."
-  },
-  {
-    "id": "spring-t010",
-    "difficulty": "advanced",
-    "type": "tradeoff",
-    "question": "Spring에서 `ApplicationEventPublisher` vs 메시지 브로커(Kafka/RabbitMQ) 선택 기준은?",
-    "options": [
-      "ApplicationEventPublisher는 분산 환경에서도 동일하게 동작",
-      "ApplicationEventPublisher는 동일 프로세스 내 동기/비동기 이벤트에 간편하지만 서비스 간 통신 불가, 메시지 브로커는 분산 서비스 간 통신·내구성·순서 보장에 적합하나 운영 복잡도 증가",
-      "메시지 브로커는 Spring Boot와 통합이 어려워 ApplicationEventPublisher 권장",
-      "둘 다 트랜잭션 내 이벤트 발행을 지원"
-    ],
-    "answer": 1,
-    "explanation": "`ApplicationEventPublisher`는 인프라 없이 간단하게 도메인 이벤트를 발행할 수 있으나 JVM 내부에서만 동작합니다. `@TransactionalEventListener`로 트랜잭션 커밋 후 이벤트 발행이 가능합니다. MSA 환경에서 서비스 간 통신은 Kafka, RabbitMQ 등이 필요합니다."
-  },
-  {
-    "id": "spring-t011",
-    "difficulty": "intermediate",
-    "type": "tradeoff",
-    "question": "Spring에서 `@PathVariable` vs `@RequestParam` 사용 기준은?",
-    "options": [
-      "@PathVariable은 POST, @RequestParam은 GET 요청에만 사용",
-      "@PathVariable은 리소스 식별자(필수, URL 경로의 일부), @RequestParam은 필터링·정렬 등 선택적 쿼리 파라미터에 적합",
-      "@RequestParam이 보안상 더 안전하므로 항상 @RequestParam 사용",
-      "둘 다 동일한 역할이므로 취향에 따라 선택"
-    ],
-    "answer": 1,
-    "explanation": "RESTful 설계에서 `/users/{id}`처럼 특정 리소스를 식별할 때는 `@PathVariable`을 사용합니다. `/users?page=1&size=10`처럼 선택적 파라미터·검색 조건·페이징에는 `@RequestParam`(required=false, defaultValue 지정 가능)을 사용합니다."
-  },
-  {
-    "id": "spring-t012",
-    "difficulty": "intermediate",
-    "type": "tradeoff",
-    "question": "Spring에서 Bean 스코프 singleton vs prototype 선택 기준은?",
-    "options": [
-      "데이터가 많으면 prototype, 적으면 singleton 사용",
-      "상태를 공유하는 무상태(stateless) 서비스는 singleton, 요청마다 다른 상태가 필요한 객체는 prototype(단, singleton에서 prototype 주입 시 주의 필요)",
-      "singleton은 스레드 안전하지 않아 멀티스레드 환경에서는 prototype만 사용",
-      "prototype은 메모리 낭비로 Spring에서 사용 자제 권장"
-    ],
-    "answer": 1,
-    "explanation": "대부분의 서비스·레포지토리·컨트롤러는 상태를 갖지 않아 singleton이 적합합니다. 요청마다 고유 상태가 필요한 경우 prototype을 사용하지만, singleton 빈에서 prototype 빈을 주입하면 항상 같은 인스턴스가 사용됩니다(ObjectProvider 또는 ApplicationContext.getBean()으로 해결)."
-  },
-  {
-    "id": "spring-t013",
-    "difficulty": "advanced",
-    "type": "tradeoff",
-    "question": "Spring에서 `@ExceptionHandler` vs `@ControllerAdvice` 예외 처리 방식의 트레이드오프는?",
-    "options": [
-      "@ExceptionHandler가 전역 처리, @ControllerAdvice가 로컬 처리",
-      "@ExceptionHandler는 특정 컨트롤러 내부 예외만 처리하여 세밀하지만 중복 코드 발생, @ControllerAdvice는 전역 처리로 중앙화되지만 컨트롤러별 세밀한 처리가 어려울 수 있음",
-      "둘 다 RuntimeException만 처리 가능",
-      "@ControllerAdvice는 REST API에서 사용 불가, @RestControllerAdvice 필요"
-    ],
-    "answer": 1,
-    "explanation": "`@ExceptionHandler`는 해당 컨트롤러 내에서만 동작하여 컨트롤러 특화 예외 처리가 가능하지만 중복됩니다. `@ControllerAdvice`(또는 `@RestControllerAdvice`)는 전역 예외 처리를 중앙화하여 일관된 에러 응답을 제공합니다. 두 방식은 혼용 가능합니다."
-  },
-  {
-    "id": "spring-t014",
-    "difficulty": "advanced",
-    "type": "tradeoff",
-    "question": "Spring Data JPA vs MyBatis 선택 기준은?",
-    "options": [
-      "Spring Data JPA는 항상 MyBatis보다 성능이 좋음",
-      "JPA는 객체 중심·CRUD 자동화·도메인 모델 복잡 시 유리, MyBatis는 복잡한 SQL 제어·DBA 협업·레거시 DB 스키마에서 유리",
-      "MyBatis는 Spring Boot와 통합이 어려워 JPA 권장",
-      "JPA는 NoSQL, MyBatis는 RDBMS 전용"
-    ],
-    "answer": 1,
-    "explanation": "JPA는 엔티티 중심으로 객체-관계 매핑을 자동화하여 CRUD가 편리하지만 복잡한 쿼리 작성이 어렵고 학습 곡선이 있습니다. MyBatis는 SQL을 직접 제어하여 최적화된 쿼리 작성이 가능하고 DBA와 협업이 용이하지만 보일러플레이트가 많습니다."
-  },
-  {
-    "id": "spring-t015",
-    "difficulty": "advanced",
-    "type": "tradeoff",
-    "question": "Spring에서 Feign Client vs RestTemplate vs WebClient 선택 기준은?",
-    "options": [
-      "RestTemplate은 deprecated되어 모든 프로젝트에서 WebClient 사용 필수",
-      "RestTemplate은 동기 블로킹으로 간단, Feign은 인터페이스 기반 선언적 HTTP 클라이언트로 유지보수 용이, WebClient는 리액티브 비동기 I/O 지원",
-      "Feign은 MSA 환경에서만 사용 가능",
-      "WebClient는 Spring Boot 3.0부터 제거됨"
-    ],
-    "answer": 1,
-    "explanation": "RestTemplate은 동기 방식으로 학습 곡선이 낮지만 Spring 5.0부터 유지 모드입니다. Feign은 인터페이스 선언만으로 HTTP 클라이언트를 구현하여 MSA에서 서비스 간 호출에 유용합니다. WebClient는 동기/비동기 모두 지원하며 Spring 권장 방식입니다."
-  },
-  {
-    "id": "spring-s001",
-    "difficulty": "intermediate",
-    "type": "scenario",
-    "question": "다음 코드에서 `@Transactional`이 적용되지 않는 이유는?\n```java\n@Service\npublic class OrderService {\n    public void placeOrder() {\n        this.saveOrder(); // 내부 호출\n    }\n    @Transactional\n    public void saveOrder() { ... }\n}\n```",
-    "options": [
-      "@Transactional은 public 메서드에만 적용되므로 saveOrder가 private이어야 함",
-      "Spring AOP 프록시 특성상 같은 빈의 내부 메서드 호출은 프록시를 거치지 않아 @Transactional 미적용",
-      "@Service와 @Transactional을 함께 사용할 수 없음",
-      "placeOrder()에도 @Transactional을 추가하면 해결됨"
-    ],
-    "answer": 1,
-    "explanation": "Spring AOP는 프록시 기반으로 동작합니다. 외부에서 `orderService.saveOrder()`를 호출하면 프록시가 트랜잭션을 시작하지만, `this.saveOrder()`처럼 내부 호출은 실제 객체를 직접 호출하여 프록시를 우회합니다. 해결: `placeOrder()`에 `@Transactional` 추가, 또는 자기 주입(self-injection)."
-  },
-  {
-    "id": "spring-s002",
-    "difficulty": "intermediate",
-    "type": "scenario",
-    "question": "다음 설정에서 순환 의존성(Circular Dependency) 문제가 발생하는 이유와 해결 방법은?\n```java\n@Service class A {\n    @Autowired B b;\n}\n@Service class B {\n    @Autowired A a;\n}\n```",
-    "options": [
-      "Spring은 순환 의존성을 자동으로 해결하므로 문제 없음",
-      "생성자 주입 시 A와 B가 서로를 필요로 하여 BeanCurrentlyInCreationException 발생 — 설계 분리 또는 @Lazy로 해결",
-      "@Autowired 대신 @Resource를 사용하면 순환 의존성이 자동 해결",
-      "순환 의존성은 인터페이스로 분리하면 해결"
-    ],
-    "answer": 1,
-    "explanation": "생성자 주입에서 A가 B를 필요로 하고 B가 A를 필요로 하면 애플리케이션 시작 시 `BeanCurrentlyInCreationException`이 발생합니다. 근본 해결: 설계를 변경하여 순환 참조를 끊거나 공통 의존성을 별도 컴포넌트로 추출. 임시 방편: `@Lazy` 어노테이션으로 지연 초기화."
-  },
-  {
-    "id": "spring-s003",
-    "difficulty": "intermediate",
-    "type": "scenario",
-    "question": "다음 코드에서 `LazyInitializationException`이 발생하는 이유는?\n```java\n@Transactional\npublic User getUser(Long id) {\n    return userRepository.findById(id).orElseThrow();\n}\n// 호출 코드\nUser user = userService.getUser(1L);\nList<Order> orders = user.getOrders(); // 예외 발생!\n```",
-    "options": [
-      "getOrders()가 List 타입이 아니어서 발생",
-      "트랜잭션이 종료된 후 LAZY 로딩 연관 관계에 접근하여 발생",
-      "User 엔티티에 @OneToMany 어노테이션이 없어서 발생",
-      "getUser()가 User를 반환하지 않고 Optional을 반환해야 함"
-    ],
-    "answer": 1,
-    "explanation": "`@Transactional` 메서드가 반환된 후 트랜잭션이 닫히고 영속성 컨텍스트(EntityManager)가 소멸합니다. 이후 `user.getOrders()`처럼 LAZY 관계에 접근하면 초기화할 세션이 없어 `LazyInitializationException`이 발생합니다. 해결: DTO로 변환 후 반환, fetch join 사용, `@Transactional` 범위 확장."
-  },
-  {
-    "id": "spring-s004",
-    "difficulty": "intermediate",
-    "type": "scenario",
-    "question": "Spring Boot 애플리케이션에서 다음 설정의 결과는?\n```yaml\nspring:\n  datasource:\n    url: jdbc:h2:mem:testdb\n  jpa:\n    hibernate:\n      ddl-auto: create-drop\n```",
-    "options": [
-      "운영 DB에 연결하여 기존 테이블을 유지",
-      "애플리케이션 시작 시 스키마 생성, 종료 시 삭제 — 테스트 환경에 적합하나 운영 환경에서는 데이터 손실 위험",
-      "H2 DB는 영구 저장소이므로 종료 후에도 데이터 유지",
-      "ddl-auto: create-drop은 Spring Boot 3.0부터 지원 중단"
-    ],
-    "answer": 1,
-    "explanation": "`create-drop`은 시작 시 `CREATE TABLE`, 종료 시 `DROP TABLE`을 실행합니다. 인메모리 H2와 함께 테스트 환경에서 유용하지만 운영 환경에서는 절대 사용하면 안 됩니다. 운영: `validate` 또는 Flyway/Liquibase 사용 권장."
-  },
-  {
-    "id": "spring-s005",
-    "difficulty": "intermediate",
-    "type": "scenario",
-    "question": "다음 코드에서 N+1 쿼리 문제가 발생하는 상황은?\n```java\nList<User> users = userRepository.findAll();\nfor (User user : users) {\n    System.out.println(user.getOrders().size());\n}\n```",
-    "options": [
-      "N+1은 INSERT 쿼리에서만 발생하는 문제",
-      "findAll()로 N명의 User를 조회 후, 각 user.getOrders() 접근마다 추가 쿼리 — 총 N+1번 쿼리 실행",
-      "getOrders()는 캐시되어 추가 쿼리 없음",
-      "Spring Data JPA는 자동으로 N+1을 방지"
-    ],
-    "answer": 1,
-    "explanation": "N명의 User를 조회하는 쿼리 1번 + 각 User의 orders를 조회하는 쿼리 N번 = N+1번 쿼리가 실행됩니다. 해결: `@Query(\"SELECT u FROM User u JOIN FETCH u.orders\")` 또는 `@EntityGraph(attributePaths = {\"orders\"})`로 한 번의 JOIN 쿼리로 처리."
-  },
-  {
-    "id": "spring-s006",
-    "difficulty": "intermediate",
-    "type": "scenario",
-    "question": "Spring Security에서 다음 설정의 의미는?\n```java\nhttp.authorizeHttpRequests(auth -> auth\n    .requestMatchers(\"/public/**\").permitAll()\n    .requestMatchers(\"/admin/**\").hasRole(\"ADMIN\")\n    .anyRequest().authenticated()\n);\n```",
-    "options": [
-      "모든 요청이 인증 없이 접근 가능",
-      "/public/** 경로는 모두 허용, /admin/** 경로는 ADMIN 역할 필요, 나머지는 로그인한 사용자만 접근",
-      "ADMIN 역할만 전체 API에 접근 가능",
-      "인증된 사용자는 /admin/**에도 자동으로 접근 가능"
-    ],
-    "answer": 1,
-    "explanation": "규칙은 순서대로 적용됩니다. `/public/**`는 인증 없이 접근 가능, `/admin/**`는 `ROLE_ADMIN` 권한이 필요, 나머지 모든 요청은 인증(로그인)된 사용자만 접근 가능합니다. 순서가 중요하며 더 구체적인 규칙을 먼저 배치해야 합니다."
-  },
-  {
-    "id": "spring-s007",
-    "difficulty": "intermediate",
-    "type": "scenario",
-    "question": "다음 Spring 설정에서 Bean이 등록되지 않는 이유는?\n```java\n@Configuration\npublic class AppConfig {\n    @Bean\n    @ConditionalOnProperty(name = \"feature.enabled\", havingValue = \"true\")\n    public FeatureService featureService() {\n        return new FeatureService();\n    }\n}\n```",
-    "options": [
-      "@Configuration 클래스에서는 @Bean을 사용할 수 없음",
-      "application.properties에 `feature.enabled=true`가 없으면 조건 미충족으로 Bean 미등록",
-      "@ConditionalOnProperty는 Spring Boot에서만 동작하지 않음",
-      "FeatureService가 @Component가 아니어서 등록 안 됨"
-    ],
-    "answer": 1,
-    "explanation": "`@ConditionalOnProperty`는 지정된 프로퍼티가 해당 값과 일치할 때만 Bean을 등록합니다. `application.properties`에 `feature.enabled=true`가 없거나 다른 값이면 Bean이 생성되지 않습니다. Spring Boot 자동 설정의 핵심 메커니즘입니다."
-  },
-  {
-    "id": "spring-s008",
-    "difficulty": "intermediate",
-    "type": "scenario",
-    "question": "다음 JPA 코드에서 변경 감지(Dirty Checking)가 동작하는 조건은?\n```java\n@Transactional\npublic void updateUser(Long id, String name) {\n    User user = userRepository.findById(id).orElseThrow();\n    user.setName(name); // save() 호출 없음\n}\n```",
-    "options": [
-      "save()를 호출하지 않으면 변경이 반영되지 않음",
-      "트랜잭션 내에서 영속 상태의 엔티티를 변경하면 커밋 시 자동으로 UPDATE 쿼리 실행",
-      "setName()은 DB에 즉시 UPDATE를 전송",
-      "Dirty Checking은 @Entity에 @DynamicUpdate를 설정해야 동작"
-    ],
-    "answer": 1,
-    "explanation": "JPA 영속성 컨텍스트는 관리 중인 엔티티의 스냅샷을 보관합니다. 트랜잭션 커밋 시 현재 상태와 스냅샷을 비교(Dirty Checking)하여 변경된 필드에 대해 UPDATE 쿼리를 자동 실행합니다. 별도의 `save()` 호출 없이도 변경이 DB에 반영됩니다."
-  },
-  {
-    "id": "spring-s009",
-    "difficulty": "advanced",
-    "type": "scenario",
-    "question": "다음 코드에서 트랜잭션 롤백이 발생하지 않는 이유는?\n```java\n@Transactional\npublic void process() throws IOException {\n    saveData();\n    throw new IOException(\"파일 오류\");\n}\n```",
-    "options": [
-      "IOException이 발생하면 트랜잭션이 자동 롤백됨",
-      "@Transactional의 기본 rollbackFor는 RuntimeException이므로 Checked Exception인 IOException은 롤백 대상이 아님",
-      "IOException은 catch하지 않았으므로 컴파일 에러",
-      "saveData() 성공 후 예외가 발생하면 부분 커밋됨"
-    ],
-    "answer": 1,
-    "explanation": "`@Transactional`은 기본적으로 `RuntimeException`과 `Error`에만 롤백합니다. `IOException`은 Checked Exception이므로 기본 설정에서는 롤백되지 않고 커밋됩니다. 해결: `@Transactional(rollbackFor = IOException.class)` 또는 IOException을 RuntimeException으로 감싸서 던지기."
-  },
-  {
-    "id": "spring-s010",
-    "difficulty": "advanced",
-    "type": "scenario",
-    "question": "Spring AOP에서 다음 Pointcut 표현식이 매칭하는 대상은?\n```java\n@Pointcut(\"execution(* com.example.service..*Service.*(..))\")\n```",
-    "options": [
-      "com.example.service 패키지의 모든 클래스의 모든 메서드",
-      "com.example.service 패키지 및 하위 패키지에서 이름이 Service로 끝나는 클래스의 모든 메서드(모든 반환 타입, 모든 매개변수)",
-      "com.example.service.Service 클래스의 특정 메서드",
-      "Service 인터페이스를 구현한 모든 클래스의 모든 메서드"
-    ],
-    "answer": 1,
-    "explanation": "`execution(반환타입 패키지..클래스.메서드(매개변수))` 형식입니다. `*`는 모든 반환 타입, `com.example.service..*Service`는 해당 패키지 및 하위 패키지의 Service로 끝나는 클래스, `*(..)`는 모든 메서드와 매개변수를 의미합니다."
-  },
-  {
-    "id": "spring-s011",
-    "difficulty": "advanced",
-    "type": "scenario",
-    "question": "다음 Spring Batch 설정에서 Chunk 기반 처리의 동작은?\n```java\nstepBuilderFactory.get(\"step\")\n    .<User, UserDTO>chunk(100)\n    .reader(userReader)\n    .processor(userProcessor)\n    .writer(userWriter)\n    .build();\n```",
-    "options": [
-      "100명의 User를 전부 메모리에 올린 후 한 번에 처리",
+    {
+      "id": "spring-c001",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "Spring의 IoC(Inversion of Control)란 무엇인가요?",
+      "options": [
+        "개발자가 직접 객체를 생성하고 의존성을 관리하는 패턴",
+        "객체의 생성과 의존성 관리를 프레임워크(컨테이너)에 위임하는 설계 원칙",
+        "컨트롤러가 서비스 레이어를 직접 호출하는 패턴",
+        "인터페이스를 통해 구현체를 역방향으로 참조하는 기법"
+      ],
+      "answer": 1,
+      "explanation": "IoC는 객체의 생성·생명주기·의존성 주입을 개발자가 아닌 Spring 컨테이너(ApplicationContext)가 제어하는 원칙입니다. 개발자는 '어떻게 만들지' 대신 '무엇이 필요한지'만 선언하면 됩니다."
+    },
+    {
+      "id": "spring-c002",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "Spring의 DI(Dependency Injection) 방식 중 생성자 주입(Constructor Injection)의 장점은?",
+      "options": [
+        "런타임에 의존성을 동적으로 교체할 수 있다",
+        "필수 의존성을 강제하고, 불변성 보장, 순환 의존성 컴파일 타임 감지",
+        "선택적 의존성 처리가 용이하다",
+        "코드 양이 가장 적어 간결하다"
+      ],
+      "answer": 1,
+      "explanation": "생성자 주입은 객체 생성 시 모든 의존성이 주입되어 필수 의존성을 보장합니다. final 필드 선언으로 불변성을 유지하고, 순환 의존성을 애플리케이션 시작 시 감지할 수 있습니다. Spring 공식 권장 방식입니다."
+    },
+    {
+      "id": "spring-c003",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "Spring Bean의 기본 스코프(Scope)는?",
+      "options": [
+        "prototype — 요청마다 새 인스턴스 생성",
+        "singleton — 컨테이너당 하나의 인스턴스",
+        "request — HTTP 요청마다 새 인스턴스",
+        "session — HTTP 세션마다 새 인스턴스"
+      ],
+      "answer": 1,
+      "explanation": "Spring Bean의 기본 스코프는 singleton입니다. 동일한 ApplicationContext 내에서 동일한 Bean 정의에 대해 단 하나의 인스턴스만 생성되어 모든 요청에 공유됩니다. 별도 설정 없이는 모든 Bean이 싱글톤으로 관리됩니다."
+    },
+    {
+      "id": "spring-c004",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "Spring의 `@Component`, `@Service`, `@Repository`, `@Controller`의 관계는?",
+      "options": [
+        "완전히 다른 기능을 하는 독립적인 어노테이션",
+        "`@Service`, `@Repository`, `@Controller`는 모두 `@Component`의 특수화로 계층별 의미를 부여한 것",
+        "`@Component`는 deprecated되고 나머지 셋을 사용 권장",
+        "`@Repository`는 DB 연결, `@Service`는 트랜잭션을 자동으로 처리"
+      ],
+      "answer": 1,
+      "explanation": "`@Service`, `@Repository`, `@Controller`는 `@Component`를 메타 어노테이션으로 포함하여 컴포넌트 스캔 대상이 됩니다. 계층별 의미를 명확히 하고, `@Repository`는 추가로 데이터 접근 예외를 Spring 예외 계층으로 변환합니다."
+    },
+    {
+      "id": "spring-c005",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "Spring AOP에서 `@Aspect`와 `@Around` 어노테이션의 역할은?",
+      "options": [
+        "`@Aspect`는 트랜잭션 관리, `@Around`는 예외 처리를 담당",
+        "`@Aspect`는 클래스를 Aspect로 선언, `@Around`는 대상 메서드 실행 전후를 모두 제어하는 Advice 정의",
+        "`@Aspect`는 Bean 등록, `@Around`는 메서드 실행 시간 측정 전용",
+        "둘 다 Spring Security에서 인증/인가를 위해 사용"
+      ],
+      "answer": 1,
+      "explanation": "`@Aspect`는 해당 클래스가 횡단 관심사를 담당하는 Aspect임을 선언합니다. `@Around`는 가장 강력한 Advice로, `ProceedingJoinPoint`를 통해 대상 메서드 실행 전·후·예외 상황 모두를 제어할 수 있습니다."
+    },
+    {
+      "id": "spring-c006",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "Spring MVC에서 `DispatcherServlet`의 역할은?",
+      "options": [
+        "데이터베이스 연결을 관리하는 서블릿",
+        "모든 HTTP 요청을 받아 적절한 핸들러(Controller)로 라우팅하는 프론트 컨트롤러",
+        "정적 자원(CSS, JS)을 처리하는 서블릿",
+        "세션과 쿠키를 관리하는 서블릿"
+      ],
+      "answer": 1,
+      "explanation": "`DispatcherServlet`은 Spring MVC의 프론트 컨트롤러 패턴 구현체입니다. HandlerMapping으로 요청을 핸들러에 매핑하고, HandlerAdapter로 핸들러를 실행하며, ViewResolver로 뷰를 결정합니다."
+    },
+    {
+      "id": "spring-c007",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "Spring Boot의 `@SpringBootApplication` 어노테이션이 포함하는 것은?",
+      "options": [
+        "`@Controller`, `@Service`, `@Repository`를 합친 어노테이션",
+        "`@Configuration`, `@EnableAutoConfiguration`, `@ComponentScan`을 합친 복합 어노테이션",
+        "`@Transactional`, `@Cacheable`, `@Async`를 자동 활성화",
+        "Spring Security와 Spring Data를 자동 설정"
+      ],
+      "answer": 1,
+      "explanation": "`@SpringBootApplication`은 ①`@Configuration`(설정 클래스) ②`@EnableAutoConfiguration`(자동 설정 활성화) ③`@ComponentScan`(현재 패키지부터 컴포넌트 탐색)을 합친 편의 어노테이션입니다."
+    },
+    {
+      "id": "spring-c008",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "`@Transactional` 어노테이션의 기본 동작은?",
+      "options": [
+        "읽기 전용 트랜잭션을 생성하고 커밋 없이 종료",
+        "메서드 시작 시 트랜잭션을 시작하고, 정상 종료 시 커밋, RuntimeException 발생 시 롤백",
+        "새로운 트랜잭션을 항상 생성하며 기존 트랜잭션을 일시 중단",
+        "체크드 예외 발생 시에도 자동 롤백"
+      ],
+      "answer": 1,
+      "explanation": "`@Transactional`의 기본 설정: propagation=REQUIRED(기존 트랜잭션 참여 또는 새 생성), isolation=DEFAULT, rollbackFor=RuntimeException(Unchecked Exception). Checked Exception은 기본적으로 롤백되지 않습니다."
+    },
+    {
+      "id": "spring-c009",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "Spring Boot 자동 설정(Auto Configuration)의 동작 원리는?",
+      "options": [
+        "개발자가 설정 파일을 명시적으로 import해야 활성화",
+        "클래스패스의 라이브러리와 설정을 감지하여 `@Conditional` 조건에 따라 Bean을 자동 등록",
+        "모든 가능한 Bean을 항상 등록하고 사용하지 않는 것은 나중에 제거",
+        "application.properties 파일의 내용만으로 자동 설정"
+      ],
+      "answer": 1,
+      "explanation": "Spring Boot는 `spring.factories`(또는 `AutoConfiguration.imports`)에 등록된 자동 설정 클래스들을 로드하고, `@ConditionalOnClass`, `@ConditionalOnMissingBean` 등 조건에 따라 필요한 Bean만 자동 등록합니다."
+    },
+    {
+      "id": "spring-c010",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "Spring에서 `@RequestBody`와 `@ResponseBody`의 역할은?",
+      "options": [
+        "`@RequestBody`는 요청 헤더, `@ResponseBody`는 응답 헤더를 처리",
+        "`@RequestBody`는 HTTP 요청 본문을 Java 객체로 역직렬화, `@ResponseBody`는 Java 객체를 응답 본문으로 직렬화",
+        "`@RequestBody`는 GET 파라미터, `@ResponseBody`는 POST 데이터를 처리",
+        "둘 다 JSON만 처리하며 XML은 별도 어노테이션 필요"
+      ],
+      "answer": 1,
+      "explanation": "`@RequestBody`는 `HttpMessageConverter`를 통해 요청 본문(JSON 등)을 Java 객체로 변환합니다. `@ResponseBody`는 반환 객체를 응답 본문으로 직렬화합니다. `@RestController`는 `@Controller + @ResponseBody`를 합친 것입니다."
+    },
+    {
+      "id": "spring-c011",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "Spring AOP에서 JDK Dynamic Proxy와 CGLIB Proxy의 차이는?",
+      "options": [
+        "JDK Proxy는 XML 기반, CGLIB는 어노테이션 기반 설정에서 사용",
+        "JDK Proxy는 인터페이스가 있을 때 인터페이스 기반 프록시 생성, CGLIB는 인터페이스 없이 클래스를 상속하여 프록시 생성",
+        "JDK Proxy는 성능이 좋고, CGLIB는 기능이 많음",
+        "Spring Boot에서는 항상 JDK Proxy만 사용"
+      ],
+      "answer": 1,
+      "explanation": "JDK Dynamic Proxy는 대상 클래스가 인터페이스를 구현해야 하며 인터페이스 기반으로 프록시를 생성합니다. CGLIB는 클래스를 상속하여 프록시를 생성하므로 인터페이스 없이도 동작합니다. Spring Boot 2.x+는 기본적으로 CGLIB를 사용합니다."
+    },
+    {
+      "id": "spring-c012",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "Spring의 `@Transactional` 전파(Propagation) 속성 중 `REQUIRES_NEW`의 동작은?",
+      "options": [
+        "기존 트랜잭션이 있으면 참여하고, 없으면 새로 생성",
+        "기존 트랜잭션을 일시 중단하고 항상 새 트랜잭션을 생성",
+        "트랜잭션 없이 실행하며, 기존 트랜잭션도 일시 중단",
+        "기존 트랜잭션의 중첩 트랜잭션(Savepoint)으로 실행"
+      ],
+      "answer": 1,
+      "explanation": "`REQUIRES_NEW`는 기존 트랜잭션을 일시 중단(suspend)하고 완전히 독립된 새 트랜잭션을 시작합니다. 새 트랜잭션이 커밋/롤백되어도 원래 트랜잭션에 영향을 주지 않습니다. 로깅, 감사(Audit) 등에 유용합니다."
+    },
+    {
+      "id": "spring-c013",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "Spring Bean 생명주기에서 초기화 콜백의 우선순위 순서는?",
+      "options": [
+        "@Bean(initMethod) → @PostConstruct → InitializingBean.afterPropertiesSet()",
+        "@PostConstruct → InitializingBean.afterPropertiesSet() → @Bean(initMethod)",
+        "InitializingBean → @Bean(initMethod) → @PostConstruct",
+        "모두 동시에 실행되어 순서 없음"
+      ],
+      "answer": 1,
+      "explanation": "Spring Bean 초기화 순서: ①`@PostConstruct` (JSR-250, 권장) → ②`InitializingBean.afterPropertiesSet()` → ③`@Bean(initMethod)` 또는 XML `init-method`. 소멸 순서는 반대: `@PreDestroy` → `DisposableBean.destroy()` → `destroyMethod`."
+    },
+    {
+      "id": "spring-c014",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "Spring의 `@Async` 어노테이션 사용 시 주의사항은?",
+      "options": [
+        "@Async는 모든 메서드에 자동 적용되어 별도 설정 불필요",
+        "같은 클래스 내부 호출은 프록시를 거치지 않아 비동기 미적용, `@EnableAsync` 필요, 반환 타입은 void 또는 Future/CompletableFuture",
+        "@Async 메서드는 반드시 static이어야 함",
+        "@Async는 트랜잭션과 함께 사용 불가"
+      ],
+      "answer": 1,
+      "explanation": "`@Async`는 ①`@EnableAsync` 활성화 필요 ②같은 빈의 내부 메서드 호출 시 프록시를 거치지 않아 비동기 미적용 ③반환 타입은 void, Future, CompletableFuture ④별도 스레드풀 미설정 시 기본 SimpleAsyncTaskExecutor 사용(스레드풀 미사용 주의)."
+    },
+    {
+      "id": "spring-c015",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "Spring Data JPA의 `@EntityGraph`와 `fetch join`의 공통 목적은?",
+      "options": [
+        "엔티티를 여러 데이터베이스에 분산 저장",
+        "N+1 문제를 해결하기 위해 연관 엔티티를 한 쿼리로 함께 조회",
+        "엔티티의 변경을 추적하여 자동으로 UPDATE 쿼리 실행",
+        "읽기 전용 트랜잭션에서 캐싱을 활성화"
+      ],
+      "answer": 1,
+      "explanation": "N+1 문제는 연관 관계를 LAZY 로딩할 때 N개의 엔티티마다 추가 쿼리가 발생하는 문제입니다. `@EntityGraph`와 JPQL `fetch join`은 모두 연관 엔티티를 한 번의 JOIN 쿼리로 함께 조회하여 이 문제를 해결합니다."
+    },
+    {
+      "id": "spring-t001",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "Spring DI에서 필드 주입(Field Injection) vs 생성자 주입(Constructor Injection)의 트레이드오프는?",
+      "options": [
+        "필드 주입이 성능이 더 좋아 대규모 프로젝트에 권장",
+        "필드 주입은 코드가 간결하지만 불변성 미보장·테스트 어려움, 생성자 주입은 코드가 길지만 불변성·테스트 용이성·순환 의존성 감지 가능",
+        "생성자 주입은 Spring 5 이전에만 지원됨",
+        "필드 주입은 인터페이스, 생성자 주입은 구체 클래스에만 사용"
+      ],
+      "answer": 1,
+      "explanation": "필드 주입(`@Autowired` 필드)은 코드가 간결하지만 final 선언 불가, Reflection 사용으로 테스트 시 의존성 주입 어려움, 순환 의존성 런타임 감지 단점이 있습니다. 생성자 주입은 불변성 보장, 테스트 용이성, 필수 의존성 명시성으로 Spring 공식 권장합니다."
+    },
+    {
+      "id": "spring-t002",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "Spring MVC vs Spring WebFlux 선택 기준은?",
+      "options": [
+        "Spring WebFlux는 항상 Spring MVC보다 빠르므로 새 프로젝트는 WebFlux 선택",
+        "동기 블로킹 I/O 위주·팀 친숙도가 높으면 Spring MVC, 고동시성 비동기 I/O 요구·리액티브 생태계 활용 시 WebFlux",
+        "Spring MVC는 REST API, WebFlux는 웹소켓에만 사용",
+        "WebFlux는 Spring Data JPA와 함께 사용 불가"
+      ],
+      "answer": 1,
+      "explanation": "Spring MVC는 스레드당 요청 모델로 팀 친숙도 높고 디버깅 용이합니다. WebFlux는 이벤트 루프 기반으로 적은 스레드로 높은 동시성을 처리하지만 리액티브 프로그래밍 학습 곡선, 디버깅 복잡성이 있습니다. CPU 바운드 작업에서는 차이가 없습니다."
+    },
+    {
+      "id": "spring-t003",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "Spring Cache(`@Cacheable`)를 사용할 때의 트레이드오프는?",
+      "options": [
+        "캐싱은 항상 성능을 향상시키므로 모든 서비스 메서드에 적용 권장",
+        "읽기 성능 향상과 DB 부하 감소의 이점, 캐시 일관성 관리 복잡성·메모리 사용 증가·캐시 무효화 전략 필요의 단점",
+        "캐시는 외부 Redis만 가능하며 로컬 메모리 캐시는 미지원",
+        "@Cacheable은 읽기 전용이므로 쓰기 작업에는 별도 처리 불필요"
+      ],
+      "answer": 1,
+      "explanation": "`@Cacheable`은 반복 호출을 캐시에서 처리하여 DB 부하를 줄이지만, 데이터 변경 시 캐시를 무효화(`@CacheEvict`, `@CachePut`)해야 합니다. TTL 설정, 캐시 키 전략, 분산 환경에서의 일관성 관리가 필요합니다."
+    },
+    {
+      "id": "spring-t004",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "Spring Data JPA의 EAGER vs LAZY 로딩 전략 선택 기준은?",
+      "options": [
+        "EAGER가 성능이 좋으므로 항상 EAGER 사용",
+        "EAGER는 항상 연관 데이터를 즉시 로드하여 N+1 문제 발생 가능, LAZY는 필요 시 로드하여 효율적이나 트랜잭션 외부 접근 시 LazyInitializationException 위험",
+        "LAZY는 읽기 전용 트랜잭션에서만 사용 가능",
+        "Spring Boot에서는 기본적으로 모든 연관관계가 EAGER"
+      ],
+      "answer": 1,
+      "explanation": "JPA 기본값: `@ManyToOne`, `@OneToOne`은 EAGER, `@OneToMany`, `@ManyToMany`는 LAZY. EAGER는 항상 JOIN하여 불필요한 데이터 로드 위험이 있고, LAZY는 트랜잭션 범위 밖에서 접근 시 `LazyInitializationException`이 발생합니다. 일반적으로 LAZY + fetch join 권장."
+    },
+    {
+      "id": "spring-t005",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "Spring에서 `@Transactional(readOnly = true)` 사용의 장단점은?",
+      "options": [
+        "readOnly=true는 데이터 변경을 물리적으로 차단하는 잠금 메커니즘",
+        "더티 체킹 비활성화로 성능 향상, DB에 읽기 전용 힌트 제공 가능, 그러나 트랜잭션 내 쓰기 시도 시 예외 발생 없이 무시될 수 있어 주의 필요",
+        "readOnly=true는 트랜잭션을 완전히 비활성화하여 성능을 극대화",
+        "readOnly=true 설정은 테스트 코드에서만 사용 권장"
+      ],
+      "answer": 1,
+      "explanation": "`readOnly=true`는 ①JPA 더티 체킹(Dirty Checking) 비활성화로 스냅샷 저장을 생략하여 메모리·성능 향상 ②일부 JDBC 드라이버/DB에 읽기 전용 힌트 제공(리플리카 라우팅 가능). 단, 쓰기 연산을 완전히 막는 것은 아니라 주의가 필요합니다."
+    },
+    {
+      "id": "spring-t006",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "Spring Security의 세션 기반 인증 vs JWT 토큰 기반 인증 트레이드오프는?",
+      "options": [
+        "JWT는 항상 세션보다 안전하므로 새 프로젝트는 JWT 선택",
+        "세션은 서버 메모리 사용·스케일 아웃 어려움이 있지만 즉시 무효화 가능, JWT는 무상태·스케일 아웃 용이하지만 토큰 만료 전 강제 무효화 어려움",
+        "세션은 REST API에, JWT는 MVC에 적합",
+        "Spring Security는 JWT를 기본으로 지원하지 않아 별도 라이브러리 필수"
+      ],
+      "answer": 1,
+      "explanation": "세션은 서버 메모리 부담과 분산 환경에서 세션 공유 문제가 있지만 즉각적인 강제 로그아웃이 가능합니다. JWT는 무상태로 수평 확장에 유리하지만 토큰 탈취 시 만료 전까지 무효화가 어렵습니다(Refresh Token + Blacklist 로 보완)."
+    },
+    {
+      "id": "spring-t007",
+      "difficulty": "advanced",
+      "type": "tradeoff",
+      "question": "Spring에서 단일 애플리케이션 vs 마이크로서비스 전환 시 고려 사항은?",
+      "options": [
+        "마이크로서비스는 항상 모놀리식보다 확장성이 좋으므로 신규 프로젝트는 MSA",
+        "모놀리식은 개발·배포·디버깅이 단순하지만 확장 한계, MSA는 독립 배포·기술 다양성 가능하지만 분산 트랜잭션·네트워크 레이턴시·운영 복잡도 증가",
+        "Spring Boot는 마이크로서비스 전용 프레임워크",
+        "마이크로서비스는 팀 규모가 10명 이상일 때만 적합"
+      ],
+      "answer": 1,
+      "explanation": "모놀리식은 트랜잭션 일관성, 단순한 로컬 호출, 쉬운 디버깅의 장점이 있습니다. MSA는 독립 배포·확장·기술 선택의 유연성이 있지만 분산 트랜잭션(Saga 패턴), 서비스 간 통신(API 게이트웨이, 서킷 브레이커), 운영 복잡도(Kubernetes, 모니터링)가 증가합니다."
+    },
+    {
+      "id": "spring-t008",
+      "difficulty": "advanced",
+      "type": "tradeoff",
+      "question": "Spring에서 `@Transactional` 예외 처리 전략의 트레이드오프는?",
+      "options": [
+        "모든 예외에 대해 rollbackFor=Exception.class를 설정하는 것이 항상 안전",
+        "rollbackFor=Exception.class는 모든 예외에 롤백하여 안전하지만 외부 API 호출 실패 등 롤백이 불필요한 경우도 포함, 세밀한 rollbackFor/noRollbackFor 설정이 필요",
+        "Checked Exception은 항상 롤백해야 하므로 rollbackFor 설정 불필요",
+        "RuntimeException 롤백은 성능 저하를 유발하므로 noRollbackFor로 비활성화 권장"
+      ],
+      "answer": 1,
+      "explanation": "기본 설정(RuntimeException 롤백)은 대부분 적절하지만, 복구 가능한 Checked Exception에 대해 무조건 롤백하면 불필요한 데이터 손실이 생길 수 있습니다. 반대로 이미 외부 API 호출이 완료된 상황에서는 DB 롤백만 해도 불일치가 생깁니다."
+    },
+    {
+      "id": "spring-t009",
+      "difficulty": "advanced",
+      "type": "tradeoff",
+      "question": "Spring Batch vs Spring Quartz 선택 기준은?",
+      "options": [
+        "Spring Batch는 소량 데이터, Quartz는 대량 데이터 처리에 적합",
+        "대용량 데이터 처리·청크 기반 I/O·재시작/재처리가 필요하면 Spring Batch, 단순 반복 스케줄링·분산 실행·클러스터링이 목적이면 Quartz",
+        "Quartz는 Spring Boot와 통합 불가",
+        "Spring Batch는 비동기 처리, Quartz는 동기 처리 전용"
+      ],
+      "answer": 1,
+      "explanation": "Spring Batch는 청크 기반(read-process-write) 처리, 실패 지점에서의 재시작, 스킵/재시도 정책, 실행 이력 관리에 특화되어 있습니다. Quartz는 cron 표현식 스케줄링, 클러스터 환경에서의 분산 실행에 특화되어 있으며, 두 기술을 함께 사용할 수도 있습니다."
+    },
+    {
+      "id": "spring-t010",
+      "difficulty": "advanced",
+      "type": "tradeoff",
+      "question": "Spring에서 `ApplicationEventPublisher` vs 메시지 브로커(Kafka/RabbitMQ) 선택 기준은?",
+      "options": [
+        "ApplicationEventPublisher는 분산 환경에서도 동일하게 동작",
+        "ApplicationEventPublisher는 동일 프로세스 내 동기/비동기 이벤트에 간편하지만 서비스 간 통신 불가, 메시지 브로커는 분산 서비스 간 통신·내구성·순서 보장에 적합하나 운영 복잡도 증가",
+        "메시지 브로커는 Spring Boot와 통합이 어려워 ApplicationEventPublisher 권장",
+        "둘 다 트랜잭션 내 이벤트 발행을 지원"
+      ],
+      "answer": 1,
+      "explanation": "`ApplicationEventPublisher`는 인프라 없이 간단하게 도메인 이벤트를 발행할 수 있으나 JVM 내부에서만 동작합니다. `@TransactionalEventListener`로 트랜잭션 커밋 후 이벤트 발행이 가능합니다. MSA 환경에서 서비스 간 통신은 Kafka, RabbitMQ 등이 필요합니다."
+    },
+    {
+      "id": "spring-t011",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "Spring에서 `@PathVariable` vs `@RequestParam` 사용 기준은?",
+      "options": [
+        "@PathVariable은 POST, @RequestParam은 GET 요청에만 사용",
+        "@PathVariable은 리소스 식별자(필수, URL 경로의 일부), @RequestParam은 필터링·정렬 등 선택적 쿼리 파라미터에 적합",
+        "@RequestParam이 보안상 더 안전하므로 항상 @RequestParam 사용",
+        "둘 다 동일한 역할이므로 취향에 따라 선택"
+      ],
+      "answer": 1,
+      "explanation": "RESTful 설계에서 `/users/{id}`처럼 특정 리소스를 식별할 때는 `@PathVariable`을 사용합니다. `/users?page=1&size=10`처럼 선택적 파라미터·검색 조건·페이징에는 `@RequestParam`(required=false, defaultValue 지정 가능)을 사용합니다."
+    },
+    {
+      "id": "spring-t012",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "Spring에서 Bean 스코프 singleton vs prototype 선택 기준은?",
+      "options": [
+        "데이터가 많으면 prototype, 적으면 singleton 사용",
+        "상태를 공유하는 무상태(stateless) 서비스는 singleton, 요청마다 다른 상태가 필요한 객체는 prototype(단, singleton에서 prototype 주입 시 주의 필요)",
+        "singleton은 스레드 안전하지 않아 멀티스레드 환경에서는 prototype만 사용",
+        "prototype은 메모리 낭비로 Spring에서 사용 자제 권장"
+      ],
+      "answer": 1,
+      "explanation": "대부분의 서비스·레포지토리·컨트롤러는 상태를 갖지 않아 singleton이 적합합니다. 요청마다 고유 상태가 필요한 경우 prototype을 사용하지만, singleton 빈에서 prototype 빈을 주입하면 항상 같은 인스턴스가 사용됩니다(ObjectProvider 또는 ApplicationContext.getBean()으로 해결)."
+    },
+    {
+      "id": "spring-t013",
+      "difficulty": "advanced",
+      "type": "tradeoff",
+      "question": "Spring에서 `@ExceptionHandler` vs `@ControllerAdvice` 예외 처리 방식의 트레이드오프는?",
+      "options": [
+        "@ExceptionHandler가 전역 처리, @ControllerAdvice가 로컬 처리",
+        "@ExceptionHandler는 특정 컨트롤러 내부 예외만 처리하여 세밀하지만 중복 코드 발생, @ControllerAdvice는 전역 처리로 중앙화되지만 컨트롤러별 세밀한 처리가 어려울 수 있음",
+        "둘 다 RuntimeException만 처리 가능",
+        "@ControllerAdvice는 REST API에서 사용 불가, @RestControllerAdvice 필요"
+      ],
+      "answer": 1,
+      "explanation": "`@ExceptionHandler`는 해당 컨트롤러 내에서만 동작하여 컨트롤러 특화 예외 처리가 가능하지만 중복됩니다. `@ControllerAdvice`(또는 `@RestControllerAdvice`)는 전역 예외 처리를 중앙화하여 일관된 에러 응답을 제공합니다. 두 방식은 혼용 가능합니다."
+    },
+    {
+      "id": "spring-t014",
+      "difficulty": "advanced",
+      "type": "tradeoff",
+      "question": "Spring Data JPA vs MyBatis 선택 기준은?",
+      "options": [
+        "Spring Data JPA는 항상 MyBatis보다 성능이 좋음",
+        "JPA는 객체 중심·CRUD 자동화·도메인 모델 복잡 시 유리, MyBatis는 복잡한 SQL 제어·DBA 협업·레거시 DB 스키마에서 유리",
+        "MyBatis는 Spring Boot와 통합이 어려워 JPA 권장",
+        "JPA는 NoSQL, MyBatis는 RDBMS 전용"
+      ],
+      "answer": 1,
+      "explanation": "JPA는 엔티티 중심으로 객체-관계 매핑을 자동화하여 CRUD가 편리하지만 복잡한 쿼리 작성이 어렵고 학습 곡선이 있습니다. MyBatis는 SQL을 직접 제어하여 최적화된 쿼리 작성이 가능하고 DBA와 협업이 용이하지만 보일러플레이트가 많습니다."
+    },
+    {
+      "id": "spring-t015",
+      "difficulty": "advanced",
+      "type": "tradeoff",
+      "question": "Spring에서 Feign Client vs RestTemplate vs WebClient 선택 기준은?",
+      "options": [
+        "RestTemplate은 deprecated되어 모든 프로젝트에서 WebClient 사용 필수",
+        "RestTemplate은 동기 블로킹으로 간단, Feign은 인터페이스 기반 선언적 HTTP 클라이언트로 유지보수 용이, WebClient는 리액티브 비동기 I/O 지원",
+        "Feign은 MSA 환경에서만 사용 가능",
+        "WebClient는 Spring Boot 3.0부터 제거됨"
+      ],
+      "answer": 1,
+      "explanation": "RestTemplate은 동기 방식으로 학습 곡선이 낮지만 Spring 5.0부터 유지 모드입니다. Feign은 인터페이스 선언만으로 HTTP 클라이언트를 구현하여 MSA에서 서비스 간 호출에 유용합니다. WebClient는 동기/비동기 모두 지원하며 Spring 권장 방식입니다."
+    },
+    {
+      "id": "spring-s001",
+      "difficulty": "intermediate",
+      "type": "scenario",
+      "question": "다음 코드에서 `@Transactional`이 적용되지 않는 이유는?\n```java\n@Service\npublic class OrderService {\n    public void placeOrder() {\n        this.saveOrder(); // 내부 호출\n    }\n    @Transactional\n    public void saveOrder() { ... }\n}\n```",
+      "options": [
+        "@Transactional은 public 메서드에만 적용되므로 saveOrder가 private이어야 함",
+        "Spring AOP 프록시 특성상 같은 빈의 내부 메서드 호출은 프록시를 거치지 않아 @Transactional 미적용",
+        "@Service와 @Transactional을 함께 사용할 수 없음",
+        "placeOrder()에도 @Transactional을 추가하면 해결됨"
+      ],
+      "answer": 1,
+      "explanation": "Spring AOP는 프록시 기반으로 동작합니다. 외부에서 `orderService.saveOrder()`를 호출하면 프록시가 트랜잭션을 시작하지만, `this.saveOrder()`처럼 내부 호출은 실제 객체를 직접 호출하여 프록시를 우회합니다. 해결: `placeOrder()`에 `@Transactional` 추가, 또는 자기 주입(self-injection)."
+    },
+    {
+      "id": "spring-s002",
+      "difficulty": "intermediate",
+      "type": "scenario",
+      "question": "다음 설정에서 순환 의존성(Circular Dependency) 문제가 발생하는 이유와 해결 방법은?\n```java\n@Service class A {\n    @Autowired B b;\n}\n@Service class B {\n    @Autowired A a;\n}\n```",
+      "options": [
+        "Spring은 순환 의존성을 자동으로 해결하므로 문제 없음",
+        "생성자 주입 시 A와 B가 서로를 필요로 하여 BeanCurrentlyInCreationException 발생 — 설계 분리 또는 @Lazy로 해결",
+        "@Autowired 대신 @Resource를 사용하면 순환 의존성이 자동 해결",
+        "순환 의존성은 인터페이스로 분리하면 해결"
+      ],
+      "answer": 1,
+      "explanation": "생성자 주입에서 A가 B를 필요로 하고 B가 A를 필요로 하면 애플리케이션 시작 시 `BeanCurrentlyInCreationException`이 발생합니다. 근본 해결: 설계를 변경하여 순환 참조를 끊거나 공통 의존성을 별도 컴포넌트로 추출. 임시 방편: `@Lazy` 어노테이션으로 지연 초기화."
+    },
+    {
+      "id": "spring-s003",
+      "difficulty": "intermediate",
+      "type": "scenario",
+      "question": "다음 코드에서 `LazyInitializationException`이 발생하는 이유는?\n```java\n@Transactional\npublic User getUser(Long id) {\n    return userRepository.findById(id).orElseThrow();\n}\n// 호출 코드\nUser user = userService.getUser(1L);\nList<Order> orders = user.getOrders(); // 예외 발생!\n```",
+      "options": [
+        "getOrders()가 List 타입이 아니어서 발생",
+        "트랜잭션이 종료된 후 LAZY 로딩 연관 관계에 접근하여 발생",
+        "User 엔티티에 @OneToMany 어노테이션이 없어서 발생",
+        "getUser()가 User를 반환하지 않고 Optional을 반환해야 함"
+      ],
+      "answer": 1,
+      "explanation": "`@Transactional` 메서드가 반환된 후 트랜잭션이 닫히고 영속성 컨텍스트(EntityManager)가 소멸합니다. 이후 `user.getOrders()`처럼 LAZY 관계에 접근하면 초기화할 세션이 없어 `LazyInitializationException`이 발생합니다. 해결: DTO로 변환 후 반환, fetch join 사용, `@Transactional` 범위 확장."
+    },
+    {
+      "id": "spring-s004",
+      "difficulty": "intermediate",
+      "type": "scenario",
+      "question": "Spring Boot 애플리케이션에서 다음 설정의 결과는?\n```yaml\nspring:\n  datasource:\n    url: jdbc:h2:mem:testdb\n  jpa:\n    hibernate:\n      ddl-auto: create-drop\n```",
+      "options": [
+        "운영 DB에 연결하여 기존 테이블을 유지",
+        "애플리케이션 시작 시 스키마 생성, 종료 시 삭제 — 테스트 환경에 적합하나 운영 환경에서는 데이터 손실 위험",
+        "H2 DB는 영구 저장소이므로 종료 후에도 데이터 유지",
+        "ddl-auto: create-drop은 Spring Boot 3.0부터 지원 중단"
+      ],
+      "answer": 1,
+      "explanation": "`create-drop`은 시작 시 `CREATE TABLE`, 종료 시 `DROP TABLE`을 실행합니다. 인메모리 H2와 함께 테스트 환경에서 유용하지만 운영 환경에서는 절대 사용하면 안 됩니다. 운영: `validate` 또는 Flyway/Liquibase 사용 권장."
+    },
+    {
+      "id": "spring-s005",
+      "difficulty": "intermediate",
+      "type": "scenario",
+      "question": "다음 코드에서 N+1 쿼리 문제가 발생하는 상황은?\n```java\nList<User> users = userRepository.findAll();\nfor (User user : users) {\n    System.out.println(user.getOrders().size());\n}\n```",
+      "options": [
+        "N+1은 INSERT 쿼리에서만 발생하는 문제",
+        "findAll()로 N명의 User를 조회 후, 각 user.getOrders() 접근마다 추가 쿼리 — 총 N+1번 쿼리 실행",
+        "getOrders()는 캐시되어 추가 쿼리 없음",
+        "Spring Data JPA는 자동으로 N+1을 방지"
+      ],
+      "answer": 1,
+      "explanation": "N명의 User를 조회하는 쿼리 1번 + 각 User의 orders를 조회하는 쿼리 N번 = N+1번 쿼리가 실행됩니다. 해결: `@Query(\"SELECT u FROM User u JOIN FETCH u.orders\")` 또는 `@EntityGraph(attributePaths = {\"orders\"})`로 한 번의 JOIN 쿼리로 처리."
+    },
+    {
+      "id": "spring-s006",
+      "difficulty": "intermediate",
+      "type": "scenario",
+      "question": "Spring Security에서 다음 설정의 의미는?\n```java\nhttp.authorizeHttpRequests(auth -> auth\n    .requestMatchers(\"/public/**\").permitAll()\n    .requestMatchers(\"/admin/**\").hasRole(\"ADMIN\")\n    .anyRequest().authenticated()\n);\n```",
+      "options": [
+        "모든 요청이 인증 없이 접근 가능",
+        "/public/** 경로는 모두 허용, /admin/** 경로는 ADMIN 역할 필요, 나머지는 로그인한 사용자만 접근",
+        "ADMIN 역할만 전체 API에 접근 가능",
+        "인증된 사용자는 /admin/**에도 자동으로 접근 가능"
+      ],
+      "answer": 1,
+      "explanation": "규칙은 순서대로 적용됩니다. `/public/**`는 인증 없이 접근 가능, `/admin/**`는 `ROLE_ADMIN` 권한이 필요, 나머지 모든 요청은 인증(로그인)된 사용자만 접근 가능합니다. 순서가 중요하며 더 구체적인 규칙을 먼저 배치해야 합니다."
+    },
+    {
+      "id": "spring-s007",
+      "difficulty": "intermediate",
+      "type": "scenario",
+      "question": "다음 Spring 설정에서 Bean이 등록되지 않는 이유는?\n```java\n@Configuration\npublic class AppConfig {\n    @Bean\n    @ConditionalOnProperty(name = \"feature.enabled\", havingValue = \"true\")\n    public FeatureService featureService() {\n        return new FeatureService();\n    }\n}\n```",
+      "options": [
+        "@Configuration 클래스에서는 @Bean을 사용할 수 없음",
+        "application.properties에 `feature.enabled=true`가 없으면 조건 미충족으로 Bean 미등록",
+        "@ConditionalOnProperty는 Spring Boot에서만 동작하지 않음",
+        "FeatureService가 @Component가 아니어서 등록 안 됨"
+      ],
+      "answer": 1,
+      "explanation": "`@ConditionalOnProperty`는 지정된 프로퍼티가 해당 값과 일치할 때만 Bean을 등록합니다. `application.properties`에 `feature.enabled=true`가 없거나 다른 값이면 Bean이 생성되지 않습니다. Spring Boot 자동 설정의 핵심 메커니즘입니다."
+    },
+    {
+      "id": "spring-s008",
+      "difficulty": "intermediate",
+      "type": "scenario",
+      "question": "다음 JPA 코드에서 변경 감지(Dirty Checking)가 동작하는 조건은?\n```java\n@Transactional\npublic void updateUser(Long id, String name) {\n    User user = userRepository.findById(id).orElseThrow();\n    user.setName(name); // save() 호출 없음\n}\n```",
+      "options": [
+        "save()를 호출하지 않으면 변경이 반영되지 않음",
+        "트랜잭션 내에서 영속 상태의 엔티티를 변경하면 커밋 시 자동으로 UPDATE 쿼리 실행",
+        "setName()은 DB에 즉시 UPDATE를 전송",
+        "Dirty Checking은 @Entity에 @DynamicUpdate를 설정해야 동작"
+      ],
+      "answer": 1,
+      "explanation": "JPA 영속성 컨텍스트는 관리 중인 엔티티의 스냅샷을 보관합니다. 트랜잭션 커밋 시 현재 상태와 스냅샷을 비교(Dirty Checking)하여 변경된 필드에 대해 UPDATE 쿼리를 자동 실행합니다. 별도의 `save()` 호출 없이도 변경이 DB에 반영됩니다."
+    },
+    {
+      "id": "spring-s009",
+      "difficulty": "advanced",
+      "type": "scenario",
+      "question": "다음 코드에서 트랜잭션 롤백이 발생하지 않는 이유는?\n```java\n@Transactional\npublic void process() throws IOException {\n    saveData();\n    throw new IOException(\"파일 오류\");\n}\n```",
+      "options": [
+        "IOException이 발생하면 트랜잭션이 자동 롤백됨",
+        "@Transactional의 기본 rollbackFor는 RuntimeException이므로 Checked Exception인 IOException은 롤백 대상이 아님",
+        "IOException은 catch하지 않았으므로 컴파일 에러",
+        "saveData() 성공 후 예외가 발생하면 부분 커밋됨"
+      ],
+      "answer": 1,
+      "explanation": "`@Transactional`은 기본적으로 `RuntimeException`과 `Error`에만 롤백합니다. `IOException`은 Checked Exception이므로 기본 설정에서는 롤백되지 않고 커밋됩니다. 해결: `@Transactional(rollbackFor = IOException.class)` 또는 IOException을 RuntimeException으로 감싸서 던지기."
+    },
+    {
+      "id": "spring-s010",
+      "difficulty": "advanced",
+      "type": "scenario",
+      "question": "Spring AOP에서 다음 Pointcut 표현식이 매칭하는 대상은?\n```java\n@Pointcut(\"execution(* com.example.service..*Service.*(..))\")\n```",
+      "options": [
+        "com.example.service 패키지의 모든 클래스의 모든 메서드",
+        "com.example.service 패키지 및 하위 패키지에서 이름이 Service로 끝나는 클래스의 모든 메서드(모든 반환 타입, 모든 매개변수)",
+        "com.example.service.Service 클래스의 특정 메서드",
+        "Service 인터페이스를 구현한 모든 클래스의 모든 메서드"
+      ],
+      "answer": 1,
+      "explanation": "`execution(반환타입 패키지..클래스.메서드(매개변수))` 형식입니다. `*`는 모든 반환 타입, `com.example.service..*Service`는 해당 패키지 및 하위 패키지의 Service로 끝나는 클래스, `*(..)`는 모든 메서드와 매개변수를 의미합니다."
+    },
+    {
+      "id": "spring-s011",
+      "difficulty": "advanced",
+      "type": "scenario",
+      "question": "다음 Spring Batch 설정에서 Chunk 기반 처리의 동작은?\n```java\nstepBuilderFactory.get(\"step\")\n    .<User, UserDTO>chunk(100)\n    .reader(userReader)\n    .processor(userProcessor)\n    .writer(userWriter)\n    .build();\n```",
+      "options": [
+        "100명의 User를 전부 메모리에 올린 후 한 번에 처리",
         "100개씩 읽기-처리-쓰기를 반복하며, 각 청크가 하나의 트랜잭션으로 처리",
-      "processor는 1개씩 처리하고, writer는 100개가 모이면 한 번에 저장",
-      "100개 처리 실패 시 전체 Job이 즉시 중단"
-    ],
-    "answer": 1,
-    "explanation": "Chunk 기반 처리: Reader가 100개를 하나씩 읽어 Processor에 전달하고, 100개가 쌓이면 Writer에 한 번에 전달합니다. 각 청크는 하나의 트랜잭션으로 처리되어 청크 단위 롤백이 가능합니다. 실패 시 해당 청크만 롤백하고 Skip/Retry 정책을 적용할 수 있습니다."
-  },
-  {
-    "id": "spring-s012",
-    "difficulty": "advanced",
-    "type": "scenario",
-    "question": "Spring에서 `@EventListener` vs `@TransactionalEventListener`의 차이가 중요한 시나리오는?",
-    "options": [
-      "둘의 동작이 동일하여 차이 없음",
-      "이메일 발송 이벤트에서 @EventListener는 트랜잭션 롤백 후에도 이메일이 발송될 수 있어, @TransactionalEventListener(phase=AFTER_COMMIT)으로 커밋 성공 후 발송 보장",
-      "@TransactionalEventListener는 비동기 이벤트 처리를 위한 어노테이션",
-      "@EventListener는 Spring Boot 3.0부터 deprecated"
-    ],
-    "answer": 1,
-    "explanation": "`@EventListener`는 이벤트 발행 즉시 실행되어 트랜잭션이 롤백되어도 이미 외부 시스템(이메일, 알림)에 영향을 줄 수 있습니다. `@TransactionalEventListener(phase=AFTER_COMMIT)`은 트랜잭션이 성공적으로 커밋된 후에만 이벤트를 처리합니다."
-  },
-  {
-    "id": "spring-s013",
-    "difficulty": "intermediate",
-    "type": "scenario",
-    "question": "Spring Boot에서 `application.properties` vs `application.yml` 중 다음 설정이 올바른 것은?",
-    "options": [
-      "properties와 yml은 동일한 설정 방식으로 혼용 가능하며 우선순위 없음",
-      "두 파일 모두 존재할 때 properties가 yml보다 우선순위가 높고, 계층 구조 표현은 yml이 더 간결함",
-      "yml은 Spring Boot 2.0부터 deprecated",
-      "application.properties는 개발, application.yml은 운영 환경 전용"
-    ],
-    "answer": 1,
-    "explanation": "Spring Boot는 `application.properties`가 `application.yml`보다 높은 우선순위를 가집니다. `yml`은 들여쓰기로 계층 구조를 표현하여 중첩 설정이 깔끔하지만, `---` 구분자로 다중 프로파일 설정도 지원합니다. 두 형식 혼용보다는 하나를 선택하여 일관되게 사용을 권장합니다."
-  },
-  {
-    "id": "spring-s014",
-    "difficulty": "intermediate",
-    "type": "scenario",
-    "question": "Spring MVC에서 `@Valid`와 `BindingResult`를 함께 사용하는 이유는?",
-    "options": [
-      "@Valid 없이 BindingResult만으로 유효성 검사 가능",
-      "@Valid로 입력 유효성을 검사하고, BindingResult가 없으면 검증 실패 시 400 예외가 발생하지만, BindingResult로 직접 오류를 처리하여 커스텀 응답 구성 가능",
-      "BindingResult는 데이터베이스 제약 조건 위반을 처리",
-      "@Valid와 BindingResult는 Kotlin 프로젝트에서만 함께 사용 가능"
-    ],
-    "answer": 1,
-    "explanation": "`@Valid`는 Bean Validation 어노테이션(`@NotNull`, `@Size` 등)을 실행합니다. `BindingResult`가 없으면 검증 실패 시 `MethodArgumentNotValidException`(400)이 자동 발생합니다. `BindingResult`를 추가하면 예외 대신 오류 정보를 가져와 커스텀 에러 응답을 구성할 수 있습니다."
-  },
-  {
-    "id": "spring-s015",
-    "difficulty": "advanced",
-    "type": "scenario",
-    "question": "다음 코드에서 `@Cacheable`이 동작하지 않는 이유는?\n```java\n@Service\npublic class ProductService {\n    @Cacheable(\"products\")\n    public Product getProduct(Long id) { ... }\n    \n    public void refresh(Long id) {\n        this.getProduct(id); // 내부 호출\n    }\n}\n```",
-    "options": [
-      "@Cacheable은 @Repository에서만 동작",
-      "Spring AOP 프록시 특성상 내부 호출(this.getProduct())은 프록시를 우회하여 캐싱 미적용",
-      "@EnableCaching이 없어서 캐싱 비활성화",
-      "Long 타입은 캐시 키로 사용 불가"
-    ],
-    "answer": 1,
-    "explanation": "`@Cacheable`은 `@Transactional`과 마찬가지로 Spring AOP 프록시 기반으로 동작합니다. 같은 빈 내부에서 `this.getProduct()`를 호출하면 프록시를 거치지 않아 캐싱이 적용되지 않습니다. 해결: 자기 주입(self-injection) 또는 별도 빈으로 분리."
-  },
-  {
-    "id": "spring-d001",
-    "difficulty": "intermediate",
-    "type": "debug",
-    "question": "다음 Spring 코드에서 `NoUniqueBeanDefinitionException`이 발생하는 이유는?\n```java\npublic interface PaymentService { void pay(); }\n@Service class CardPayment implements PaymentService { ... }\n@Service class CashPayment implements PaymentService { ... }\n\n@Autowired PaymentService paymentService; // 예외 발생\n```",
-    "options": [
-      "PaymentService 인터페이스는 직접 주입 불가",
-      "PaymentService 타입의 Bean이 2개(CardPayment, CashPayment)여서 어떤 것을 주입할지 불명확",
-      "@Service 어노테이션을 구현체에 사용할 수 없음",
-      "인터페이스 타입으로는 @Autowired 사용 불가"
-    ],
-    "answer": 1,
-    "explanation": "동일 타입의 Bean이 여러 개일 때 `NoUniqueBeanDefinitionException`이 발생합니다. 해결: ①`@Primary`로 기본 Bean 지정 ②`@Qualifier(\"cardPayment\")`로 구체 Bean 지정 ③`List<PaymentService>`로 모든 구현체 주입 ④변수명을 구현체명과 동일하게 설정."
-  },
-  {
-    "id": "spring-d002",
-    "difficulty": "intermediate",
-    "type": "debug",
-    "question": "다음 코드에서 `@Transactional`이 예상대로 동작하지 않는 이유는?\n```java\n@Service\npublic class UserService {\n    @Transactional\n    private void saveUser(User user) { // private 메서드\n        userRepository.save(user);\n    }\n}\n```",
-    "options": [
-      "private 메서드에는 @Transactional이 적용되지 않음 — Spring AOP는 public 메서드만 프록시 처리",
-      "@Transactional은 void 반환 메서드에만 동작",
-      "userRepository.save()는 이미 트랜잭션을 내장하므로 중복 적용 불가",
-      "@Service와 @Transactional은 같은 클래스에 사용 불가"
-    ],
-    "answer": 0,
-    "explanation": "Spring AOP 프록시는 기본적으로 public 메서드에만 어드바이스를 적용합니다. private 메서드는 외부에서 직접 호출할 수 없어 프록시를 통해 처리될 수 없으므로 `@Transactional`이 무시됩니다. 해결: 메서드를 public으로 변경하거나 별도 빈으로 분리."
-  },
-  {
-    "id": "spring-d003",
-    "difficulty": "intermediate",
-    "type": "debug",
-    "question": "Spring Boot 애플리케이션에서 `BeanCreationException`이 발생하는 다음 상황의 원인은?\n```\nCaused by: java.lang.IllegalStateException:\nambiguous handler methods mapped for '/api/users'\n```",
-    "options": [
-      "/api/users 경로에 접근 권한이 없어 발생",
-      "두 개 이상의 핸들러 메서드가 동일한 URL(/api/users)에 매핑되어 충돌",
-      "UserController에 @RequestMapping 어노테이션이 없어서 발생",
-      "Spring Security가 해당 경로를 차단"
-    ],
-    "answer": 1,
-    "explanation": "동일한 URL 패턴과 HTTP 메서드에 둘 이상의 `@RequestMapping`(또는 `@GetMapping`, `@PostMapping` 등)이 매핑되면 `RequestMappingHandlerMapping`이 초기화 시 `IllegalStateException: Ambiguous handler methods`를 발생시킵니다."
-  },
-  {
-    "id": "spring-d004",
-    "difficulty": "intermediate",
-    "type": "debug",
-    "question": "다음 JPA 코드에서 `DetachedObjectException`이 발생하는 이유는?\n```java\nUser user = userRepository.findById(1L).orElseThrow();\ntransactionManager.commit();\nuserRepository.save(user); // 예외 발생\n```",
-    "options": [
-      "findById가 null을 반환하여 발생",
-      "트랜잭션 종료 후 엔티티가 준영속(Detached) 상태가 되어 다른 트랜잭션에서 병합(merge) 없이 저장 시도",
-      "save()는 새로운 엔티티에만 사용 가능",
-      "user 객체가 null이어서 발생"
-    ],
-    "answer": 1,
-    "explanation": "트랜잭션이 종료되면 영속성 컨텍스트가 닫히고 엔티티는 준영속(Detached) 상태가 됩니다. 새 트랜잭션에서 준영속 객체를 사용하려면 `entityManager.merge(user)` 또는 Spring Data JPA의 `save()`(내부적으로 merge 호출)가 올바른 컨텍스트 내에서 이루어져야 합니다."
-  },
-  {
-    "id": "spring-d005",
-    "difficulty": "intermediate",
-    "type": "debug",
-    "question": "다음 Spring MVC 코드에서 항상 null을 반환하는 이유는?\n```java\n@GetMapping(\"/user\")\npublic User getUser(@RequestParam String name) {\n    return userService.findByName(name);\n}\n// 요청: GET /user?Name=Alice (대문자 N)\n```",
-    "options": [
-      "GET 요청에서는 @RequestParam을 사용할 수 없음",
-      "@RequestParam은 대소문자를 구분하여 파라미터명 'name'과 'Name'이 불일치 — null 또는 400 에러 발생",
-      "쿼리 파라미터에는 @PathVariable을 사용해야 함",
-      "String 타입은 @RequestParam으로 받을 수 없음"
-    ],
-    "answer": 1,
-    "explanation": "HTTP 쿼리 파라미터 이름은 대소문자를 구분합니다. `@RequestParam String name`은 `?name=Alice`를 기대하지만 요청은 `?Name=Alice`를 보냈습니다. `required=true`(기본값)이면 `MissingServletRequestParameterException`이, `required=false`이면 null이 바인딩됩니다."
-  },
-  {
-    "id": "spring-d006",
-    "difficulty": "advanced",
-    "type": "debug",
-    "question": "다음 코드에서 `@Scheduled`가 동작하지 않는 이유는?\n```java\n@Component\npublic class ScheduledTask {\n    @Scheduled(fixedRate = 5000)\n    public void run() {\n        System.out.println(\"실행\");\n    }\n}\n// @SpringBootApplication 클래스\n```",
-    "options": [
-      "@Scheduled는 @Service 클래스에서만 동작",
-      "@EnableScheduling 어노테이션이 설정 클래스에 없어 스케줄러 미활성화",
-      "fixedRate는 밀리초 단위가 아닌 초 단위",
-      "run() 메서드가 반환값이 없어서 실행 불가"
-    ],
-    "answer": 1,
-    "explanation": "`@Scheduled`를 사용하려면 `@EnableScheduling` 어노테이션을 `@SpringBootApplication` 또는 `@Configuration` 클래스에 추가해야 합니다. 마찬가지로 `@Async`는 `@EnableAsync`, 캐싱은 `@EnableCaching`이 필요합니다."
-  },
-  {
-    "id": "spring-d007",
-    "difficulty": "advanced",
-    "type": "debug",
-    "question": "다음 Spring Data JPA 코드에서 쿼리가 올바르게 동작하지 않는 이유는?\n```java\n@Repository\npublic interface UserRepository extends JpaRepository<User, Long> {\n    List<User> findByNameAndAge(String name, int age);\n    // 실제 DB에는 name 컬럼이 'username'으로 저장됨\n}\n```",
-    "options": [
-      "findBy 메서드명에 And 사용 불가",
-      "메서드명의 'Name'이 엔티티 필드명과 불일치하면 PropertyReferenceException 발생",
-      "int 타입은 메서드명 파싱에서 지원하지 않음",
-      "JpaRepository를 직접 상속하면 커스텀 메서드 불가"
-    ],
-    "answer": 1,
-    "explanation": "Spring Data JPA는 메서드명을 파싱하여 JPQL을 생성합니다. `findByName`은 `User` 엔티티의 `name` 필드를 기대합니다. 필드명이 `username`이라면 `findByUsername`으로 변경하거나 `@Column(name = \"username\")`으로 DB 컬럼명을 매핑해야 합니다."
-  },
-  {
-    "id": "spring-d008",
-    "difficulty": "advanced",
-    "type": "debug",
-    "question": "다음 코드에서 트랜잭션이 예상대로 롤백되지 않는 이유는?\n```java\n@Service\npublic class OrderService {\n    @Autowired OrderRepository orderRepository;\n    \n    @Transactional\n    public void createOrder(Order order) {\n        try {\n            orderRepository.save(order);\n            throw new RuntimeException(\"오류\");\n        } catch (RuntimeException e) {\n            log.error(\"오류 발생\", e);\n            // 예외를 삼킴\n        }\n    }\n}\n```",
-    "options": [
-      "RuntimeException은 자동 롤백이므로 예외를 삼켜도 롤백됨",
-      "catch 블록에서 RuntimeException을 잡아 전파하지 않으면 트랜잭션 관리자가 롤백을 결정할 수 없어 커밋됨",
-      "log.error() 호출이 트랜잭션 롤백을 막음",
-      "@Transactional은 RuntimeException을 catch하면 자동으로 재전파"
-    ],
-    "answer": 1,
-    "explanation": "Spring의 트랜잭션 관리자는 메서드 종료 시점에 예외가 전파되어야 롤백을 결정합니다. 메서드 내에서 예외를 catch하고 전파하지 않으면 트랜잭션 관리자는 정상 종료로 판단하여 커밋합니다. 해결: 예외를 재던지거나 `TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()` 호출."
-  },
-  {
-    "id": "spring-d009",
-    "difficulty": "advanced",
-    "type": "debug",
-    "question": "Spring Boot에서 다음 설정이 운영 환경에서 심각한 문제를 유발하는 이유는?\n```yaml\nspring:\n  jpa:\n    show-sql: true\n    properties:\n      hibernate:\n        format_sql: true\nlogging:\n  level:\n    org.hibernate.SQL: DEBUG\n```",
-    "options": [
-      "show-sql과 logging.level.SQL 중복 설정으로 오류 발생",
-      "운영 환경에서 모든 SQL이 로그에 출력되어 성능 저하, 민감한 데이터 노출, 로그 용량 폭발 위험",
-      "format_sql은 개발 환경에서만 지원",
-      "이 설정은 문제 없음"
-    ],
-    "answer": 1,
-    "explanation": "운영 환경에서 `show-sql: true`와 SQL DEBUG 로깅은 모든 쿼리(민감한 파라미터 포함)를 로그에 기록하여 ①성능 저하 ②민감 데이터(비밀번호, 개인정보) 로그 노출 ③디스크 로그 공간 폭발을 유발합니다. 운영 환경 프로파일에서 해당 설정을 제거해야 합니다."
-  },
-  {
-    "id": "spring-d010",
-    "difficulty": "advanced",
-    "type": "debug",
-    "question": "다음 Spring Security 설정의 보안 취약점은?\n```java\nhttp.csrf().disable()\n    .authorizeHttpRequests(auth -> auth\n        .anyRequest().permitAll()\n    );\n```",
-    "options": [
-      "csrf().disable()은 GET 요청에만 영향을 줌",
-      "CSRF 보호 비활성화로 Cross-Site Request Forgery 공격에 취약, anyRequest().permitAll()로 모든 엔드포인트 인증 없이 접근 가능",
-      "이 설정은 REST API에서 표준적인 설정",
-      "Spring Boot 3.0에서 이 설정 방식은 지원 안 됨"
-    ],
-    "answer": 1,
-    "explanation": "두 가지 문제: ①`csrf().disable()`은 세션 기반 앱에서 CSRF 공격에 노출시킵니다(JWT 사용 시는 허용 가능). ②`anyRequest().permitAll()`은 인증 없이 모든 API에 접근을 허용합니다. 운영 환경에서 필요한 경로만 permitAll()로 설정하고, 나머지는 authenticated() 또는 hasRole()로 보호해야 합니다."
-  },
-  {
-    "id": "spring-o001",
-    "difficulty": "basic",
-    "type": "ordering",
-    "question": "Spring MVC에서 HTTP 요청 처리 순서로 올바른 것은?\n1. HandlerAdapter가 Controller 메서드 실행\n2. DispatcherServlet이 요청을 수신\n3. ViewResolver가 뷰 이름으로 실제 뷰 결정\n4. HandlerMapping이 적합한 Controller를 탐색",
-    "options": [
-      "1 → 2 → 3 → 4",
-      "2 → 4 → 1 → 3",
-      "4 → 2 → 1 → 3",
-      "2 → 1 → 4 → 3"
-    ],
-    "answer": 1,
-    "explanation": "Spring MVC 요청 처리: ①DispatcherServlet이 요청 수신 → ②HandlerMapping으로 적합한 핸들러(Controller) 탐색 → ③HandlerAdapter로 Controller 메서드 실행 → ④ViewResolver로 뷰 결정 후 응답 렌더링."
-  },
-  {
-    "id": "spring-o002",
-    "difficulty": "basic",
-    "type": "ordering",
-    "question": "Spring Bean 생명주기 순서로 올바른 것은?\n1. 의존성 주입(DI)\n2. @PostConstruct 초기화 콜백\n3. Bean 인스턴스 생성\n4. @PreDestroy 소멸 콜백\n5. 비즈니스 로직 실행",
-    "options": [
-      "1 → 3 → 2 → 5 → 4",
-      "3 → 1 → 2 → 5 → 4",
-      "2 → 3 → 1 → 4 → 5",
-      "3 → 2 → 1 → 5 → 4"
-    ],
-    "answer": 1,
-    "explanation": "Spring Bean 생명주기: ①인스턴스 생성 → ②의존성 주입(DI) → ③초기화 콜백(@PostConstruct) → ④비즈니스 로직 실행(사용 단계) → ⑤소멸 콜백(@PreDestroy, 컨테이너 종료 시)."
-  },
-  {
-    "id": "spring-o003",
-    "difficulty": "intermediate",
-    "type": "ordering",
-    "question": "Spring `@Transactional` 메서드 실행 순서로 올바른 것은?\n1. 실제 메서드 비즈니스 로직 실행\n2. AOP 프록시가 요청을 인터셉트\n3. 예외 여부에 따라 커밋 또는 롤백\n4. 트랜잭션 시작(또는 기존 참여)",
-    "options": [
-      "1 → 2 → 4 → 3",
-      "2 → 4 → 1 → 3",
-      "4 → 2 → 1 → 3",
-      "2 → 1 → 4 → 3"
-    ],
-    "answer": 1,
-    "explanation": "@Transactional 처리 순서: ①AOP 프록시가 메서드 호출을 인터셉트 → ②트랜잭션 시작(TransactionManager) → ③실제 메서드 로직 실행 → ④정상 종료 시 커밋, RuntimeException 발생 시 롤백."
-  },
-  {
-    "id": "spring-o004",
-    "difficulty": "intermediate",
-    "type": "ordering",
-    "question": "Spring Boot 자동 설정(Auto Configuration) 과정 순서로 올바른 것은?\n1. @Conditional 조건 평가\n2. spring.factories 또는 AutoConfiguration.imports 파일 로드\n3. 조건 충족 시 Bean 등록\n4. @SpringBootApplication → @EnableAutoConfiguration 활성화",
-    "options": [
-      "2 → 4 → 1 → 3",
-      "4 → 2 → 1 → 3",
-      "1 → 4 → 2 → 3",
-      "4 → 1 → 2 → 3"
-    ],
-    "answer": 1,
-    "explanation": "자동 설정 순서: ①@EnableAutoConfiguration 활성화 → ②META-INF/spring.factories(또는 AutoConfiguration.imports)에서 자동 설정 클래스 목록 로드 → ③각 설정 클래스의 @Conditional 조건 평가 → ④조건 충족 시 Bean 자동 등록."
-  },
-  {
-    "id": "spring-o005",
-    "difficulty": "advanced",
-    "type": "ordering",
-    "question": "Spring Security에서 HTTP 요청 인증 처리 순서로 올바른 것은?\n1. 인증된 Authentication을 SecurityContextHolder에 저장\n2. SecurityFilterChain에서 요청 수신\n3. AuthenticationManager로 인증 처리\n4. 인증 필터(UsernamePasswordAuthenticationFilter 등)가 자격증명 추출",
-    "options": [
-      "4 → 2 → 3 → 1",
-      "2 → 4 → 3 → 1",
-      "3 → 2 → 4 → 1",
-      "2 → 3 → 4 → 1"
-    ],
-    "answer": 1,
-    "explanation": "Spring Security 인증 순서: ①SecurityFilterChain이 요청 수신 → ②인증 필터(예: UsernamePasswordAuthenticationFilter)가 자격증명(아이디/비밀번호) 추출 → ③AuthenticationManager(→UserDetailsService)로 인증 처리 → ④인증 성공 시 Authentication을 SecurityContextHolder에 저장.",
-    "id": "spring-o005"
-  },
-  {
-    "id": "spring-o006",
-    "difficulty": "intermediate",
-    "type": "ordering",
-    "question": "Spring Data JPA에서 엔티티 저장(save) 처리 순서로 올바른 것은?\n1. 영속성 컨텍스트에서 변경 감지(Dirty Checking)\n2. repository.save() 호출\n3. 트랜잭션 커밋 시 flush() 실행\n4. EntityManager.persist() 또는 merge() 호출",
-    "options": [
-      "1 → 2 → 4 → 3",
-      "2 → 4 → 1 → 3",
-      "4 → 2 → 3 → 1",
-      "2 → 1 → 4 → 3"
-    ],
-    "answer": 1,
-    "explanation": "JPA save() 처리: ①repository.save() 호출 → ②새 엔티티면 persist(), 기존이면 merge()로 영속화 → ③영속성 컨텍스트가 엔티티 스냅샷 관리(Dirty Checking) → ④트랜잭션 커밋 시 flush()로 SQL 생성 및 DB 전송."
-  },
-  {
-    "id": "spring-o007",
-    "difficulty": "advanced",
-    "type": "ordering",
-    "question": "Spring AOP에서 Pointcut 표현식 매칭부터 Advice 실행까지 순서로 올바른 것은?\n1. Around Advice의 proceed() 호출로 실제 메서드 실행\n2. 대상 Bean 메서드 호출 시 프록시 인터셉트\n3. Pointcut 조건 평가\n4. Advice 체인 구성 및 실행 시작",
-    "options": [
-      "3 → 2 → 4 → 1",
-      "2 → 3 → 4 → 1",
-      "2 → 4 → 3 → 1",
-      "3 → 4 → 2 → 1"
-    ],
-    "answer": 1,
-    "explanation": "AOP 실행 순서: ①대상 메서드 호출 시 프록시가 인터셉트 → ②Pointcut 조건 평가(매칭 여부 확인) → ③매칭 시 Advice 체인(Around → Before → 실제 메서드 → After → AfterReturning/AfterThrowing) 구성 → ④Around Advice의 proceed()로 실제 메서드 실행."
-  },
-  {
-    "id": "spring-o008",
-    "difficulty": "intermediate",
-    "type": "ordering",
-    "question": "Spring Boot 애플리케이션 시작 순서로 올바른 것은?\n1. ApplicationContext 생성 및 Bean 초기화\n2. main() 메서드 실행\n3. 내장 웹 서버(Tomcat 등) 시작\n4. 자동 설정 클래스 로드 및 조건 평가",
-    "options": [
-      "2 → 4 → 1 → 3",
-      "1 → 2 → 4 → 3",
-      "2 → 1 → 4 → 3",
-      "4 → 2 → 1 → 3"
-    ],
-    "answer": 0,
-    "explanation": "Spring Boot 시작 순서: ①main() 메서드에서 SpringApplication.run() 호출 → ②자동 설정 클래스 로드 및 @Conditional 조건 평가 → ③ApplicationContext 생성 및 Bean 초기화(@PostConstruct 포함) → ④내장 Tomcat/Netty 시작 및 HTTP 요청 수신 준비 완료."
-  },
-  {
-    "id": "spring-o009",
-    "difficulty": "intermediate",
-    "type": "ordering",
-    "question": "Spring `@Cacheable` 메서드 호출 처리 순서로 올바른 것은?\n1. 캐시에 저장 후 결과 반환\n2. 캐시 키로 캐시 조회\n3. 메서드 호출 시 프록시 인터셉트\n4. 캐시 히트 시 즉시 반환, 미스 시 실제 메서드 실행",
-    "options": [
-      "2 → 3 → 4 → 1",
-      "3 → 2 → 4 → 1",
-      "3 → 4 → 2 → 1",
-      "2 → 4 → 3 → 1"
-    ],
-    "answer": 1,
-    "explanation": "@Cacheable 처리 순서: ①프록시가 메서드 호출 인터셉트 → ②파라미터 기반 캐시 키로 캐시 조회 → ③캐시 히트 시 즉시 반환(메서드 실행 생략), 캐시 미스 시 실제 메서드 실행 → ④결과를 캐시에 저장 후 반환."
-  },
-  {
-    "id": "spring-o010",
-    "difficulty": "advanced",
-    "type": "ordering",
-    "question": "Spring에서 @Transactional REQUIRES_NEW 전파 속성 처리 순서로 올바른 것은?\n1. 새 트랜잭션 시작\n2. 외부 트랜잭션 일시 중단(Suspend)\n3. 새 트랜잭션 커밋 또는 롤백\n4. 외부 트랜잭션 재개(Resume)",
-    "options": [
-      "1 → 2 → 3 → 4",
-      "2 → 1 → 3 → 4",
-      "1 → 3 → 2 → 4",
-      "2 → 3 → 1 → 4"
-    ],
-    "answer": 1,
-    "explanation": "REQUIRES_NEW 전파 순서: ①기존(외부) 트랜잭션 일시 중단 → ②완전히 독립된 새 트랜잭션 시작 → ③새 트랜잭션 내 로직 실행 후 커밋 또는 롤백 → ④외부 트랜잭션 재개. 새 트랜잭션의 커밋/롤백은 외부 트랜잭션에 영향을 주지 않습니다."
-  }
-]
+        "processor는 1개씩 처리하고, writer는 100개가 모이면 한 번에 저장",
+        "100개 처리 실패 시 전체 Job이 즉시 중단"
+      ],
+      "answer": 1,
+      "explanation": "Chunk 기반 처리: Reader가 100개를 하나씩 읽어 Processor에 전달하고, 100개가 쌓이면 Writer에 한 번에 전달합니다. 각 청크는 하나의 트랜잭션으로 처리되어 청크 단위 롤백이 가능합니다. 실패 시 해당 청크만 롤백하고 Skip/Retry 정책을 적용할 수 있습니다."
+    },
+    {
+      "id": "spring-s012",
+      "difficulty": "advanced",
+      "type": "scenario",
+      "question": "Spring에서 `@EventListener` vs `@TransactionalEventListener`의 차이가 중요한 시나리오는?",
+      "options": [
+        "둘의 동작이 동일하여 차이 없음",
+        "이메일 발송 이벤트에서 @EventListener는 트랜잭션 롤백 후에도 이메일이 발송될 수 있어, @TransactionalEventListener(phase=AFTER_COMMIT)으로 커밋 성공 후 발송 보장",
+        "@TransactionalEventListener는 비동기 이벤트 처리를 위한 어노테이션",
+        "@EventListener는 Spring Boot 3.0부터 deprecated"
+      ],
+      "answer": 1,
+      "explanation": "`@EventListener`는 이벤트 발행 즉시 실행되어 트랜잭션이 롤백되어도 이미 외부 시스템(이메일, 알림)에 영향을 줄 수 있습니다. `@TransactionalEventListener(phase=AFTER_COMMIT)`은 트랜잭션이 성공적으로 커밋된 후에만 이벤트를 처리합니다."
+    },
+    {
+      "id": "spring-s013",
+      "difficulty": "intermediate",
+      "type": "scenario",
+      "question": "Spring Boot에서 `application.properties` vs `application.yml` 중 다음 설정이 올바른 것은?",
+      "options": [
+        "properties와 yml은 동일한 설정 방식으로 혼용 가능하며 우선순위 없음",
+        "두 파일 모두 존재할 때 properties가 yml보다 우선순위가 높고, 계층 구조 표현은 yml이 더 간결함",
+        "yml은 Spring Boot 2.0부터 deprecated",
+        "application.properties는 개발, application.yml은 운영 환경 전용"
+      ],
+      "answer": 1,
+      "explanation": "Spring Boot는 `application.properties`가 `application.yml`보다 높은 우선순위를 가집니다. `yml`은 들여쓰기로 계층 구조를 표현하여 중첩 설정이 깔끔하지만, `---` 구분자로 다중 프로파일 설정도 지원합니다. 두 형식 혼용보다는 하나를 선택하여 일관되게 사용을 권장합니다."
+    },
+    {
+      "id": "spring-s014",
+      "difficulty": "intermediate",
+      "type": "scenario",
+      "question": "Spring MVC에서 `@Valid`와 `BindingResult`를 함께 사용하는 이유는?",
+      "options": [
+        "@Valid 없이 BindingResult만으로 유효성 검사 가능",
+        "@Valid로 입력 유효성을 검사하고, BindingResult가 없으면 검증 실패 시 400 예외가 발생하지만, BindingResult로 직접 오류를 처리하여 커스텀 응답 구성 가능",
+        "BindingResult는 데이터베이스 제약 조건 위반을 처리",
+        "@Valid와 BindingResult는 Kotlin 프로젝트에서만 함께 사용 가능"
+      ],
+      "answer": 1,
+      "explanation": "`@Valid`는 Bean Validation 어노테이션(`@NotNull`, `@Size` 등)을 실행합니다. `BindingResult`가 없으면 검증 실패 시 `MethodArgumentNotValidException`(400)이 자동 발생합니다. `BindingResult`를 추가하면 예외 대신 오류 정보를 가져와 커스텀 에러 응답을 구성할 수 있습니다."
+    },
+    {
+      "id": "spring-s015",
+      "difficulty": "advanced",
+      "type": "scenario",
+      "question": "다음 코드에서 `@Cacheable`이 동작하지 않는 이유는?\n```java\n@Service\npublic class ProductService {\n    @Cacheable(\"products\")\n    public Product getProduct(Long id) { ... }\n    \n    public void refresh(Long id) {\n        this.getProduct(id); // 내부 호출\n    }\n}\n```",
+      "options": [
+        "@Cacheable은 @Repository에서만 동작",
+        "Spring AOP 프록시 특성상 내부 호출(this.getProduct())은 프록시를 우회하여 캐싱 미적용",
+        "@EnableCaching이 없어서 캐싱 비활성화",
+        "Long 타입은 캐시 키로 사용 불가"
+      ],
+      "answer": 1,
+      "explanation": "`@Cacheable`은 `@Transactional`과 마찬가지로 Spring AOP 프록시 기반으로 동작합니다. 같은 빈 내부에서 `this.getProduct()`를 호출하면 프록시를 거치지 않아 캐싱이 적용되지 않습니다. 해결: 자기 주입(self-injection) 또는 별도 빈으로 분리."
+    },
+    {
+      "id": "spring-d001",
+      "difficulty": "intermediate",
+      "type": "debug",
+      "question": "다음 Spring 코드에서 `NoUniqueBeanDefinitionException`이 발생하는 이유는?\n```java\npublic interface PaymentService { void pay(); }\n@Service class CardPayment implements PaymentService { ... }\n@Service class CashPayment implements PaymentService { ... }\n\n@Autowired PaymentService paymentService; // 예외 발생\n```",
+      "options": [
+        "PaymentService 인터페이스는 직접 주입 불가",
+        "PaymentService 타입의 Bean이 2개(CardPayment, CashPayment)여서 어떤 것을 주입할지 불명확",
+        "@Service 어노테이션을 구현체에 사용할 수 없음",
+        "인터페이스 타입으로는 @Autowired 사용 불가"
+      ],
+      "answer": 1,
+      "explanation": "동일 타입의 Bean이 여러 개일 때 `NoUniqueBeanDefinitionException`이 발생합니다. 해결: ①`@Primary`로 기본 Bean 지정 ②`@Qualifier(\"cardPayment\")`로 구체 Bean 지정 ③`List<PaymentService>`로 모든 구현체 주입 ④변수명을 구현체명과 동일하게 설정."
+    },
+    {
+      "id": "spring-d002",
+      "difficulty": "intermediate",
+      "type": "debug",
+      "question": "다음 코드에서 `@Transactional`이 예상대로 동작하지 않는 이유는?\n```java\n@Service\npublic class UserService {\n    @Transactional\n    private void saveUser(User user) { // private 메서드\n        userRepository.save(user);\n    }\n}\n```",
+      "options": [
+        "private 메서드에는 @Transactional이 적용되지 않음 — Spring AOP는 public 메서드만 프록시 처리",
+        "@Transactional은 void 반환 메서드에만 동작",
+        "userRepository.save()는 이미 트랜잭션을 내장하므로 중복 적용 불가",
+        "@Service와 @Transactional은 같은 클래스에 사용 불가"
+      ],
+      "answer": 0,
+      "explanation": "Spring AOP 프록시는 기본적으로 public 메서드에만 어드바이스를 적용합니다. private 메서드는 외부에서 직접 호출할 수 없어 프록시를 통해 처리될 수 없으므로 `@Transactional`이 무시됩니다. 해결: 메서드를 public으로 변경하거나 별도 빈으로 분리."
+    },
+    {
+      "id": "spring-d003",
+      "difficulty": "intermediate",
+      "type": "debug",
+      "question": "Spring Boot 애플리케이션에서 `BeanCreationException`이 발생하는 다음 상황의 원인은?\n```\nCaused by: java.lang.IllegalStateException:\nambiguous handler methods mapped for '/api/users'\n```",
+      "options": [
+        "/api/users 경로에 접근 권한이 없어 발생",
+        "두 개 이상의 핸들러 메서드가 동일한 URL(/api/users)에 매핑되어 충돌",
+        "UserController에 @RequestMapping 어노테이션이 없어서 발생",
+        "Spring Security가 해당 경로를 차단"
+      ],
+      "answer": 1,
+      "explanation": "동일한 URL 패턴과 HTTP 메서드에 둘 이상의 `@RequestMapping`(또는 `@GetMapping`, `@PostMapping` 등)이 매핑되면 `RequestMappingHandlerMapping`이 초기화 시 `IllegalStateException: Ambiguous handler methods`를 발생시킵니다."
+    },
+    {
+      "id": "spring-d004",
+      "difficulty": "intermediate",
+      "type": "debug",
+      "question": "다음 JPA 코드에서 `DetachedObjectException`이 발생하는 이유는?\n```java\nUser user = userRepository.findById(1L).orElseThrow();\ntransactionManager.commit();\nuserRepository.save(user); // 예외 발생\n```",
+      "options": [
+        "findById가 null을 반환하여 발생",
+        "트랜잭션 종료 후 엔티티가 준영속(Detached) 상태가 되어 다른 트랜잭션에서 병합(merge) 없이 저장 시도",
+        "save()는 새로운 엔티티에만 사용 가능",
+        "user 객체가 null이어서 발생"
+      ],
+      "answer": 1,
+      "explanation": "트랜잭션이 종료되면 영속성 컨텍스트가 닫히고 엔티티는 준영속(Detached) 상태가 됩니다. 새 트랜잭션에서 준영속 객체를 사용하려면 `entityManager.merge(user)` 또는 Spring Data JPA의 `save()`(내부적으로 merge 호출)가 올바른 컨텍스트 내에서 이루어져야 합니다."
+    },
+    {
+      "id": "spring-d005",
+      "difficulty": "intermediate",
+      "type": "debug",
+      "question": "다음 Spring MVC 코드에서 항상 null을 반환하는 이유는?\n```java\n@GetMapping(\"/user\")\npublic User getUser(@RequestParam String name) {\n    return userService.findByName(name);\n}\n// 요청: GET /user?Name=Alice (대문자 N)\n```",
+      "options": [
+        "GET 요청에서는 @RequestParam을 사용할 수 없음",
+        "@RequestParam은 대소문자를 구분하여 파라미터명 'name'과 'Name'이 불일치 — null 또는 400 에러 발생",
+        "쿼리 파라미터에는 @PathVariable을 사용해야 함",
+        "String 타입은 @RequestParam으로 받을 수 없음"
+      ],
+      "answer": 1,
+      "explanation": "HTTP 쿼리 파라미터 이름은 대소문자를 구분합니다. `@RequestParam String name`은 `?name=Alice`를 기대하지만 요청은 `?Name=Alice`를 보냈습니다. `required=true`(기본값)이면 `MissingServletRequestParameterException`이, `required=false`이면 null이 바인딩됩니다."
+    },
+    {
+      "id": "spring-d006",
+      "difficulty": "advanced",
+      "type": "debug",
+      "question": "다음 코드에서 `@Scheduled`가 동작하지 않는 이유는?\n```java\n@Component\npublic class ScheduledTask {\n    @Scheduled(fixedRate = 5000)\n    public void run() {\n        System.out.println(\"실행\");\n    }\n}\n// @SpringBootApplication 클래스\n```",
+      "options": [
+        "@Scheduled는 @Service 클래스에서만 동작",
+        "@EnableScheduling 어노테이션이 설정 클래스에 없어 스케줄러 미활성화",
+        "fixedRate는 밀리초 단위가 아닌 초 단위",
+        "run() 메서드가 반환값이 없어서 실행 불가"
+      ],
+      "answer": 1,
+      "explanation": "`@Scheduled`를 사용하려면 `@EnableScheduling` 어노테이션을 `@SpringBootApplication` 또는 `@Configuration` 클래스에 추가해야 합니다. 마찬가지로 `@Async`는 `@EnableAsync`, 캐싱은 `@EnableCaching`이 필요합니다."
+    },
+    {
+      "id": "spring-d007",
+      "difficulty": "advanced",
+      "type": "debug",
+      "question": "다음 Spring Data JPA 코드에서 쿼리가 올바르게 동작하지 않는 이유는?\n```java\n@Repository\npublic interface UserRepository extends JpaRepository<User, Long> {\n    List<User> findByNameAndAge(String name, int age);\n    // 실제 DB에는 name 컬럼이 'username'으로 저장됨\n}\n```",
+      "options": [
+        "findBy 메서드명에 And 사용 불가",
+        "메서드명의 'Name'이 엔티티 필드명과 불일치하면 PropertyReferenceException 발생",
+        "int 타입은 메서드명 파싱에서 지원하지 않음",
+        "JpaRepository를 직접 상속하면 커스텀 메서드 불가"
+      ],
+      "answer": 1,
+      "explanation": "Spring Data JPA는 메서드명을 파싱하여 JPQL을 생성합니다. `findByName`은 `User` 엔티티의 `name` 필드를 기대합니다. 필드명이 `username`이라면 `findByUsername`으로 변경하거나 `@Column(name = \"username\")`으로 DB 컬럼명을 매핑해야 합니다."
+    },
+    {
+      "id": "spring-d008",
+      "difficulty": "advanced",
+      "type": "debug",
+      "question": "다음 코드에서 트랜잭션이 예상대로 롤백되지 않는 이유는?\n```java\n@Service\npublic class OrderService {\n    @Autowired OrderRepository orderRepository;\n    \n    @Transactional\n    public void createOrder(Order order) {\n        try {\n            orderRepository.save(order);\n            throw new RuntimeException(\"오류\");\n        } catch (RuntimeException e) {\n            log.error(\"오류 발생\", e);\n            // 예외를 삼킴\n        }\n    }\n}\n```",
+      "options": [
+        "RuntimeException은 자동 롤백이므로 예외를 삼켜도 롤백됨",
+        "catch 블록에서 RuntimeException을 잡아 전파하지 않으면 트랜잭션 관리자가 롤백을 결정할 수 없어 커밋됨",
+        "log.error() 호출이 트랜잭션 롤백을 막음",
+        "@Transactional은 RuntimeException을 catch하면 자동으로 재전파"
+      ],
+      "answer": 1,
+      "explanation": "Spring의 트랜잭션 관리자는 메서드 종료 시점에 예외가 전파되어야 롤백을 결정합니다. 메서드 내에서 예외를 catch하고 전파하지 않으면 트랜잭션 관리자는 정상 종료로 판단하여 커밋합니다. 해결: 예외를 재던지거나 `TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()` 호출."
+    },
+    {
+      "id": "spring-d009",
+      "difficulty": "advanced",
+      "type": "debug",
+      "question": "Spring Boot에서 다음 설정이 운영 환경에서 심각한 문제를 유발하는 이유는?\n```yaml\nspring:\n  jpa:\n    show-sql: true\n    properties:\n      hibernate:\n        format_sql: true\nlogging:\n  level:\n    org.hibernate.SQL: DEBUG\n```",
+      "options": [
+        "show-sql과 logging.level.SQL 중복 설정으로 오류 발생",
+        "운영 환경에서 모든 SQL이 로그에 출력되어 성능 저하, 민감한 데이터 노출, 로그 용량 폭발 위험",
+        "format_sql은 개발 환경에서만 지원",
+        "이 설정은 문제 없음"
+      ],
+      "answer": 1,
+      "explanation": "운영 환경에서 `show-sql: true`와 SQL DEBUG 로깅은 모든 쿼리(민감한 파라미터 포함)를 로그에 기록하여 ①성능 저하 ②민감 데이터(비밀번호, 개인정보) 로그 노출 ③디스크 로그 공간 폭발을 유발합니다. 운영 환경 프로파일에서 해당 설정을 제거해야 합니다."
+    },
+    {
+      "id": "spring-d010",
+      "difficulty": "advanced",
+      "type": "debug",
+      "question": "다음 Spring Security 설정의 보안 취약점은?\n```java\nhttp.csrf().disable()\n    .authorizeHttpRequests(auth -> auth\n        .anyRequest().permitAll()\n    );\n```",
+      "options": [
+        "csrf().disable()은 GET 요청에만 영향을 줌",
+        "CSRF 보호 비활성화로 Cross-Site Request Forgery 공격에 취약, anyRequest().permitAll()로 모든 엔드포인트 인증 없이 접근 가능",
+        "이 설정은 REST API에서 표준적인 설정",
+        "Spring Boot 3.0에서 이 설정 방식은 지원 안 됨"
+      ],
+      "answer": 1,
+      "explanation": "두 가지 문제: ①`csrf().disable()`은 세션 기반 앱에서 CSRF 공격에 노출시킵니다(JWT 사용 시는 허용 가능). ②`anyRequest().permitAll()`은 인증 없이 모든 API에 접근을 허용합니다. 운영 환경에서 필요한 경로만 permitAll()로 설정하고, 나머지는 authenticated() 또는 hasRole()로 보호해야 합니다."
+    },
+    {
+      "id": "spring-o001",
+      "difficulty": "basic",
+      "type": "ordering",
+      "question": "Spring MVC에서 HTTP 요청 처리 순서로 올바른 것은?\n1. HandlerAdapter가 Controller 메서드 실행\n2. DispatcherServlet이 요청을 수신\n3. ViewResolver가 뷰 이름으로 실제 뷰 결정\n4. HandlerMapping이 적합한 Controller를 탐색",
+      "options": [
+        "1 → 2 → 3 → 4",
+        "2 → 4 → 1 → 3",
+        "4 → 2 → 1 → 3",
+        "2 → 1 → 4 → 3"
+      ],
+      "answer": 1,
+      "explanation": "Spring MVC 요청 처리: ①DispatcherServlet이 요청 수신 → ②HandlerMapping으로 적합한 핸들러(Controller) 탐색 → ③HandlerAdapter로 Controller 메서드 실행 → ④ViewResolver로 뷰 결정 후 응답 렌더링."
+    },
+    {
+      "id": "spring-o002",
+      "difficulty": "basic",
+      "type": "ordering",
+      "question": "Spring Bean 생명주기 순서로 올바른 것은?\n1. 의존성 주입(DI)\n2. @PostConstruct 초기화 콜백\n3. Bean 인스턴스 생성\n4. @PreDestroy 소멸 콜백\n5. 비즈니스 로직 실행",
+      "options": [
+        "1 → 3 → 2 → 5 → 4",
+        "3 → 1 → 2 → 5 → 4",
+        "2 → 3 → 1 → 4 → 5",
+        "3 → 2 → 1 → 5 → 4"
+      ],
+      "answer": 1,
+      "explanation": "Spring Bean 생명주기: ①인스턴스 생성 → ②의존성 주입(DI) → ③초기화 콜백(@PostConstruct) → ④비즈니스 로직 실행(사용 단계) → ⑤소멸 콜백(@PreDestroy, 컨테이너 종료 시)."
+    },
+    {
+      "id": "spring-o003",
+      "difficulty": "intermediate",
+      "type": "ordering",
+      "question": "Spring `@Transactional` 메서드 실행 순서로 올바른 것은?\n1. 실제 메서드 비즈니스 로직 실행\n2. AOP 프록시가 요청을 인터셉트\n3. 예외 여부에 따라 커밋 또는 롤백\n4. 트랜잭션 시작(또는 기존 참여)",
+      "options": [
+        "1 → 2 → 4 → 3",
+        "2 → 4 → 1 → 3",
+        "4 → 2 → 1 → 3",
+        "2 → 1 → 4 → 3"
+      ],
+      "answer": 1,
+      "explanation": "@Transactional 처리 순서: ①AOP 프록시가 메서드 호출을 인터셉트 → ②트랜잭션 시작(TransactionManager) → ③실제 메서드 로직 실행 → ④정상 종료 시 커밋, RuntimeException 발생 시 롤백."
+    },
+    {
+      "id": "spring-o004",
+      "difficulty": "intermediate",
+      "type": "ordering",
+      "question": "Spring Boot 자동 설정(Auto Configuration) 과정 순서로 올바른 것은?\n1. @Conditional 조건 평가\n2. spring.factories 또는 AutoConfiguration.imports 파일 로드\n3. 조건 충족 시 Bean 등록\n4. @SpringBootApplication → @EnableAutoConfiguration 활성화",
+      "options": [
+        "2 → 4 → 1 → 3",
+        "4 → 2 → 1 → 3",
+        "1 → 4 → 2 → 3",
+        "4 → 1 → 2 → 3"
+      ],
+      "answer": 1,
+      "explanation": "자동 설정 순서: ①@EnableAutoConfiguration 활성화 → ②META-INF/spring.factories(또는 AutoConfiguration.imports)에서 자동 설정 클래스 목록 로드 → ③각 설정 클래스의 @Conditional 조건 평가 → ④조건 충족 시 Bean 자동 등록."
+    },
+    {
+      "id": "spring-o005",
+      "difficulty": "advanced",
+      "type": "ordering",
+      "question": "Spring Security에서 HTTP 요청 인증 처리 순서로 올바른 것은?\n1. 인증된 Authentication을 SecurityContextHolder에 저장\n2. SecurityFilterChain에서 요청 수신\n3. AuthenticationManager로 인증 처리\n4. 인증 필터(UsernamePasswordAuthenticationFilter 등)가 자격증명 추출",
+      "options": [
+        "4 → 2 → 3 → 1",
+        "2 → 4 → 3 → 1",
+        "3 → 2 → 4 → 1",
+        "2 → 3 → 4 → 1"
+      ],
+      "answer": 1,
+      "explanation": "Spring Security 인증 순서: ①SecurityFilterChain이 요청 수신 → ②인증 필터(예: UsernamePasswordAuthenticationFilter)가 자격증명(아이디/비밀번호) 추출 → ③AuthenticationManager(→UserDetailsService)로 인증 처리 → ④인증 성공 시 Authentication을 SecurityContextHolder에 저장."
+    },
+    {
+      "id": "spring-o006",
+      "difficulty": "intermediate",
+      "type": "ordering",
+      "question": "Spring Data JPA에서 엔티티 저장(save) 처리 순서로 올바른 것은?\n1. 영속성 컨텍스트에서 변경 감지(Dirty Checking)\n2. repository.save() 호출\n3. 트랜잭션 커밋 시 flush() 실행\n4. EntityManager.persist() 또는 merge() 호출",
+      "options": [
+        "1 → 2 → 4 → 3",
+        "2 → 4 → 1 → 3",
+        "4 → 2 → 3 → 1",
+        "2 → 1 → 4 → 3"
+      ],
+      "answer": 1,
+      "explanation": "JPA save() 처리: ①repository.save() 호출 → ②새 엔티티면 persist(), 기존이면 merge()로 영속화 → ③영속성 컨텍스트가 엔티티 스냅샷 관리(Dirty Checking) → ④트랜잭션 커밋 시 flush()로 SQL 생성 및 DB 전송."
+    },
+    {
+      "id": "spring-o007",
+      "difficulty": "advanced",
+      "type": "ordering",
+      "question": "Spring AOP에서 Pointcut 표현식 매칭부터 Advice 실행까지 순서로 올바른 것은?\n1. Around Advice의 proceed() 호출로 실제 메서드 실행\n2. 대상 Bean 메서드 호출 시 프록시 인터셉트\n3. Pointcut 조건 평가\n4. Advice 체인 구성 및 실행 시작",
+      "options": [
+        "3 → 2 → 4 → 1",
+        "2 → 3 → 4 → 1",
+        "2 → 4 → 3 → 1",
+        "3 → 4 → 2 → 1"
+      ],
+      "answer": 1,
+      "explanation": "AOP 실행 순서: ①대상 메서드 호출 시 프록시가 인터셉트 → ②Pointcut 조건 평가(매칭 여부 확인) → ③매칭 시 Advice 체인(Around → Before → 실제 메서드 → After → AfterReturning/AfterThrowing) 구성 → ④Around Advice의 proceed()로 실제 메서드 실행."
+    },
+    {
+      "id": "spring-o008",
+      "difficulty": "intermediate",
+      "type": "ordering",
+      "question": "Spring Boot 애플리케이션 시작 순서로 올바른 것은?\n1. ApplicationContext 생성 및 Bean 초기화\n2. main() 메서드 실행\n3. 내장 웹 서버(Tomcat 등) 시작\n4. 자동 설정 클래스 로드 및 조건 평가",
+      "options": [
+        "2 → 4 → 1 → 3",
+        "1 → 2 → 4 → 3",
+        "2 → 1 → 4 → 3",
+        "4 → 2 → 1 → 3"
+      ],
+      "answer": 0,
+      "explanation": "Spring Boot 시작 순서: ①main() 메서드에서 SpringApplication.run() 호출 → ②자동 설정 클래스 로드 및 @Conditional 조건 평가 → ③ApplicationContext 생성 및 Bean 초기화(@PostConstruct 포함) → ④내장 Tomcat/Netty 시작 및 HTTP 요청 수신 준비 완료."
+    },
+    {
+      "id": "spring-o009",
+      "difficulty": "intermediate",
+      "type": "ordering",
+      "question": "Spring `@Cacheable` 메서드 호출 처리 순서로 올바른 것은?\n1. 캐시에 저장 후 결과 반환\n2. 캐시 키로 캐시 조회\n3. 메서드 호출 시 프록시 인터셉트\n4. 캐시 히트 시 즉시 반환, 미스 시 실제 메서드 실행",
+      "options": [
+        "2 → 3 → 4 → 1",
+        "3 → 2 → 4 → 1",
+        "3 → 4 → 2 → 1",
+        "2 → 4 → 3 → 1"
+      ],
+      "answer": 1,
+      "explanation": "@Cacheable 처리 순서: ①프록시가 메서드 호출 인터셉트 → ②파라미터 기반 캐시 키로 캐시 조회 → ③캐시 히트 시 즉시 반환(메서드 실행 생략), 캐시 미스 시 실제 메서드 실행 → ④결과를 캐시에 저장 후 반환."
+    },
+    {
+      "id": "spring-o010",
+      "difficulty": "advanced",
+      "type": "ordering",
+      "question": "Spring에서 @Transactional REQUIRES_NEW 전파 속성 처리 순서로 올바른 것은?\n1. 새 트랜잭션 시작\n2. 외부 트랜잭션 일시 중단(Suspend)\n3. 새 트랜잭션 커밋 또는 롤백\n4. 외부 트랜잭션 재개(Resume)",
+      "options": [
+        "1 → 2 → 3 → 4",
+        "2 → 1 → 3 → 4",
+        "1 → 3 → 2 → 4",
+        "2 → 3 → 1 → 4"
+      ],
+      "answer": 1,
+      "explanation": "REQUIRES_NEW 전파 순서: ①기존(외부) 트랜잭션 일시 중단 → ②완전히 독립된 새 트랜잭션 시작 → ③새 트랜잭션 내 로직 실행 후 커밋 또는 롤백 → ④외부 트랜잭션 재개. 새 트랜잭션의 커밋/롤백은 외부 트랜잭션에 영향을 주지 않습니다."
+    },
+    {
+      "id": "spring-c016",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "IoC 컨테이너의 역할은 구체적으로 무엇인가요?",
+      "options": [
+        "Bean 객체의 생성, 초기화, 의존관계 주입, 소멸까지 생명주기 전반을 관리한다",
+        "컨트롤러의 HTTP 응답 본문만 JSON으로 변환한다",
+        "데이터베이스 인덱스를 자동 생성한다",
+        "JVM의 GC 알고리즘을 선택한다"
+      ],
+      "answer": 0,
+      "explanation": "Spring IoC 컨테이너(ApplicationContext, BeanFactory)는 설정 메타데이터를 기반으로 Bean을 생성하고 의존성을 주입하며 초기화/소멸 콜백까지 관리합니다. 개발자는 객체 생성과 연결보다 비즈니스 로직에 집중할 수 있습니다."
+    },
+    {
+      "id": "spring-c017",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "DI가 무엇이며, 어떤 방식들이 존재하나요?",
+      "options": [
+        "객체가 필요한 의존 객체를 외부에서 주입받는 방식이며 생성자 주입, 세터 주입, 필드 주입이 있다",
+        "객체가 내부에서 필요한 구현체를 반드시 new로 직접 생성하는 방식이다",
+        "데이터베이스의 인덱스를 자동 분산하는 방식이다",
+        "HTTP 요청을 정적 파일로 변환하는 방식이다"
+      ],
+      "answer": 0,
+      "explanation": "DI(Dependency Injection)는 객체가 사용할 의존성을 스스로 생성하지 않고 외부에서 주입받는 방식입니다. 대표 방식은 생성자 주입, 세터 주입, 필드 주입이며, 필수 의존성과 불변성을 표현하기 쉬운 생성자 주입이 권장됩니다."
+    },
+    {
+      "id": "spring-c018",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "DIP와 DI의 관계로 올바른 것은?",
+      "options": [
+        "DIP는 추상화에 의존하라는 설계 원칙이고, DI는 외부에서 의존성을 주입해 DIP를 구현하기 쉽게 해주는 방법이다",
+        "DIP는 스프링 빈의 기본 스코프 이름이다",
+        "DI를 사용하면 구체 클래스에 직접 의존해도 항상 DIP를 만족한다",
+        "DIP와 DI는 트랜잭션 격리 수준을 의미한다"
+      ],
+      "answer": 0,
+      "explanation": "DIP는 상위 모듈과 하위 모듈 모두 구체 구현이 아니라 추상화에 의존해야 한다는 SOLID 원칙입니다. DI는 의존 객체를 외부에서 주입하는 방식으로, 인터페이스에 의존하고 구현체를 컨테이너가 연결하게 만들면 DIP를 자연스럽게 만족할 수 있습니다."
+    },
+    {
+      "id": "spring-c019",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "스프링 빈이란 무엇이고, 어떻게 등록하나요?",
+      "options": [
+        "스프링 IoC 컨테이너가 생성하고 관리하는 객체이며, 컴포넌트 스캔, @Bean, XML 등으로 등록할 수 있다",
+        "JPA가 자동 생성하는 데이터베이스 테이블만을 의미한다",
+        "HTTP 세션에 저장된 사용자 정보만을 의미한다",
+        "JVM이 GC 대상으로 표시한 객체를 의미한다"
+      ],
+      "answer": 0,
+      "explanation": "스프링 빈은 컨테이너가 생명주기를 관리하는 객체입니다. `@Component`, `@Service`, `@Repository`, `@Controller` 같은 어노테이션으로 컴포넌트 스캔 대상이 되거나, `@Configuration` 클래스의 `@Bean` 메서드, XML 설정 등으로 등록할 수 있습니다."
+    },
+    {
+      "id": "spring-t016",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "싱글톤 빈 사용 시 주의할 점은 무엇인가요?",
+      "options": [
+        "여러 요청과 스레드가 같은 인스턴스를 공유하므로 가변 공유 상태를 피하고 무상태로 설계해야 한다",
+        "싱글톤 빈은 요청마다 새 객체가 만들어져 상태 공유 문제가 없다",
+        "싱글톤 빈은 필드를 사용해도 자동으로 스레드별로 분리된다",
+        "싱글톤 빈은 Controller에서만 사용할 수 있다"
+      ],
+      "answer": 0,
+      "explanation": "Spring Bean의 기본 스코프는 singleton이며 컨테이너당 하나의 인스턴스를 공유합니다. 따라서 사용자별 상태를 필드에 저장하면 동시성 문제가 발생할 수 있습니다. 지역 변수, 메서드 파라미터, 별도 스코프, ThreadLocal 등을 적절히 사용해야 합니다."
+    },
+    {
+      "id": "spring-c020",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "AOP의 주요 용어로 올바른 조합은?",
+      "options": [
+        "Aspect는 횡단 관심사 모듈, Join Point는 적용 가능 지점, Advice는 실행 부가 기능, Pointcut은 적용 지점 선별식이다",
+        "Aspect는 데이터베이스 테이블, Advice는 HTTP 상태 코드이다",
+        "Pointcut은 Bean 생성자이고 Join Point는 application.yml 설정이다",
+        "AOP 용어는 트랜잭션과 무관하다"
+      ],
+      "answer": 0,
+      "explanation": "AOP는 로깅, 트랜잭션, 보안처럼 여러 모듈에 걸친 횡단 관심사를 분리합니다. Aspect는 관심사 모듈, Join Point는 메서드 실행 같은 적용 가능 지점, Advice는 실제 부가 동작, Pointcut은 어떤 Join Point에 적용할지 고르는 표현식입니다."
+    },
+    {
+      "id": "spring-c021",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "@Transactional은 AOP와 어떤 관계인가요?",
+      "options": [
+        "스프링이 프록시 기반 AOP로 메서드 전후에 트랜잭션 시작, 커밋, 롤백 로직을 적용하는 대표 사례이다",
+        "@Transactional은 컴파일러가 SQL을 직접 생성하는 문법이다",
+        "@Transactional은 ViewResolver를 선택하는 MVC 어노테이션이다",
+        "AOP와 무관하게 JVM 바이트코드가 직접 트랜잭션을 처리한다"
+      ],
+      "answer": 0,
+      "explanation": "Spring은 `@Transactional`이 붙은 Bean을 프록시로 감싸고, 메서드 호출 전 트랜잭션을 시작하며 정상 종료 시 커밋, 예외 발생 시 롤백 규칙에 따라 롤백합니다. 이 구조 때문에 내부 호출에서는 프록시를 거치지 않아 적용되지 않을 수 있습니다."
+    },
+    {
+      "id": "spring-o011",
+      "difficulty": "basic",
+      "type": "ordering",
+      "question": "Spring MVC의 기본 요청 처리 순서로 올바른 것은?",
+      "options": [
+        "DispatcherServlet 요청 수신 → HandlerMapping으로 컨트롤러 탐색 → Controller 실행 → ViewResolver 또는 ResponseBody 처리 → 응답 반환",
+        "Controller 실행 → DispatcherServlet 생성 → HandlerMapping 삭제 → 응답 반환",
+        "ViewResolver 실행 → DNS 조회 → Controller 실행 → Bean 소멸",
+        "Repository 실행 → View 렌더링 → HandlerMapping으로 컨트롤러 탐색 → 요청 수신"
+      ],
+      "answer": 0,
+      "explanation": "Spring MVC에서 DispatcherServlet은 Front Controller입니다. 요청을 받아 HandlerMapping으로 적절한 핸들러를 찾고 HandlerAdapter로 실행합니다. 이후 ViewResolver로 뷰를 찾거나 `@ResponseBody`로 본문을 직렬화해 응답합니다."
+    },
+    {
+      "id": "spring-c022",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "@RestController와 @Controller의 차이는 무엇인가요?",
+      "options": [
+        "@Controller는 주로 View를 반환하고, @RestController는 @Controller + @ResponseBody로 반환값을 응답 본문에 직접 쓴다",
+        "@RestController는 HTML만 반환하고 @Controller는 JSON만 반환한다",
+        "@Controller는 Bean으로 등록되지 않고 @RestController만 Bean으로 등록된다",
+        "둘은 트랜잭션 전파 옵션이다"
+      ],
+      "answer": 0,
+      "explanation": "`@Controller`는 MVC에서 뷰 이름을 반환해 ViewResolver와 함께 화면을 렌더링하는 데 주로 사용됩니다. `@RestController`는 `@Controller`와 `@ResponseBody`를 합친 형태라 메서드 반환값이 JSON/XML 등 HTTP 응답 본문으로 직렬화됩니다."
+    },
+    {
+      "id": "spring-c023",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "Spring Boot의 장점으로 옳은 것은?",
+      "options": [
+        "자동 설정, 내장 서버, starter 기반 의존성 관리, 독립 실행 JAR, Actuator 같은 운영 기능을 제공한다",
+        "반드시 XML 설정만 사용하도록 강제한다",
+        "서블릿 컨테이너가 없어 웹 애플리케이션을 만들 수 없다",
+        "JPA와 트랜잭션을 사용할 수 없게 한다"
+      ],
+      "answer": 0,
+      "explanation": "Spring Boot는 Spring 기반 애플리케이션을 빠르게 만들기 위해 Auto Configuration, starter 의존성, 내장 Tomcat/Jetty, 실행 가능한 JAR, Actuator 등을 제공합니다. 반복 설정을 줄이고 운영 준비 기능을 쉽게 붙일 수 있습니다."
+    },
+    {
+      "id": "spring-c024",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "PSA(Portable Service Abstraction)가 무엇인가요?",
+      "options": [
+        "세부 기술이 바뀌어도 일관된 방식으로 사용할 수 있게 해주는 스프링의 서비스 추상화이다",
+        "컨트롤러의 URL 경로를 자동으로 암호화하는 기능이다",
+        "JPA 엔티티의 기본 키 생성 전략이다",
+        "Bean 스코프 중 하나이다"
+      ],
+      "answer": 0,
+      "explanation": "PSA는 트랜잭션, 캐싱, 메시징처럼 구현 기술이 달라도 같은 추상화로 접근하게 해주는 구조입니다. 예를 들어 `@Transactional`은 JDBC, JPA, Hibernate 등 구체 기술이 달라도 일관된 방식으로 트랜잭션을 다루게 해줍니다."
+    },
+    {
+      "id": "spring-t017",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "Filter, Interceptor, AOP는 각각 언제 사용하는 것이 적절한가요?",
+      "options": [
+        "Filter는 서블릿 전후 요청/응답 전체, Interceptor는 Spring MVC 컨트롤러 전후, AOP는 웹 여부와 무관한 메서드 단위 공통 로직에 적합하다",
+        "Filter는 서비스 메서드 트랜잭션, Interceptor는 JVM GC, AOP는 DNS 조회에 사용한다",
+        "세 기능은 실행 위치와 용도가 완전히 같다",
+        "AOP는 HTTP 요청에만 적용할 수 있다"
+      ],
+      "answer": 0,
+      "explanation": "Filter는 DispatcherServlet 이전의 서블릿 계층에서 인코딩, 보안, 로깅 등에 적합합니다. Interceptor는 Spring MVC 핸들러 전후에서 인증/인가나 컨트롤러 공통 처리에 적합합니다. AOP는 서비스/레포지토리 메서드 등 비즈니스 로직 주변의 횡단 관심사에 적합합니다."
+    },
+    {
+      "id": "spring-c025",
+      "difficulty": "basic",
+      "type": "concept",
+      "question": "JPA와 ORM의 관계로 옳은 것은?",
+      "options": [
+        "JPA는 자바 ORM 표준 인터페이스이고, Hibernate 같은 구현체가 객체와 관계형 테이블 매핑을 실제 수행한다",
+        "JPA는 SQL Injection 방어 전용 라이브러리이다",
+        "ORM은 객체를 JSON으로 직렬화하는 방식이다",
+        "JPA는 Spring MVC의 ViewResolver 구현체이다"
+      ],
+      "answer": 0,
+      "explanation": "ORM(Object-Relational Mapping)은 객체와 관계형 데이터베이스 테이블을 매핑하는 기술입니다. JPA는 Java ORM 표준 API이며, Hibernate, EclipseLink 같은 구현체가 실제 동작을 제공합니다. Spring Data JPA는 그 위에 Repository 추상화를 추가합니다."
+    },
+    {
+      "id": "spring-c026",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "영속성 컨텍스트(Persistence Context)의 역할은 무엇인가요?",
+      "options": [
+        "엔티티를 관리하는 1차 캐시 공간이며 동일성 보장, 변경 감지, 쓰기 지연 등을 제공한다",
+        "HTTP 세션을 저장하는 브라우저 쿠키이다",
+        "컨트롤러의 요청 매핑 정보를 저장하는 테이블이다",
+        "GC Root 목록을 저장하는 JVM 영역이다"
+      ],
+      "answer": 0,
+      "explanation": "영속성 컨텍스트는 EntityManager가 관리하는 엔티티 저장소입니다. 같은 트랜잭션 안에서 1차 캐시와 동일성 보장, 더티 체킹, 쓰기 지연 SQL 저장소 등을 제공해 객체 상태 변경을 DB 작업으로 동기화합니다."
+    },
+    {
+      "id": "spring-c027",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "JPA 엔티티 생명주기 상태로 올바른 것은?",
+      "options": [
+        "비영속(new/transient), 영속(managed), 준영속(detached), 삭제(removed)",
+        "요청(request), 세션(session), 애플리케이션(application), 웹소켓(websocket)",
+        "준비(ready), 실행(running), 대기(waiting), 종료(terminated)",
+        "커밋(commit), 롤백(rollback), 잠금(lock), 조인(join)"
+      ],
+      "answer": 0,
+      "explanation": "JPA 엔티티는 아직 영속성 컨텍스트와 관계없는 비영속, 컨텍스트가 관리하는 영속, 한 번 관리되었지만 현재 분리된 준영속, 삭제 예정인 삭제 상태를 가집니다. 상태에 따라 더티 체킹과 flush 대상 여부가 달라집니다."
+    },
+    {
+      "id": "spring-t018",
+      "difficulty": "intermediate",
+      "type": "tradeoff",
+      "question": "영속성 전이(Cascade)와 고아 객체 제거(orphanRemoval) 사용 시 주의할 점은?",
+      "options": [
+        "부모-자식 생명주기가 명확히 종속될 때만 사용해야 하며, 잘못 쓰면 의도치 않은 저장·삭제가 전파될 수 있다",
+        "항상 모든 연관관계에 CascadeType.ALL과 orphanRemoval=true를 적용하는 것이 안전하다",
+        "고아 객체 제거는 조회 성능만 높이고 삭제와 무관하다",
+        "Cascade는 트랜잭션 롤백을 비활성화한다"
+      ],
+      "answer": 0,
+      "explanation": "Cascade는 부모 엔티티 작업을 자식에게 전파하고, orphanRemoval은 부모 컬렉션에서 빠진 자식을 삭제 대상으로 만듭니다. 생명주기가 완전히 부모에 종속된 경우에 유용하지만, 독립적으로 참조될 수 있는 엔티티에 쓰면 데이터가 의도치 않게 삭제될 수 있습니다."
+    },
+    {
+      "id": "spring-c028",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "JPQL과 QueryDSL의 차이로 옳은 것은?",
+      "options": [
+        "JPQL은 문자열 기반 객체 지향 쿼리이고, QueryDSL은 타입 안전한 쿼리 생성을 지원한다",
+        "JPQL은 SQL Injection만을 방어하는 라이브러리이고 QueryDSL은 캐시 서버이다",
+        "QueryDSL은 JPA 엔티티 생명주기를 관리하는 컨테이너이다",
+        "둘 다 HTTP 요청 매핑 전용 문법이다"
+      ],
+      "answer": 0,
+      "explanation": "JPQL은 엔티티 객체와 필드를 대상으로 작성하는 객체 지향 쿼리 언어입니다. 문자열 기반이라 런타임 오류 가능성이 있습니다. QueryDSL은 Q타입을 이용해 타입 안전한 쿼리를 코드로 작성하게 해 컴파일 시점 검증과 동적 쿼리 작성에 유리합니다."
+    },
+    {
+      "id": "spring-c029",
+      "difficulty": "advanced",
+      "type": "concept",
+      "question": "JPA의 낙관적 락과 비관적 락의 차이는 무엇인가요?",
+      "options": [
+        "낙관적 락은 버전 컬럼으로 충돌을 감지하고, 비관적 락은 DB 락을 먼저 획득해 다른 트랜잭션 접근을 제한한다",
+        "낙관적 락은 항상 테이블 전체를 잠그고 비관적 락은 아무 검사를 하지 않는다",
+        "둘 다 HTTP 세션 인증 방식이다",
+        "비관적 락은 버전 충돌을 커밋 후 무시한다"
+      ],
+      "answer": 0,
+      "explanation": "낙관적 락은 충돌이 드물다고 보고 `@Version` 컬럼으로 업데이트 시점에 충돌을 감지합니다. 비관적 락은 충돌 가능성이 높다고 보고 `SELECT FOR UPDATE` 같은 DB 락을 먼저 잡아 다른 트랜잭션의 변경을 막습니다. 동시성 패턴과 비용이 다릅니다."
+    },
+    {
+      "id": "spring-c030",
+      "difficulty": "intermediate",
+      "type": "concept",
+      "question": "JPA 연관관계의 주인(owner)이 중요한 이유는 무엇인가요?",
+      "options": [
+        "외래 키를 실제로 업데이트하는 쪽을 정해 양방향 연관관계에서 DB 반영 기준을 명확히 하기 위해서이다",
+        "연관관계의 주인만 트랜잭션을 시작할 수 있기 때문이다",
+        "주인이 아닌 엔티티는 조회할 수 없기 때문이다",
+        "연관관계의 주인은 항상 부모 테이블이어야 한다"
+      ],
+      "answer": 0,
+      "explanation": "양방향 연관관계는 객체 양쪽에 참조가 있지만 DB 외래 키는 한 곳에만 있습니다. JPA는 외래 키를 관리하는 쪽을 연관관계의 주인으로 정하고, 주인 쪽 변경을 기준으로 DB 업데이트를 수행합니다. mappedBy 쪽은 읽기 반영용입니다."
+    },
+    {
+      "id": "spring-o012",
+      "difficulty": "intermediate",
+      "type": "ordering",
+      "question": "JPA 영속성 컨텍스트에서 더티 체킹이 DB에 반영되는 순서로 올바른 것은?",
+      "options": [
+        "엔티티 조회로 영속 상태 관리 → 필드 변경 → flush 시 스냅샷과 비교 → UPDATE SQL 생성/실행 → 커밋",
+        "필드 변경 → 즉시 DB UPDATE 확정 → 영속성 컨텍스트 생성 → 스냅샷 삭제",
+        "커밋 → 엔티티 조회 → 변경 감지 → 트랜잭션 시작",
+        "UPDATE SQL 수동 작성 → EntityManager 제거 → 더티 체킹 시작"
+      ],
+      "answer": 0,
+      "explanation": "JPA는 영속 상태 엔티티의 최초 스냅샷을 보관합니다. 트랜잭션 안에서 필드가 변경되면 flush 시점에 현재 값과 스냅샷을 비교해 변경된 엔티티에 대한 UPDATE SQL을 생성하고, 커밋 과정에서 DB에 반영합니다."
+    }
+  ]
 }
