@@ -126,6 +126,31 @@
     background: var(--surface); border-radius: .75rem; padding: 1.1rem;
     margin-bottom: 1rem; line-height: 1.6; font-size: .95rem;
   }
+  .question-card p,
+  .explanation p,
+  .wrong-q p { margin-bottom: .7rem; }
+  .question-card p:last-child,
+  .explanation p:last-child,
+  .wrong-q p:last-child { margin-bottom: 0; }
+  .question-card pre,
+  .explanation pre,
+  .wrong-q pre {
+    margin: .75rem 0; padding: .8rem; border-radius: .5rem;
+    background: #020617; border: 1px solid var(--surface2);
+    overflow-x: auto; line-height: 1.5;
+  }
+  .question-card code,
+  .explanation code,
+  .wrong-q code {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+    font-size: .82rem;
+  }
+  .question-card :not(pre) > code,
+  .explanation :not(pre) > code,
+  .wrong-q :not(pre) > code {
+    padding: .1rem .3rem; border-radius: .3rem;
+    background: var(--surface2); color: #e2e8f0;
+  }
 
   .options { display: flex; flex-direction: column; gap: .55rem; }
   .option {
@@ -412,6 +437,31 @@ function shuffle(arr) {
   return arr;
 }
 
+function escapeHtml(value = '') {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function renderMarkdown(value = '') {
+  const blocks = String(value).split(/(```[\w-]*\n[\s\S]*?\n```)/g);
+  return blocks.map(block => {
+    const codeMatch = block.match(/^```([\w-]*)\n([\s\S]*?)\n```$/);
+    if (codeMatch) {
+      const lang = codeMatch[1] ? ` language-${escapeHtml(codeMatch[1])}` : '';
+      return `<pre><code class="${lang.trim()}">${escapeHtml(codeMatch[2])}</code></pre>`;
+    }
+    return escapeHtml(block)
+      .replace(/`([^`\n]+)`/g, '<code>$1</code>')
+      .split(/\n{2,}/)
+      .map(part => part.trim() ? `<p>${part.replace(/\n/g, '<br>')}</p>` : '')
+      .join('');
+  }).join('');
+}
+
 function startQuiz() {
   const pool = shuffle([...getFiltered()]);
   const chosen = pool.slice(0, countTarget);
@@ -437,13 +487,13 @@ function renderQuestion() {
   badge.textContent = `${meta.icon} ${meta.label}`;
   badge.className = `chip chip-type ${q.type}`;
 
-  document.getElementById('questionText').textContent = q.question;
+  document.getElementById('questionText').innerHTML = renderMarkdown(q.question);
   document.getElementById('explanationBox').style.display = 'none';
   document.getElementById('nextBtn').style.display = 'none';
 
   const list = document.getElementById('optionList');
   list.innerHTML = q.options.map((opt, i) =>
-    `<div class="option" data-idx="${i}">${opt}</div>`
+    `<div class="option" data-idx="${i}">${escapeHtml(opt)}</div>`
   ).join('');
 
   list.querySelectorAll('.option').forEach(el => {
@@ -469,7 +519,7 @@ function selectOption(el, q) {
   else quiz.wrongs.push({ q, chosen });
 
   const box = document.getElementById('explanationBox');
-  box.textContent = q.explanation;
+  box.innerHTML = renderMarkdown(q.explanation);
   box.style.display = 'block';
 
   const nextBtn = document.getElementById('nextBtn');
@@ -527,10 +577,10 @@ function showResult() {
     wrongCard.style.display = '';
     document.getElementById('wrongList').innerHTML = quiz.wrongs.map(({ q, chosen }) =>
       `<div class="wrong-item">
-        <div class="wrong-q">${q.question}</div>
+        <div class="wrong-q">${renderMarkdown(q.question)}</div>
         <div class="wrong-ans">
-          <span class="correct-text">✓ ${q.options[q.answer]}</span><br>
-          <span class="your-text">✗ ${q.options[chosen]}</span>
+          <span class="correct-text">✓ ${escapeHtml(q.options[q.answer])}</span><br>
+          <span class="your-text">✗ ${escapeHtml(q.options[chosen])}</span>
         </div>
       </div>`
     ).join('');
