@@ -198,6 +198,100 @@
   .wrong-ans { font-size: .8rem; }
   .wrong-ans .correct-text { color: var(--green); }
   .wrong-ans .your-text    { color: var(--red); }
+
+  /* ────────────────────────────────── STUDY ── */
+  .home-actions { display: flex; flex-direction: column; gap: .65rem; }
+  .home-actions .btn { width: 100%; padding: .85rem; font-size: 1.02rem; }
+
+  #studyScreen,
+  #studyCategoryScreen,
+  #studyArticleListScreen,
+  #studyArticleScreen {
+    padding: 1rem; gap: 1rem; max-width: 640px; margin: 0 auto; width: 100%;
+  }
+
+  .topbar {
+    position: sticky; top: 0; z-index: 3;
+    display: grid; grid-template-columns: 2.6rem 1fr 2.6rem; align-items: center; gap: .5rem;
+    padding: .4rem 0 .7rem; background: var(--bg);
+  }
+  .icon-btn {
+    width: 2.4rem; height: 2.4rem; border: 1px solid var(--border); border-radius: .5rem;
+    background: var(--surface); color: var(--text); font-size: 1.05rem; font-weight: 700;
+    cursor: pointer; -webkit-tap-highlight-color: transparent;
+  }
+  .icon-btn:active { transform: scale(.96); }
+  .topbar-title { min-width: 0; text-align: center; }
+  .topbar-title strong { display: block; font-size: .98rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .topbar-title span { display: block; margin-top: .12rem; color: var(--muted); font-size: .74rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  .study-list { display: flex; flex-direction: column; gap: .55rem; }
+  .study-row {
+    width: 100%; min-height: 4.4rem; display: grid; grid-template-columns: 1fr auto; gap: .75rem;
+    align-items: center; padding: .85rem .95rem; border: 1px solid var(--border); border-radius: .5rem;
+    background: var(--surface); color: var(--text); text-align: left; cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .study-row:active { transform: scale(.99); }
+  .study-row-title { display: block; font-size: .98rem; font-weight: 800; line-height: 1.35; }
+  .study-row-meta { display: block; margin-top: .25rem; color: var(--muted); font-size: .78rem; line-height: 1.35; }
+  .study-row-mark { color: var(--green); font-size: 1.1rem; font-weight: 800; }
+  .study-empty {
+    padding: 1rem; border: 1px dashed var(--border); border-radius: .5rem;
+    color: var(--muted); line-height: 1.65; background: rgba(30, 41, 59, .55);
+  }
+  .study-toolbar { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
+  .study-toolbar .btn { width: 100%; }
+
+  .article-header {
+    display: flex; flex-direction: column; gap: .45rem; padding-bottom: .75rem;
+    border-bottom: 1px solid var(--surface2);
+  }
+  .article-kicker { color: var(--green); font-size: .78rem; font-weight: 800; }
+  .article-title { font-size: 1.35rem; line-height: 1.35; letter-spacing: 0; }
+  .article-meta { color: var(--muted); font-size: .78rem; line-height: 1.4; }
+  .article-body {
+    font-size: .97rem; line-height: 1.78; color: #e5edf8; overflow-wrap: anywhere;
+  }
+  .article-body h1,
+  .article-body h2,
+  .article-body h3,
+  .article-body h4 {
+    margin: 1.35rem 0 .55rem; line-height: 1.35; letter-spacing: 0; color: var(--text);
+  }
+  .article-body h1 { font-size: 1.25rem; }
+  .article-body h2 { font-size: 1.16rem; }
+  .article-body h3 { font-size: 1.06rem; }
+  .article-body h4 { font-size: .98rem; color: #bfdbfe; }
+  .article-body p { margin: .7rem 0; }
+  .article-body ul,
+  .article-body ol { margin: .65rem 0 .8rem; padding-left: 1.2rem; }
+  .article-body li { margin: .28rem 0; }
+  .article-body blockquote {
+    margin: .85rem 0; padding: .75rem .9rem; border-left: 3px solid var(--green);
+    border-radius: .4rem; background: rgba(21, 128, 61, .14); color: #dbeafe;
+  }
+  .article-body pre {
+    margin: .85rem 0; padding: .85rem; border-radius: .5rem;
+    background: #020617; border: 1px solid var(--surface2);
+    overflow-x: auto; line-height: 1.55;
+  }
+  .article-body code {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; font-size: .86rem;
+  }
+  .article-body :not(pre) > code {
+    padding: .1rem .3rem; border-radius: .3rem; background: var(--surface2); color: #f8fafc;
+  }
+  .article-body table {
+    display: block; width: 100%; margin: .85rem 0; border-collapse: collapse; overflow-x: auto;
+    white-space: nowrap;
+  }
+  .article-body th,
+  .article-body td {
+    padding: .5rem .6rem; border: 1px solid var(--border); text-align: left; vertical-align: top;
+  }
+  .article-body th { color: #bfdbfe; background: rgba(51, 65, 85, .8); }
+  .article-body a { color: #93c5fd; }
 </style>
 </head>
 <body>
@@ -257,7 +351,10 @@
       </div>
     </div>
 
-    <button class="btn btn-primary" id="startBtn" style="font-size:1.05rem;padding:.85rem;">퀴즈 시작</button>
+    <div class="home-actions">
+      <button class="btn btn-primary" id="startBtn">퀴즈 시작</button>
+      <button class="btn btn-ghost" id="openStudyBtn">학습 자료 보기</button>
+    </div>
   </div>
 
   <!-- ═══════════════════ QUIZ ═══════════════════ -->
@@ -300,11 +397,74 @@
     <button class="btn btn-ghost" id="homeBtn">홈으로</button>
   </div>
 
+  <!-- ═══════════════════ STUDY TOPICS ═══════════════════ -->
+  <div id="studyScreen" class="screen">
+    <div class="topbar">
+      <button class="icon-btn" id="studyHomeBtn" aria-label="홈으로">←</button>
+      <div class="topbar-title">
+        <strong>학습 자료</strong>
+        <span>파트를 선택하세요</span>
+      </div>
+      <span></span>
+    </div>
+    <div class="study-list" id="studyTopicList"></div>
+  </div>
+
+  <!-- ═══════════════════ STUDY CATEGORIES ═══════════════════ -->
+  <div id="studyCategoryScreen" class="screen">
+    <div class="topbar">
+      <button class="icon-btn" id="studyCategoryBackBtn" aria-label="학습 자료로">←</button>
+      <div class="topbar-title">
+        <strong id="studyCategoryTitle">파트</strong>
+        <span id="studyCategoryMeta">소분류</span>
+      </div>
+      <span></span>
+    </div>
+    <div class="study-list" id="studyCategoryList"></div>
+    <div class="study-toolbar">
+      <button class="btn btn-ghost" id="studyCategoryQuizBtn">파트 퀴즈</button>
+      <button class="btn btn-ghost" id="studyCategoryHomeBtn">홈으로</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ STUDY ARTICLES ═══════════════════ -->
+  <div id="studyArticleListScreen" class="screen">
+    <div class="topbar">
+      <button class="icon-btn" id="studyArticleListBackBtn" aria-label="소분류로">←</button>
+      <div class="topbar-title">
+        <strong id="studyArticleListTitle">소분류</strong>
+        <span id="studyArticleListMeta">글 목록</span>
+      </div>
+      <span></span>
+    </div>
+    <div class="study-list" id="studyArticleList"></div>
+  </div>
+
+  <!-- ═══════════════════ STUDY ARTICLE ═══════════════════ -->
+  <div id="studyArticleScreen" class="screen">
+    <div class="topbar">
+      <button class="icon-btn" id="studyArticleBackBtn" aria-label="글 목록으로">←</button>
+      <div class="topbar-title">
+        <strong id="studyArticleTopTitle">글</strong>
+        <span id="studyArticleTopMeta">학습 자료</span>
+      </div>
+      <span></span>
+    </div>
+    <article class="article-header">
+      <span class="article-kicker" id="studyArticleKicker"></span>
+      <h1 class="article-title" id="studyArticleTitle"></h1>
+      <span class="article-meta" id="studyArticleMeta"></span>
+      <button class="btn btn-primary" id="studyArticleQuizBtn">이 파트 퀴즈 풀기</button>
+    </article>
+    <div class="article-body" id="studyArticleBody"></div>
+  </div>
+
 </div>
 
 <script>
 // ─── 설정 ───────────────────────────────────────────────────────────────────
 const BASE_URL = './data';
+const CONTENT_MANIFEST_URL = './content/manifest.json';
 const TOPICS = [
   { key: 'os',      label: '운영체제' },
   { key: 'network', label: '네트워크' },
@@ -332,6 +492,12 @@ let selectedTypes  = new Set(['concept','tradeoff','scenario','debug','ordering'
 let countTarget = 10;
 
 let quiz = { questions: [], idx: 0, correct: 0, wrongs: [], answered: false };
+let learningNotes = [];
+let noteCache = {};
+let currentNote = null;
+let currentCategory = null;
+let currentArticle = null;
+let questionLoadPromise = null;
 
 // ─── 데이터 로드 ─────────────────────────────────────────────────────────────
 async function loadAll() {
@@ -357,6 +523,7 @@ async function loadAll() {
   }
   renderTopicGrid();
   updateStartBtn();
+  renderStudyTopics();
 }
 
 // ─── 홈 렌더 ─────────────────────────────────────────────────────────────────
@@ -446,20 +613,415 @@ function escapeHtml(value = '') {
     .replace(/'/g, '&#39;');
 }
 
+function escapeAttr(value = '') {
+  return escapeHtml(value).replace(/`/g, '&#96;');
+}
+
+function renderInlineMarkdown(value = '') {
+  return escapeHtml(value)
+    .replace(/`([^`\n]+)`/g, '<code>$1</code>')
+    .replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/\[([^\]\n]+)\]\((https?:\/\/[^)\s]+|\.\/[^)\s]+|\/[^)\s]+|#[^)\s]+|about:blank#[^)\s]+)\)/g,
+      (_, text, href) => `<a href="${escapeAttr(href)}" target="_blank" rel="noopener noreferrer">${text}</a>`);
+}
+
+function renderTable(lines) {
+  const rows = lines
+    .filter(line => !/^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?\s*$/.test(line))
+    .map(line => line.trim().replace(/^\||\|$/g, '').split('|').map(cell => cell.trim()));
+  if (!rows.length) return '';
+  const head = rows[0];
+  const body = rows.slice(1);
+  return `<table><thead><tr>${head.map(cell => `<th>${renderInlineMarkdown(cell)}</th>`).join('')}</tr></thead>` +
+    `<tbody>${body.map(row => `<tr>${row.map(cell => `<td>${renderInlineMarkdown(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+}
+
 function renderMarkdown(value = '') {
-  const blocks = String(value).split(/(```[\w-]*\n[\s\S]*?\n```)/g);
+  const blocks = String(value).replace(/\r\n/g, '\n').replace(/<!--[\s\S]*?-->/g, '')
+    .split(/(```[\w-]*\n[\s\S]*?\n```)/g);
   return blocks.map(block => {
     const codeMatch = block.match(/^```([\w-]*)\n([\s\S]*?)\n```$/);
     if (codeMatch) {
       const lang = codeMatch[1] ? ` language-${escapeHtml(codeMatch[1])}` : '';
       return `<pre><code class="${lang.trim()}">${escapeHtml(codeMatch[2])}</code></pre>`;
     }
-    return escapeHtml(block)
-      .replace(/`([^`\n]+)`/g, '<code>$1</code>')
-      .split(/\n{2,}/)
-      .map(part => part.trim() ? `<p>${part.replace(/\n/g, '<br>')}</p>` : '')
-      .join('');
+    const out = [];
+    const lines = block.split('\n');
+    let paragraph = [];
+    let listType = null;
+    let tableLines = [];
+
+    const flushParagraph = () => {
+      if (!paragraph.length) return;
+      out.push(`<p>${renderInlineMarkdown(paragraph.join(' '))}</p>`);
+      paragraph = [];
+    };
+    const closeList = () => {
+      if (!listType) return;
+      out.push(`</${listType}>`);
+      listType = null;
+    };
+    const flushTable = () => {
+      if (!tableLines.length) return;
+      out.push(renderTable(tableLines));
+      tableLines = [];
+    };
+
+    lines.forEach(line => {
+      const raw = line.replace(/\s+$/, '');
+      const trimmed = raw.trim();
+
+      if (!trimmed) {
+        flushParagraph();
+        closeList();
+        flushTable();
+        return;
+      }
+
+      if (trimmed.startsWith('|') && trimmed.includes('|')) {
+        flushParagraph();
+        closeList();
+        tableLines.push(trimmed);
+        return;
+      }
+
+      flushTable();
+
+      const heading = trimmed.match(/^(#{1,4})\s+(.+)$/);
+      if (heading) {
+        flushParagraph();
+        closeList();
+        const level = heading[1].length;
+        out.push(`<h${level}>${renderInlineMarkdown(heading[2])}</h${level}>`);
+        return;
+      }
+
+      if (/^---+$/.test(trimmed)) {
+        flushParagraph();
+        closeList();
+        out.push('<hr>');
+        return;
+      }
+
+      const quote = trimmed.match(/^>\s?(.+)$/);
+      if (quote) {
+        flushParagraph();
+        closeList();
+        out.push(`<blockquote>${renderInlineMarkdown(quote[1])}</blockquote>`);
+        return;
+      }
+
+      const unordered = raw.match(/^\s*[-*]\s+(.+)$/);
+      if (unordered) {
+        flushParagraph();
+        if (listType !== 'ul') { closeList(); out.push('<ul>'); listType = 'ul'; }
+        out.push(`<li>${renderInlineMarkdown(unordered[1])}</li>`);
+        return;
+      }
+
+      const ordered = raw.match(/^\s*\d+\.\s+(.+)$/);
+      if (ordered) {
+        flushParagraph();
+        if (listType !== 'ol') { closeList(); out.push('<ol>'); listType = 'ol'; }
+        out.push(`<li>${renderInlineMarkdown(ordered[1])}</li>`);
+        return;
+      }
+
+      closeList();
+      paragraph.push(trimmed);
+    });
+
+    flushParagraph();
+    closeList();
+    flushTable();
+    return out.join('');
   }).join('');
+}
+
+function fallbackLearningNotes() {
+  return TOPICS.map(t => ({
+    topic: t.key,
+    label: t.label,
+    quiz_topic: t.key,
+    href: `content/notes/${t.key}.md`,
+  }));
+}
+
+async function loadLearningManifest() {
+  try {
+    const res = await fetch(CONTENT_MANIFEST_URL);
+    if (!res.ok) throw new Error('manifest not found');
+    const data = await res.json();
+    learningNotes = Array.isArray(data.notes) ? data.notes : fallbackLearningNotes();
+  } catch {
+    learningNotes = fallbackLearningNotes();
+  }
+  renderStudyTopics();
+}
+
+function stripFrontMatter(raw = '') {
+  const text = String(raw).replace(/\r\n/g, '\n');
+  if (!text.startsWith('---\n')) return { frontMatter: '', body: text };
+  const end = text.indexOf('\n---', 4);
+  if (end === -1) return { frontMatter: '', body: text };
+  return {
+    frontMatter: text.slice(4, end).trim(),
+    body: text.slice(end + 4).replace(/^\n/, ''),
+  };
+}
+
+function readMetaValue(frontMatter, key) {
+  const match = frontMatter.match(new RegExp(`^${key}:\\s*(.+)$`, 'm'));
+  return match ? match[1].trim().replace(/^['"]|['"]$/g, '') : '';
+}
+
+function cleanMarkdownTitle(value = '') {
+  return value.replace(/`/g, '').replace(/\*\*/g, '').trim();
+}
+
+function makeSlug(value = '') {
+  return value.toLowerCase()
+    .replace(/[^a-z0-9가-힣]+/g, '-')
+    .replace(/^-+|-+$/g, '') || 'article';
+}
+
+function firstArticleParagraph(content = '') {
+  const withoutMeta = content.replace(/<!--[\s\S]*?-->/g, '').replace(/```[\s\S]*?```/g, '').trim();
+  const line = withoutMeta.split('\n').map(v => v.trim()).find(v =>
+    v && !v.startsWith('#') && !v.startsWith('- ') && !v.startsWith('>') && !v.startsWith('|')
+  );
+  return line ? line.replace(/\*\*/g, '').replace(/`/g, '').slice(0, 72) : '';
+}
+
+function parseLearningNote(raw, entry) {
+  const { frontMatter, body } = stripFrontMatter(raw);
+  const lines = body.split('\n');
+  const parsed = {
+    topic: readMetaValue(frontMatter, 'topic') || entry.topic,
+    label: readMetaValue(frontMatter, 'label') || entry.label,
+    quizTopic: readMetaValue(frontMatter, 'quiz_topic') || entry.quiz_topic || entry.topic,
+    status: readMetaValue(frontMatter, 'status') || 'draft',
+    categories: [],
+    intro: [],
+    href: entry.href,
+  };
+
+  let currentCategory = null;
+  let currentArticle = null;
+
+  const ensureCategory = () => {
+    if (currentCategory) return currentCategory;
+    currentCategory = {
+      id: `${parsed.topic}-overview`,
+      title: '개요',
+      introLines: [],
+      articles: [],
+    };
+    parsed.categories.push(currentCategory);
+    return currentCategory;
+  };
+
+  lines.forEach(line => {
+    const h1 = line.match(/^#\s+(.+)$/);
+    if (h1) {
+      parsed.label = parsed.label || cleanMarkdownTitle(h1[1]);
+      return;
+    }
+
+    const h2 = line.match(/^##\s+(.+)$/);
+    if (h2) {
+      currentCategory = {
+        id: `${parsed.topic}-${makeSlug(h2[1])}`,
+        title: cleanMarkdownTitle(h2[1]),
+        introLines: [],
+        articles: [],
+      };
+      parsed.categories.push(currentCategory);
+      currentArticle = null;
+      return;
+    }
+
+    const h3 = line.match(/^###\s+(.+)$/);
+    if (h3) {
+      const category = ensureCategory();
+      currentArticle = {
+        id: `${parsed.topic}-${makeSlug(h3[1])}`,
+        title: cleanMarkdownTitle(h3[1]),
+        contentLines: [],
+      };
+      category.articles.push(currentArticle);
+      return;
+    }
+
+    if (currentArticle) {
+      const articleId = line.match(/<!--\s*article:\s*([a-z0-9-]+)\s*-->/i);
+      if (articleId) currentArticle.id = articleId[1];
+      currentArticle.contentLines.push(line);
+      return;
+    }
+
+    if (currentCategory) {
+      const categoryId = line.match(/<!--\s*category:\s*([a-z0-9-]+)\s*-->/i);
+      if (categoryId) currentCategory.id = categoryId[1];
+      currentCategory.introLines.push(line);
+      return;
+    }
+
+    parsed.intro.push(line);
+  });
+
+  parsed.categories = parsed.categories
+    .map(category => ({
+      ...category,
+      intro: category.introLines.join('\n').replace(/<!--[\s\S]*?-->/g, '').trim(),
+      articles: category.articles.map(article => ({
+        ...article,
+        content: article.contentLines.join('\n').replace(/<!--[\s\S]*?-->/g, '').trim(),
+      })),
+    }))
+    .filter(category => category.articles.length);
+
+  parsed.articleCount = parsed.categories.reduce((sum, category) => sum + category.articles.length, 0);
+  return parsed;
+}
+
+async function loadLearningNote(topic) {
+  if (noteCache[topic]) return noteCache[topic];
+  const entry = learningNotes.find(note => note.topic === topic);
+  if (!entry) return null;
+
+  try {
+    const res = await fetch(entry.href);
+    if (!res.ok) throw new Error('note not found');
+    const text = await res.text();
+    const note = parseLearningNote(text, entry);
+    noteCache[topic] = note;
+    return note;
+  } catch {
+    const note = {
+      topic: entry.topic,
+      label: entry.label,
+      quizTopic: entry.quiz_topic || entry.topic,
+      href: entry.href,
+      status: 'missing',
+      categories: [],
+      articleCount: 0,
+    };
+    noteCache[topic] = note;
+    return note;
+  }
+}
+
+function renderStudyTopics() {
+  const list = document.getElementById('studyTopicList');
+  if (!list) return;
+  const notes = learningNotes.length ? learningNotes : fallbackLearningNotes();
+  list.innerHTML = notes.map(note => {
+    const quizCount = topicCounts[note.topic] || 0;
+    const cached = noteCache[note.topic];
+    const articleMeta = cached && cached.articleCount ? ` · ${cached.articleCount}개 글` : '';
+    return `<button class="study-row" data-study-topic="${escapeAttr(note.topic)}">
+      <span>
+        <span class="study-row-title">${escapeHtml(note.label)}</span>
+        <span class="study-row-meta">${quizCount}문제${articleMeta}</span>
+      </span>
+      <span class="study-row-mark">›</span>
+    </button>`;
+  }).join('');
+
+  list.querySelectorAll('[data-study-topic]').forEach(btn => {
+    btn.addEventListener('click', () => openStudyTopic(btn.dataset.studyTopic));
+  });
+}
+
+async function openStudyTopic(topic) {
+  const note = await loadLearningNote(topic);
+  currentNote = note;
+  currentCategory = null;
+  currentArticle = null;
+
+  document.getElementById('studyCategoryTitle').textContent = note.label;
+  document.getElementById('studyCategoryMeta').textContent = note.articleCount
+    ? `${note.categories.length}개 소분류 · ${note.articleCount}개 글`
+    : '정리 파일 준비 중';
+
+  const list = document.getElementById('studyCategoryList');
+  if (!note.categories.length) {
+    list.innerHTML = `<div class="study-empty">
+      <strong>${escapeHtml(note.href)}</strong><br>
+      아직 읽을 수 있는 정리 파일이 없습니다. 콘텐츠 작업이 완료되면 이 화면에 소분류와 글 목록이 자동으로 표시됩니다.
+    </div>`;
+  } else {
+    list.innerHTML = note.categories.map(category => `<button class="study-row" data-category-id="${escapeAttr(category.id)}">
+      <span>
+        <span class="study-row-title">${escapeHtml(category.title)}</span>
+        <span class="study-row-meta">${category.articles.length}개 글</span>
+      </span>
+      <span class="study-row-mark">›</span>
+    </button>`).join('');
+
+    list.querySelectorAll('[data-category-id]').forEach(btn => {
+      btn.addEventListener('click', () => openStudyCategory(btn.dataset.categoryId));
+    });
+  }
+
+  showScreen('studyCategoryScreen');
+}
+
+function openStudyCategory(categoryId) {
+  if (!currentNote) return;
+  const category = currentNote.categories.find(item => item.id === categoryId);
+  if (!category) return;
+  currentCategory = category;
+  currentArticle = null;
+
+  document.getElementById('studyArticleListTitle').textContent = category.title;
+  document.getElementById('studyArticleListMeta').textContent = `${currentNote.label} · ${category.articles.length}개 글`;
+
+  const list = document.getElementById('studyArticleList');
+  list.innerHTML = category.articles.map(article => {
+    const preview = firstArticleParagraph(article.content);
+    return `<button class="study-row" data-article-id="${escapeAttr(article.id)}">
+      <span>
+        <span class="study-row-title">${escapeHtml(article.title)}</span>
+        <span class="study-row-meta">${escapeHtml(preview || '본문 보기')}</span>
+      </span>
+      <span class="study-row-mark">›</span>
+    </button>`;
+  }).join('');
+
+  list.querySelectorAll('[data-article-id]').forEach(btn => {
+    btn.addEventListener('click', () => openStudyArticle(btn.dataset.articleId));
+  });
+
+  showScreen('studyArticleListScreen');
+}
+
+function openStudyArticle(articleId) {
+  if (!currentNote || !currentCategory) return;
+  const article = currentCategory.articles.find(item => item.id === articleId);
+  if (!article) return;
+  currentArticle = article;
+
+  document.getElementById('studyArticleTopTitle').textContent = currentCategory.title;
+  document.getElementById('studyArticleTopMeta').textContent = currentNote.label;
+  document.getElementById('studyArticleKicker').textContent = `${currentNote.label} · ${currentCategory.title}`;
+  document.getElementById('studyArticleTitle').textContent = article.title;
+  document.getElementById('studyArticleMeta').textContent = article.id;
+  document.getElementById('studyArticleBody').innerHTML = renderMarkdown(article.content || '본문이 비어 있습니다.');
+
+  showScreen('studyArticleScreen');
+}
+
+async function startTopicQuiz(topic) {
+  if (questionLoadPromise) await questionLoadPromise;
+  selectedTopics = new Set([topic]);
+  selectedDiffs = new Set(['basic','intermediate','advanced']);
+  selectedTypes = new Set(['concept','tradeoff','scenario','debug','ordering']);
+  document.querySelectorAll('#diffFilter [data-diff], #typeFilter [data-type]').forEach(chip => chip.classList.add('active'));
+  renderTopicGrid();
+  updateStartBtn();
+  startQuiz();
 }
 
 function startQuiz() {
@@ -600,6 +1162,28 @@ function showResult() {
 
 document.getElementById('retryBtn').addEventListener('click', startQuiz);
 document.getElementById('homeBtn').addEventListener('click', () => showScreen('homeScreen'));
+document.getElementById('openStudyBtn').addEventListener('click', () => {
+  renderStudyTopics();
+  showScreen('studyScreen');
+});
+document.getElementById('studyHomeBtn').addEventListener('click', () => showScreen('homeScreen'));
+document.getElementById('studyCategoryBackBtn').addEventListener('click', () => {
+  renderStudyTopics();
+  showScreen('studyScreen');
+});
+document.getElementById('studyCategoryHomeBtn').addEventListener('click', () => showScreen('homeScreen'));
+document.getElementById('studyCategoryQuizBtn').addEventListener('click', () => {
+  if (currentNote) startTopicQuiz(currentNote.quizTopic);
+});
+document.getElementById('studyArticleListBackBtn').addEventListener('click', () => {
+  if (currentNote) showScreen('studyCategoryScreen');
+});
+document.getElementById('studyArticleBackBtn').addEventListener('click', () => {
+  if (currentCategory) showScreen('studyArticleListScreen');
+});
+document.getElementById('studyArticleQuizBtn').addEventListener('click', () => {
+  if (currentNote) startTopicQuiz(currentNote.quizTopic);
+});
 
 // ─── 화면 전환 ────────────────────────────────────────────────────────────────
 function showScreen(id) {
@@ -615,7 +1199,8 @@ if ('serviceWorker' in navigator) {
 
 // ─── 초기화 ───────────────────────────────────────────────────────────────────
 renderStats();
-loadAll();
+questionLoadPromise = loadAll();
+loadLearningManifest();
 </script>
 </body>
 </html>

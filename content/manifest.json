@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "notes": [
+    {
+      "topic": "os",
+      "label": "운영체제",
+      "quiz_topic": "os",
+      "href": "content/notes/os.md"
+    },
+    {
+      "topic": "network",
+      "label": "네트워크",
+      "quiz_topic": "network",
+      "href": "content/notes/network.md"
+    },
+    {
+      "topic": "ds",
+      "label": "자료구조",
+      "quiz_topic": "ds",
+      "href": "content/notes/ds.md"
+    },
+    {
+      "topic": "db",
+      "label": "데이터베이스",
+      "quiz_topic": "db",
+      "href": "content/notes/db.md"
+    },
+    {
+      "topic": "java",
+      "label": "Java",
+      "quiz_topic": "java",
+      "href": "content/notes/java.md"
+    },
+    {
+      "topic": "spring",
+      "label": "Spring",
+      "quiz_topic": "spring",
+      "href": "content/notes/spring.md"
+    },
+    {
+      "topic": "design",
+      "label": "디자인패턴",
+      "quiz_topic": "design",
+      "href": "content/notes/design.md"
+    },
+    {
+      "topic": "general",
+      "label": "개발자 필수",
+      "quiz_topic": "general",
+      "href": "content/notes/general.md"
+    }
+  ]
+}

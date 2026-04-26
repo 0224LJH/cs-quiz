@@ -1,8 +1,9 @@
-const CACHE = 'cs-quiz-v1';
+const CACHE = 'cs-quiz-v2';
 const ASSETS = [
   '/cs-quiz/',
   '/cs-quiz/index.html',
   '/cs-quiz/manifest.json',
+  '/cs-quiz/content/manifest.json',
 ];
 
 self.addEventListener('install', e => {
